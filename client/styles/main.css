@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.app {
+  background-image: url('/images/Screenshot 2025-09-24 171203.png');
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Keeps the background image fixed when scrolling */
+  margin: 0;
+  height: 100vh;
+  /* width: 100%; */
+  /* position: absolute; */
+}
+
+.sign-in-wrapper {
+  transform: translate(57.5vw, 25vh);
+}
+
+.sign-in-button {
+  font-size: 3.5vw;
+  position: absolute;
+
+}
+
+.sign-in-message {
+  font-size: 1.25vw;
+  position: absolute;
+  transform: translate(0.25vw, 12vh);
+}

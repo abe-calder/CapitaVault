@@ -5,21 +5,20 @@ import { RouterProvider } from 'react-router/dom'
 import { createBrowserRouter } from 'react-router'
 import routes from './routes.tsx'
 import { Auth0Provider } from '@auth0/auth0-react'
+import '@radix-ui/themes/styles.css'
+
 
 const router = createBrowserRouter(routes)
 const queryClient = new QueryClient()
 
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
-    /**
-     * TODO: replace domain, clientId, and audience
-     */
     <Auth0Provider
-      domain=""
-      clientId=""
+      domain="dev-gy30iif5emo7oo31.au.auth0.com"
+      clientId="qdmoDShTbBohQbm2tpQvJqX20IyXtjGb"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: '',
+        audience: 'https://capitavault/api',
       }}
     >
       <QueryClientProvider client={queryClient}>

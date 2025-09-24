@@ -1,15 +1,14 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import { Theme } from "@radix-ui/themes"
+
+import { Outlet } from "react-router"
 
 function App() {
-  const { data } = useFruits()
-
   return (
     <>
-      <div className="app">
-        <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
-        </h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+      <div className="">
+        <Theme>
+          <Outlet />
+        </Theme>
       </div>
     </>
   )
