@@ -85,8 +85,7 @@
 .nav-heading {
   position: absolute;
   font-size: 2.75vw;
-  font-weight: 400;
-
+  font-weight: 500;
 }
 
 .page-link {
@@ -156,7 +155,7 @@
 
 
 
-/* DASHBOARD PAGE START  */
+/* INVEST / DASH / SETTINGS  BACKGROUND */
 
 .app2 {
   background-image: url('/images/Dashboard-background.webp');
@@ -166,6 +165,167 @@
   margin: 0;
   height: 100vh;
   width: 100vw;
+}
+
+/* INVEST / DASH / SETTINGS  BACKGROUND */
+
+
+
+/* DASHBOARD PAGE START  */
+
+.dashboard-wrapper {
+
+}
+
+.heading-and-total-balance-wrapper {
+  position: absolute;
+  left: 25vw;
+  top: 7.5vh;
+}
+
+.dashboard-heading {
+  font-size: 2vw;
+  font-weight: 500;
+}
+
+.total-balance {
+  position: absolute;
+  background-color: lightgrey;
+  width: 18vw;
+  height: 10vw;
+  margin-top: 1vh;
+}
+
+.total-balance-heading {
+  position: absolute;
+  font-size: 1vw;
+  font-weight: 500;
+  left: 0.7vw;
+  top: 0.7vh
+}
+
+.statistics-wrapper {
+  position: absolute;
+  left: 25vw;
+  top: 37vh;
+}
+
+.statistics {
+  background-color: rgb(34, 34, 44) ;
+  width: 37.5vw;
+  height: 34vh;
+}
+
+.statistics-heading {
+  position: absolute;
+  font-size: 1vw;
+  font-weight: 500;
+  left: 0.7vw;
+  top: 0.7vh;
+  color: white;
+}
+
+.goals-wrapper {
+  position: absolute;
+  bottom: 27.5vh;
+  left: 25vw
+}
+
+.goals {
+  position: absolute;
+  background-color: lightgrey;
+  width: 18vw;
+  height: 10vw;
+  margin-top: 1vh;
+}
+
+.goals-heading {
+  position: absolute;
+  font-size: 1vw;
+  font-weight: 500;
+  left: 0.7vw;
+  top: 0.7vh;
+}
+
+.goals-sub-heading {
+  position: absolute;
+  top: 3.5vh;
+  left: 0.6vw;
+  font-size: 0.7vw;
+}
+
+.spending-wrapper {
+  position: absolute;
+  bottom: 27.5vh;
+  left: 44.5vw
+}
+
+.spending {
+  position: absolute;
+  background-color: lightgrey;
+  width: 18vw;
+  height: 10vw;
+  margin-top: 1vh;
+}
+
+.spending-heading {
+  position: absolute;
+  font-size: 1vw;
+  font-weight: 500;
+  left: 0.7vw;
+  top: 0.7vh;
+}
+
+.profile-and-holdings-wrapper {
+  position: absolute;
+  right: 2vw;
+  top: 3vh;
+  width: 32vw;
+  height: 80vh;
+  background-color: pink;
+}
+
+.profile {
+  position: absolute;
+  right: 0vw;
+  top: 0vh;
+}
+
+.profile-photo {
+  position: absolute;
+  left: -2.5vw;
+  top: 0.3vh;
+  width: 2.1vw;
+  border-radius: 1vw;
+}
+
+.profile-name {
+  font-size: 1.8vw;
+  font-weight: 500;
+}
+
+.holdings {
+  position: absolute;
+  top: 12vh;
+  background-color: grey;
+  width: 32vw;
+  height: 68vh;
+}
+
+.holdings-heading {
+  position: absolute;
+  font-size: 1.5vw;
+  top: 0vw;
+  left: 0vw;
+}
+
+.holdings-buttons {
+  position: absolute;
+  top: 5.5vh;
+}
+
+.dashboard-radio-buttons {
+  margin-right: 1.25vw;
 }
 
 /* DASHBOARD PAGE END  */
