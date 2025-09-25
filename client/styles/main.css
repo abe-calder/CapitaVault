@@ -125,8 +125,31 @@
 
 .log-out-button {
   position: absolute;
-  bottom: -35vw;
-  width: 3vw;
+  font-size: 1vw;
+  bottom: -80vh;
+  left: 2.4vw;
+  width: 4vw;
+}
+
+.settings-link {
+  position: absolute;
+  font-size: 1vw;
+  bottom: -73vh;
+  left: 2.5vw;
+}
+
+.mini-log-out-icon {
+  position: absolute;
+  width: 1vw;
+  left: -1vw;
+  top: 0.5vh
+}
+
+.mini-settings-icon {
+  position: absolute;
+  width: 1.3vw;
+  left: -1.2vw;
+  bottom: 0.25vh;
 }
 
 /* NAV END */
