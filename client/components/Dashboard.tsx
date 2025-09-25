@@ -1,6 +1,5 @@
 import Nav from './Nav'
 import { useAuth0 } from '@auth0/auth0-react'
-import { Avatar, Box, Flex, RadioCards, Text } from '@radix-ui/themes'
 
 export default function Dashboard() {
   const { user } = useAuth0()
