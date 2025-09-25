@@ -1,8 +1,8 @@
-import request from 'superagent'
+// import request from 'superagent'
 
-const rootURL = new URL(`/api/v1`, document.baseURI)
+// const rootURL = new URL(`/api/v1`, document.baseURI)
 
-export async function getFruits(): Promise<string[]> {
-  const response = await request.get(`${rootURL}/fruits`)
-  return response.body.fruits as string[]
-}
+// export async function getFruits(): Promise<string[]> {
+//   const response = await request.get(`${rootURL}/fruits`)
+//   return response.body.fruits as string[]
+// }

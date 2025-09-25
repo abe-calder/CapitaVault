@@ -1,13 +1,13 @@
-import { Outlet } from 'react-router'
+import '@radix-ui/themes/styles.css'
+
 
 export default function Layout() {
   return (
     <>
       <header>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
+        <h1 style={{color: 'white'}}>Fullstack Boilerplate - with Fruits!</h1>
       </header>
       <main>
-        <Outlet />
       </main>
       <footer></footer>
     </>
