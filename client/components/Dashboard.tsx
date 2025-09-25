@@ -1,10 +1,14 @@
+import Nav from "./Nav";
 
 export default function Dashboard() {
 
 
   return (
     <>
-      <h1>Dashhboard</h1>
+      <div className="app2">
+        <Nav />
+        
+      </div>
     </>
   )
 }

@@ -7,6 +7,7 @@ function App() {
     <>
       <div className="">
         <Theme>
+
           <Outlet />
         </Theme>
       </div>

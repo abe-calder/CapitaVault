@@ -1,0 +1,47 @@
+import { Link } from 'react-router'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router'
+import { IfAuthenticated } from './Authenticated'
+
+export default function Nav() {
+  const { logout } = useAuth0()
+  const navigate = useNavigate()
+
+  const handleSignOut = async () => {
+    await logout()
+    navigate('/')
+  }
+
+  return (
+    <>
+      <div className="nav">
+        <h1 className="nav-heading">CapitaVault</h1>
+        <nav>
+          <IfAuthenticated>
+            <Link to="/dashboard" className="page-link dashboard-link">
+              <img
+                className="mini-house-icon"
+                alt="dashboard-house-icon"
+                src="/images/house-dashboard-icon.webp"
+              ></img>
+              Dashboard
+            </Link>
+            <Link to="/investments" className="page-link investments-link">
+              <img
+                className="mini-chart-icon"
+                alt="investment-chart-icon"
+                src="/images/investment-chart-icon.webp"
+              ></img>
+              Investments
+            </Link>
+            <Link to="/settings">Settings</Link>
+
+            <button className="log-out-button" onClick={() => handleSignOut()}>
+              Log-Out
+            </button>
+          </IfAuthenticated>
+        </nav>
+      </div>
+    </>
+  )
+}

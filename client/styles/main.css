@@ -5,7 +5,7 @@
 /* SIGN IN PAGE START */
 
 .app {
-  background-image: url('/images/Screenshot 2025-09-24 171203.png');
+  background-image: url('/images/Screenshot 2025-09-24 171203.webp');
   background-size: cover; /* Ensures the image covers the entire viewport */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-attachment: fixed; /* Keeps the background image fixed when scrolling */
@@ -71,3 +71,78 @@
 }
 
 /* SIGN IN PAGE END */
+
+
+
+/* NAV START */
+
+.nav {
+  position: absolute;
+  top: 6vh;
+  left: 3.5vw;
+}
+
+.nav-heading {
+  position: absolute;
+  font-size: 2.75vw;
+  font-weight: 400;
+
+}
+
+.page-link {
+  display: flex;
+  font-size: 1vw;
+}
+
+.dashboard-link {
+  position: absolute;
+  top: 12.5vh;
+}
+
+.investments-link {
+  position: absolute;
+  top: 20vh;
+  left: 0.35vw;
+}
+
+.dashboard-link:hover {
+  color: blue
+}
+
+.investments-link:hover {
+  color: blue
+}
+
+.mini-house-icon {
+  width: 2vw;
+  margin-right: 0.75vw;
+}
+
+.mini-chart-icon {
+  width: 1.5vw;
+  margin-right: 0.75vw;
+}
+
+.log-out-button {
+  position: absolute;
+  bottom: -35vw;
+  width: 3vw;
+}
+
+/* NAV END */
+
+
+
+/* DASHBOARD PAGE START  */
+
+.app2 {
+  background-image: url('/images/Dashboard-background.webp');
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Keeps the background image fixed when scrolling */
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* DASHBOARD PAGE END  */
