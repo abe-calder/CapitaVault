@@ -9,3 +9,18 @@ export async function getUsersTickers(token: string) {
     .set('Authorization', `Bearer ${token}`)
   return response.body as AssetData[]
 }
+
+interface newAsset {
+  ticket: string
+  name: string
+  shares: number
+  userId: number
+}
+
+export async function addAssets(token: string, newAsset: newAsset) {
+  const result = await request
+    .post(`${rootURL}/assets`)
+    .set('Authorization', `Bearer ${token}`)
+    .send(newAsset)
+  return result.body as AssetData
+}
