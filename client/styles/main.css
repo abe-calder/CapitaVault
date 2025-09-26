@@ -23,7 +23,7 @@ html {
   position: absolute;
   width: 27.5vw;
   left: 57.5vw;
-  top: 28vh
+  top: 28vh;
 }
 
 .sign-in-button {
@@ -46,7 +46,7 @@ html {
 }
 
 .sign-in-page-logo {
-  width: 22vw
+  width: 22vw;
 }
 
 .mini-sign-in-page-logo {
@@ -63,7 +63,7 @@ html {
   text-align: center;
   font-weight: 900;
   left: 1.4vw;
-  padding-top: 2vh
+  padding-top: 2vh;
 }
 
 .sign-in-page-sub-heading {
@@ -76,8 +76,6 @@ html {
 }
 
 /* SIGN IN PAGE END */
-
-
 
 /* NAV START */
 
@@ -110,11 +108,11 @@ html {
 }
 
 .dashboard-link:hover {
-  color: blue
+  color: blue;
 }
 
 .investments-link:hover {
-  color: blue
+  color: blue;
 }
 
 .mini-house-icon {
@@ -146,7 +144,7 @@ html {
   position: absolute;
   width: 1vw;
   left: -1vw;
-  top: 0.5vh
+  top: 0.5vh;
 }
 
 .mini-settings-icon {
@@ -157,8 +155,6 @@ html {
 }
 
 /* NAV END */
-
-
 
 /* INVEST / DASH / SETTINGS  BACKGROUND */
 
@@ -174,12 +170,9 @@ html {
 
 /* INVEST / DASH / SETTINGS  BACKGROUND */
 
-
-
 /* DASHBOARD PAGE START  */
 
 .dashboard-wrapper {
-
 }
 
 .heading-and-total-balance-wrapper {
@@ -206,7 +199,7 @@ html {
   font-size: 1vw;
   font-weight: 500;
   left: 0.7vw;
-  top: 0.7vh
+  top: 0.7vh;
 }
 
 .statistics-wrapper {
@@ -216,7 +209,7 @@ html {
 }
 
 .statistics {
-  background-color: rgb(34, 34, 44) ;
+  background-color: rgb(34, 34, 44);
   width: 37.5vw;
   height: 34vh;
 }
@@ -233,7 +226,7 @@ html {
 .goals-wrapper {
   position: absolute;
   bottom: 27.5vh;
-  left: 25vw
+  left: 25vw;
 }
 
 .goals {
@@ -262,7 +255,7 @@ html {
 .spending-wrapper {
   position: absolute;
   bottom: 27.5vh;
-  left: 44.5vw
+  left: 44.5vw;
 }
 
 .spending {
@@ -335,15 +328,12 @@ html {
 
 /* DASHBOARD PAGE END  */
 
-
-
 /* SETTINGS PAGE START */
 
 .settings-page-wrapper {
   position: absolute;
   width: 77.75vw;
   height: 100vh;
-  background-color: pink;
   left: 22.25vw;
 }
 
@@ -370,19 +360,109 @@ html {
   left: 0vw;
 }
 
-.profile-settings-radio-input {
+.profile-settings-link {
   position: absolute;
   top: 10vh;
   left: 8vw;
 }
 
-.adjust-holdings-radio-input {
+.adjust-holdings-link {
   position: absolute;
   top: 10vh;
 }
 
-.settings {
+/* ADJUST HOLDINGS START */
 
+.adjust-holdings-wrapper {
+  position: absolute;
+  width: 60vw;
+  height: 70vh;
+  top: 25vh;
+  left: 25.25vw;
 }
+
+.adjust-holdings {
+  position: absolute;
+  width: 57.5vw;
+  height: 65vh;
+}
+
+.adjust-holdings-heading {
+  position: absolute;
+  font-size: 1.5vw;
+  top: 0vw;
+  left: 0vw;
+}
+
+.adjust-holdings-form {
+  position: absolute;
+  top: 10vh;
+}
+
+.adjust-stocks-form-label {
+  position: absolute;
+  width: 20vw;
+  top: 5vh;
+  left: 5vw;
+}
+
+.adjust-crypto-form-label {
+  position: absolute;
+  width: 20vw;
+  top: 5vh;
+}
+
+.adjust-asset-name-form-label {
+  position: absolute;
+  top: 15vh;
+}
+
+.adjust-shares-form-label {
+  position: absolute;
+  top: 30vh;
+}
+
+.adjust-form-submit-button {
+  position: absolute;
+  left: 0vw;
+  top: 45vh;
+  color: white;
+  background-color: black;
+  border-radius: 0.5vw;
+  width: 20vw;
+  height: 4vh;
+}
+
+.adjust-stocksandetfs-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.adjust-crypto-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.adjust-name-input {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.adjust-shares-input {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+/* ADJUST HOLDINGS END */
+
+/* PROFILE SETTINGS START */
+
+/* PROFILE SETTINGS END */
 
 /* SETTINGS PAGE END */

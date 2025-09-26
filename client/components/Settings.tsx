@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Nav from "./Nav";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -23,28 +24,19 @@ export default function Settings() {
           </div>
           <div className="settings-tabs-wrapper">
             <h1 className="settings-heading">Settings</h1>
-            <label className="adjust-holdings-radio-input">
-              <input
-                type="radio"
-                id="adjust-holdings"
-                name="adjust-holdings"
-                value="adjustholdings"
-                className=""
-              />
+            <Link
+              to="/settings/adjust-holdings"
+              className="adjust-holdings-link"
+            >
               Adjust Holdings
-            </label>
-            <label className="profile-settings-radio-input">
-              <input
-                type="radio"
-                id="profile-settings"
-                name="profile-settings"
-                value="profilesettings"
-                className=""
-              />
+            </Link>
+            <Link
+              to="/settings/profile-settings"
+              className="profile-settings-link"
+            >
               Profile Settings
-            </label>
+            </Link>
           </div>
-          <div className="settings"></div>
         </div>
       </div>
     </>
