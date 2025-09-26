@@ -2,7 +2,7 @@ import express from 'express'
 import { JwtRequest } from '../auth0.js'
 import checkJwt from '../auth0.js'
 
-import * as db from '../db/users.ts'
+import * as db from '../db/functions/users.ts'
 
 const router = express.Router()
 
@@ -24,7 +24,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
     const newUser = req.body
     const auth0Id = req.auth?.sub
 
-    const [user] = await db.addUser({
+    const user = await db.addUser({
       ...newUser,
       auth0Id,
     })
@@ -32,6 +32,17 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   } catch (error) {
     console.error(error)
     res.status(500).send('Something Went Wrong...')
+  }
+})
+
+router.get('/me', checkJwt, async (req: JwtRequest, res) => {
+  try {
+    const auth0Id = req.auth?.sub
+    const result = await db.getUserById(auth0Id as string)
+    res.json({ user: result })
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
   }
 })
 

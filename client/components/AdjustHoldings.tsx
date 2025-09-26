@@ -1,8 +1,9 @@
 import Settings from './Settings'
+import { useState } from 'react'
 
 export default function AdjustHoldings() {
+  const [ formState, setFormState ] = useState()
 
-  
   return (
     <>
       <Settings />
@@ -16,6 +17,7 @@ export default function AdjustHoldings() {
                   type="radio"
                   name="stockorcrypto"
                   id="crypto"
+                  value={formState}
                   className="adjust-crypto-input"
                 />
                 Crypto
@@ -28,6 +30,7 @@ export default function AdjustHoldings() {
                   type="radio"
                   name="stockorcrypto"
                   id="stocksandetfs"
+                  value={formState}
                   className="adjust-stocksandetfs-input"
                 />
                 Stocks and ETFs
@@ -36,8 +39,9 @@ export default function AdjustHoldings() {
                 Input the name of the asset
                 <input
                   type="text"
-                  name=""
-                  value=""
+                  name="name"
+                  id='name'
+                  value={formState}
                   className="adjust-name-input"
                   placeholder="BTC"
                 />
@@ -45,9 +49,9 @@ export default function AdjustHoldings() {
               <label className="adjust-shares-form-label">
                 Input the amount of shares
                 <input
-                  type="text"
+                  type="number"
                   name="shares"
-                  value=""
+                  value={formState}
                   className="adjust-shares-input"
                   placeholder="0.23447"
                 />
