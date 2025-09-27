@@ -10,17 +10,15 @@ export async function getUsersTickers(token: string) {
   return response.body as AssetData[]
 }
 
-interface newAsset {
-  ticket: string
-  name: string
-  shares: number
-  userId: number
+interface AddAssetFunction {
+  newAsset: AssetData
+  token: string
 }
 
-export async function addAssets(token: string, newAsset: newAsset) {
+export async function addAssets({ newAsset, token }: AddAssetFunction) {
   const result = await request
     .post(`${rootURL}/assets`)
     .set('Authorization', `Bearer ${token}`)
     .send(newAsset)
-  return result.body as AssetData
+  return result.body
 }

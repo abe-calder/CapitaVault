@@ -399,27 +399,35 @@ html {
   top: 10vh;
 }
 
-.adjust-stocks-form-label {
+/* .adjust-stocks-form-label {
   position: absolute;
   width: 20vw;
   top: 5vh;
   left: 5vw;
-}
+} */
 
-.adjust-crypto-form-label {
+/* .adjust-crypto-form-label {
   position: absolute;
   width: 20vw;
   top: 5vh;
+} */
+
+.adjust-ticker-form-label {
+  position: absolute;
+  width: 15vw;
+  top: 0vh;
 }
 
 .adjust-asset-name-form-label {
   position: absolute;
+  width: 15vw;
   top: 15vh;
 }
 
 .adjust-shares-form-label {
   position: absolute;
   top: 30vh;
+  width: 15vw;
 }
 
 .adjust-form-submit-button {
@@ -453,6 +461,13 @@ html {
 }
 
 .adjust-shares-input {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.adjust-ticker-input {
   border: 2px solid black;
   border-radius: 0.4vw;
   padding-top: 0.5vh;

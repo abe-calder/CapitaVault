@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { User } from '../../models/users.ts'
+import { User, UserData } from '../../models/users.ts'
 
 const rootURL = new URL(`/api/v1`, document.baseURI)
 
@@ -9,7 +9,7 @@ interface GetUserFunction {
 
 export async function getUser({
   token,
-}: GetUserFunction): Promise<User | null> {
+}: GetUserFunction): Promise<UserData | null> {
   return await request
     .get(`${rootURL}/users`)
     .set('Authorization', `Bearer ${token}`)
