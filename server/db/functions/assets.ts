@@ -25,3 +25,20 @@ export async function addAssets(newAsset: {
     console.log(error)
   }
 }
+
+export async function getAssets(user_id: number) {
+  try {
+    const result = await db('assets').where({user_id}).select('id as id', 'ticker as ticker', 'name as name', 'shares as shares')
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function deleteAssetById(id: number) {
+  try {
+    return await db('assets').where({ id }).delete()
+  } catch (error) {
+    console.log(error)
+  }
+}

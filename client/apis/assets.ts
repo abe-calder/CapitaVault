@@ -22,3 +22,22 @@ export async function addAssets({ newAsset, token }: AddAssetFunction) {
     .send(newAsset)
   return result.body
 }
+
+export async function getAssets( userId: number, token: string) {
+  const response = await request
+    .get(`${rootURL}/assets/${userId}`)
+    .set('Authorization', `Bearer ${token}`)
+  return response.body
+}
+
+interface DeleteAssetFunction {
+  id: number
+  token: string
+}
+
+export async function deleteAssetById({ id, token }: DeleteAssetFunction) {
+  await request
+    .delete(`${rootURL}/assets/${id}`)
+    .set('Authorization', `Bearer ${token}`)
+  return 
+}
