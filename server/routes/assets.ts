@@ -33,4 +33,12 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.get('/', async (req, res) => {
+  try {
+    const result = await db
+  } catch (error) [
+    console.log(error)
+  ]
+})
+
 export default router

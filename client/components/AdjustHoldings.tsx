@@ -92,8 +92,16 @@ export default function AdjustHoldings() {
                   required
                 />
               </label>
-              <button data-pending={addAssets.isPending} className="adjust-form-submit-button">Submit</button>
+              <button
+                data-pending={addAssets.isPending}
+                className="adjust-form-submit-button"
+              >
+                Submit
+              </button>
             </form>
+          </div>
+          <div className="display-holdings">
+            <h1 className="current-holdings-heading">Current Holdings</h1>
           </div>
         </div>
       </div>

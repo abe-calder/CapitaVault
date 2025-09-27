@@ -474,6 +474,21 @@ html {
   margin-top: 0.5vh;
 }
 
+.display-holdings {
+  position: absolute;
+  width: 40vw;
+  height: 60vh;
+  background-color: green;
+  left: 25vw;
+}
+
+.current-holdings-heading {
+  position: absolute;
+  font-size: 1.5vw;
+  top: 0vw;
+  left: 0vw;
+}
+
 /* ADJUST HOLDINGS END */
 
 /* PROFILE SETTINGS START */
