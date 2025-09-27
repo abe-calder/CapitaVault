@@ -34,11 +34,16 @@ export default function Dashboard() {
           <div className="profile-and-holdings-wrapper">
             <div className="profile">
               {user && (
-                <img
-                  alt="profile-photo"
-                  src={user.picture}
+                <object
+                  type="image/jpeg"
+                  data={user.picture}
                   className="profile-photo"
-                ></img>
+                >
+                  <img
+                    src="/home/abecalder/1projects/CapitaVault/public/images/profile-photo-fallback.webp"
+                    alt="fallback-img"
+                  ></img>
+                </object>
               )}
               {user && <h1 className="profile-name">{user.name}</h1>}
             </div>
@@ -50,7 +55,7 @@ export default function Dashboard() {
                     type="radio"
                     id="all"
                     name="all"
-                    value='all'
+                    value="all"
                     className="dashboard-radio-inputs"
                   />
                   All
@@ -60,7 +65,7 @@ export default function Dashboard() {
                     type="radio"
                     id="crypto"
                     name="crypto"
-                    value='crypto'
+                    value="crypto"
                     className="dashboard-radio-inputs"
                   />
                   Crypto
@@ -70,7 +75,7 @@ export default function Dashboard() {
                     type="radio"
                     id="stocks-and-etfs"
                     name="stocks-and-etfs"
-                    value='stocksandetfs'
+                    value="stocksandetfs"
                     className="dashboard-radio-inputs"
                   />
                   Stocks and ETFs

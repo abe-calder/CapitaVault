@@ -1,15 +1,26 @@
-import { IfNotAuthenticated } from './Authenticated.tsx'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated.tsx'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router'
+
 
 export default function Home() {
   const { loginWithRedirect } = useAuth0()
-
+  const navigate = useNavigate()
   const handleSignIn = () => {
     loginWithRedirect({
       authorizationParams: {
         redirectUri: `${window.location.origin}/dashboard`,
       },
     })
+  }
+
+  // If authenticated already then this will trigger user to navigate to /dashboard after 1 second delay - prevents being stuck at homepage
+  function navToDash() {
+    setTimeout(runAfterDelay, 1000)
+  }
+
+  function runAfterDelay() {
+    navigate('/dashboard')
   }
 
   return (
@@ -46,6 +57,9 @@ export default function Home() {
             </h1>
           </div>
         </IfNotAuthenticated>
+        <IfAuthenticated>
+          {navToDash()}
+        </IfAuthenticated>
       </div>
     </>
   )
