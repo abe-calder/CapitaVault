@@ -1,7 +1,9 @@
-import { Result } from '../../models/polygon.ts'
 import request from 'superagent'
+import { Result } from '../../models/polygon'
 
-export default async function getPolygon() {
-  const response = await request.get(`api/v1/abe`)
+const rootURL = new URL(`/api/v1`, document.baseURI)
+
+export default async function getAssetDataByTicker(ticker: string) {
+  const response = await request.get(`${rootURL}/polygon/${ticker}`)
   return response.body as Result
 }

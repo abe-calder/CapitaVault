@@ -10,10 +10,11 @@ const formattedDate = yesterday.toISOString().slice(0, 10)
 
 
 // GET CryptoCurrency 
-router.get('/', async (req, res) => {
+router.get('/:ticker', async (req, res) => {
+  const ticker = String(req.params.ticker)
   const response = await request
     .get(
-      `https://api.polygon.io/v2/aggs/ticker/X:HBARUSD/range/1/day/${formattedDate}/${formattedDate}`,
+      `https://api.polygon.io/v2/aggs/ticker/X:${ticker}USD/range/1/day/${formattedDate}/${formattedDate}`,
     )
     .set('Authorization', `Bearer ${process.env.POLY_API_KEY}`)
   console.log(response.body)
