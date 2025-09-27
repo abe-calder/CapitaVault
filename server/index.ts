@@ -1,4 +1,5 @@
-import server from './server.ts'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { server, wss } from './server.ts'
 
 const PORT = process.env.PORT || 3000
 

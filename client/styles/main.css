@@ -478,7 +478,6 @@ html {
   position: absolute;
   width: 40vw;
   height: 60vh;
-  background-color: green;
   left: 25vw;
 }
 
@@ -487,6 +486,36 @@ html {
   font-size: 1.5vw;
   top: 0vw;
   left: 0vw;
+}
+
+.user-assets-wrapper {
+  
+}
+
+.user-assets-name {
+  position: relative;
+  top: 10vh;
+  font-size: 0.9vw;
+  font-weight: 500;
+}
+
+.user-assets-ticker {
+  position: relative;
+  top: 10vh;
+  font-size: 0.9vw;
+}
+
+.user-assets-shares {
+  position: relative;
+  top: 10vh;
+  font-size: 0.9vw;
+}
+
+.user-asset-delete {
+  position: relative;
+  top: 10vh;
+  padding-bottom: 3vh;
+  color: red;
 }
 
 /* ADJUST HOLDINGS END */

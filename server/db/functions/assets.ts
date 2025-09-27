@@ -34,3 +34,11 @@ export async function getAssets(user_id: number) {
     console.log(error)
   }
 }
+
+export async function deleteAssetById(id: number) {
+  try {
+    return await db('assets').where({ id }).delete()
+  } catch (error) {
+    console.log(error)
+  }
+}
