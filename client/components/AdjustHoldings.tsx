@@ -1,5 +1,5 @@
 import Settings from './Settings'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import {
   useAddAssets,
   useDeleteAssetById,
@@ -18,18 +18,6 @@ const emptyForm = {
   userId: '',
 } as unknown as AssetData
 
-const ws = new WebSocket('http://localhost:3000')
-
-ws.onopen = () => {
-  console.log('Websocket Connected')
-}
-
-ws.onclose = () => {}
-
-ws.onerror = (error) => {
-  console.error('WebSocket error:', error)
-}
-
 export default function AdjustHoldings() {
   const queryClient = useQueryClient()
   const [formState, setFormState] = useState(emptyForm)
@@ -39,6 +27,30 @@ export default function AdjustHoldings() {
   const userId = getMe.data?.id as number
   const userAssets = useGetAssets(userId)
   const delteAssetById = useDeleteAssetById()
+
+  useEffect(() => {
+    const ws = new WebSocket('http://localhost:3000')
+
+    ws.onopen = () => {
+      console.log('Websocket Connected')
+    }
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      if (data.type === 'database_change') {
+        queryClient.invalidateQueries({ queryKey: ['addAssets'] })
+        queryClient.invalidateQueries({ queryKey: ['getAssetsByUserId'] })
+      }
+    }
+
+    ws.onclose = () => {}
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error)
+    }
+
+    return() => ws.close()
+  }, [queryClient])
 
   if (getMe.isPending) {
     return <div className='app2'></div>
@@ -93,13 +105,6 @@ export default function AdjustHoldings() {
   }
 
 
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data)
-    if (data.type === 'database_change') {
-      queryClient.invalidateQueries({ queryKey: ['addAssets'] })
-      queryClient.invalidateQueries({ queryKey: ['getAssetsByUserId'] })
-    }
-  }
 
   return (
     <>
