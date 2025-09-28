@@ -361,6 +361,10 @@ html {
   top: 1.5vh;
 }
 
+.asset-USD-value {
+  font-size: 0.9vw;
+}
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */
