@@ -20,7 +20,7 @@ interface Asset {
   ticker: string
 }
 
-export const useAssetsQueries = (userAssetData: Asset[] | undefined) => {
+export const useAssetsQueries = (userAssetData: Asset[]) => {
   const queries =
     userAssetData?.map((asset) => ({
       queryKey: ['assetData', asset.ticker],

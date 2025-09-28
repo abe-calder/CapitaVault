@@ -17,7 +17,8 @@ export default function Dashboard() {
   if (userAssets.isError) {
     return
   }
-  
+
+
   return (
     <>
       <div className="app2">
@@ -75,9 +76,9 @@ export default function Dashboard() {
                   return (
                     <div className="asset-holdings-wrapper" key={asset.id}>
                       <h1 className="asset-holdings-name">{asset.name}</h1>
-                      <p className="asset-holdings-shares">
+                      <div className="asset-holdings-shares">
                         {asset.shares} {asset.ticker}
-                      </p>
+                      </div>
                     </div>
                   )
                 })}
