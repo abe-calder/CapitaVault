@@ -24,8 +24,8 @@ export const useAssetsQueries = (userAssetData: Asset[] | undefined) => {
   const queries =
     userAssetData?.map((asset) => ({
       queryKey: ['assetData', asset.ticker],
-      queryFn: () => getAssetDataByTicker(asset.ticker), // Replace with your actual fetch function
-      enabled: !!userAssetData, // Conditionally enable the query
+      queryFn: () => getAssetDataByTicker(asset.ticker), 
+      enabled: !!userAssetData, 
     })) ?? []
 
   const results = useQueries({ queries: queries })

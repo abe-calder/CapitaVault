@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useGetAssets } from '../hooks/useAssets'
 import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
-import { useAssetsQueries } from '../hooks/usePolygon'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -11,7 +10,6 @@ export default function Dashboard() {
   const userId = getMe.data?.id
   const userAssets = useGetAssets(userId as number)
   const userAssetData = userAssets.data
-  const assetQueries = useAssetsQueries(userAssetData)
 
   if (userAssets.isPending) {
     return
@@ -20,14 +18,6 @@ export default function Dashboard() {
     return
   }
   
-  // assetQueries.queries.map((asset) => {
-  //   console.log(asset.data)
-  //   return (
-  //   <div key={asset.data}>
-      
-  //   </div>
-  //   )
-  // })
   return (
     <>
       <div className="app2">
@@ -86,19 +76,7 @@ export default function Dashboard() {
                     <div className="asset-holdings-wrapper" key={asset.id}>
                       <h1 className="asset-holdings-name">{asset.name}</h1>
                       <p className="asset-holdings-shares">
-                        {asset.shares} {asset.ticker} {assetQueries.queries.map((a) => {
-                          return (
-                            <div key={a.data?.ticker}>
-                              <p>{a.data?.results.map((s) => {
-                                return (
-                                  <div key={s.ticker}>
-                                    <h1 className='asset-USD-value'>${s.c !== undefined ? s.c * asset.shares : 'Asset Unknown'}</h1>
-                                  </div>
-                                )
-                              })}</p>
-                            </div>
-                          )
-                        })}
+                        {asset.shares} {asset.ticker}
                       </p>
                     </div>
                   )
