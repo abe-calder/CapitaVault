@@ -312,7 +312,8 @@ html {
 
 .holdings-heading {
   position: absolute;
-  font-size: 1.5vw;
+  font-size: 1.8vw;
+  font-weight: 500;
   top: 0vw;
   left: 0vw;
 }
@@ -324,6 +325,44 @@ html {
 
 .dashboard-radio-buttons {
   margin-right: 1.25vw;
+}
+
+.dashboard-holdings-buttons {
+
+}
+
+.holdings-display {
+  position: absolute;
+  width: 32vw;
+  height: 58vh;
+  top: 10vh;
+  background-color: aquamarine;
+}
+
+.asset-holdings-wrapper {
+  position: relative;
+  width: 32vw;
+  background-color: yellow;
+}
+
+.asset-holdings-name {
+  position: relative;
+  left: 0;
+  top: 0;
+  font-size: 1.2vw;
+  font-weight: 500;
+}
+
+.asset-holdings-shares {
+  position: relative;
+  width: 32vw;
+  padding-bottom: 3vw;
+  left: 25vw;
+  top: 1.5vh;
+}
+
+.asset-USD-value {
+  font-size: 0.9vw;
 }
 
 /* DASHBOARD PAGE END  */
@@ -348,7 +387,6 @@ html {
   position: absolute;
   width: 20vw;
   height: 15vh;
-  background-color: grey;
   top: 7vh;
   left: 3vw;
 }
@@ -398,19 +436,6 @@ html {
   position: absolute;
   top: 10vh;
 }
-
-/* .adjust-stocks-form-label {
-  position: absolute;
-  width: 20vw;
-  top: 5vh;
-  left: 5vw;
-} */
-
-/* .adjust-crypto-form-label {
-  position: absolute;
-  width: 20vw;
-  top: 5vh;
-} */
 
 .adjust-ticker-form-label {
   position: absolute;
@@ -476,9 +501,10 @@ html {
 
 .display-holdings {
   position: absolute;
-  width: 40vw;
-  height: 60vh;
+  width: 49.75vw;
+  height: 70vh;
   left: 25vw;
+  overflow-y: auto;
 }
 
 .current-holdings-heading {
@@ -489,7 +515,7 @@ html {
 }
 
 .user-assets-wrapper {
-  
+
 }
 
 .user-assets-name {

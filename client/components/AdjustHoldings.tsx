@@ -41,14 +41,14 @@ export default function AdjustHoldings() {
   const delteAssetById = useDeleteAssetById()
 
   if (getMe.isPending) {
-    return <p>User data Loading...</p>
+    return <div className='app2'></div>
   }
   if (getMe.isError) {
     return <p>User data Error...</p>
   }
 
   if (userAssets.isPending) {
-    return <p>Assets are Loading...</p>
+    return
   }
   if (userAssets.isError) {
     return <p>Asset data Error...</p>

@@ -1,9 +1,23 @@
 import Nav from './Nav'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useGetAssets } from '../hooks/useAssets'
+import { useUsers } from '../hooks/useUsers'
+import { AssetData } from '../../models/assets'
 
 export default function Dashboard() {
   const { user } = useAuth0()
+  const getMe = useUsers()
+  const userId = getMe.data?.id
+  const userAssets = useGetAssets(userId as number)
+  const userAssetData = userAssets.data
 
+  if (userAssets.isPending) {
+    return
+  }
+  if (userAssets.isError) {
+    return
+  }
+  
   return (
     <>
       <div className="app2">
@@ -50,36 +64,23 @@ export default function Dashboard() {
             <div className="holdings">
               <h1 className="holdings-heading">Holdings</h1>
               <div className="holdings-buttons">
-                <label>
-                  <input
-                    type="radio"
-                    id="all"
-                    name="all"
-                    value="all"
-                    className="dashboard-radio-inputs"
-                  />
-                  All
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="crypto"
-                    name="crypto"
-                    value="crypto"
-                    className="dashboard-radio-inputs"
-                  />
-                  Crypto
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="stocks-and-etfs"
-                    name="stocks-and-etfs"
-                    value="stocksandetfs"
-                    className="dashboard-radio-inputs"
-                  />
+                <button className="dashboard-holdings-buttons">All</button>
+                <button className="dashboard-holdings-buttons">Crypto</button>
+                <button className="dashboard-holdings-buttons">
                   Stocks and ETFs
-                </label>
+                </button>
+              </div>
+              <div className="holdings-display">
+                {userAssetData.map((asset: AssetData) => {
+                  return (
+                    <div className="asset-holdings-wrapper" key={asset.id}>
+                      <h1 className="asset-holdings-name">{asset.name}</h1>
+                      <p className="asset-holdings-shares">
+                        {asset.shares} {asset.ticker}
+                      </p>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
