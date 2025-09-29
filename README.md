@@ -1,34 +1,54 @@
-# Boilerplate: Fullstack with Sass
+# CapitaVault
+Secure & Scalable Financial Data Management
+CapitaVault is an application designed to provide users with a secure and intuitive platform for managing personal or small-business financial assets. It focuses on real-time asset analysis, integrated authentication, and a clean, accessible user interface.
 
-## Setup
+## Features
+[ Real-time Portfolio Tracking] View the current value and performance of all managed assets in a consolidated dashboard. This is acheived through the Polygon api where the asset is seached though the provided ticker, and data is displayed.
 
-### What's included
+[ Integrated Authentication ] Know that your assets will only be viewed by you due to Auth0 integrated login.
 
-This repo includes:
+## Technology Stack
+This project is built using the following core technologies:
 
-* a single, simple API endpoint (`/api/v1/fruits`)
-* frontend routing via react-router
-* an auth0 setup waiting to be configured
-* an example database module (`server/db/fruits.js`)
-* an API client module (`client/apis/fruits.js`)
-* configuration for Vitest and testing library
-* configuration for server-side debugging in VS Code
-* configuration for preprocessing css with tailwind support
+Category	Technology	Purpose
+Frontend	[ React, HTML/CSS/JS]	Building the interactive user interface.
+Backend/API	[ Node.js (Express) ]	Handling business logic, routing, and server-side operations.
+Database	[ SQLite ]	Persistent storage for user and financial data.
+Styling/UI	[ Custom CSS ]	Providing a responsive and modern design.
 
-### Installation
+## Getting Started
+Follow these instructions to set up and run a local copy of the project.
 
-#### **From the Github UI**
+Prerequisites
+You will need the following software installed on your machine:
 
-See the instructions [here](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to use Github's feature to create a new repo from a template.
+[ Node.js] (Version X.X or higher)
 
-```
-git clone [your-project-ssh-address]
-cd [your-project-name]
-npm install # to install dependencies
-npm run dev # to start the dev server
-```
+[ npm ]
 
-You can find the server running on [http://localhost:3000](http://localhost:3000) and the client running on [http://localhost:5173](http://localhost:5173).
+Installation
+Clone the repository:
 
----
-[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=boilerplate-fullstack)
+Bash
+
+git clone https://github.com/abe-calder/CapitaVault.git
+cd CapitaVault
+Install dependencies:
+
+Bash
+
+### `npm install`
+
+# For the frontend (if applicable, usually in a /client directory)
+# cd client
+# npm install
+Configure environment variables:
+Create a file named .env in the root directory and add your configuration details:
+Will need a Polygon API key added to a .env file
+
+Bash
+
+npm run dev
+Access the application:
+Open your web browser and navigate to:
+http://localhost:3000
