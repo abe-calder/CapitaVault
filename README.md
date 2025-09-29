@@ -12,16 +12,16 @@ Know that your assets will only be viewed by you due to Auth0 integrated login.
 ## Technology Stack
 This project is built using the following core technologies:
 
-Frontend ### React, HTML/CSS/JS	
+### Frontend: React, HTML/CSS/JS	
 Building the interactive user interface.
 
-Backend/API	### Node.js (Express)	
+### Backend:	 Node.js (Express)	
 Handling business logic, routing, and server-side operations.
 
-Database ### SQLite 	
+### Database: SQLite 	
 Persistent storage for user and financial data.
 
-Styling/UI ### Custom CSS 
+### Styling/UI: Custom CSS 
 Providing a responsive and modern design.
 
 ## Getting Started
