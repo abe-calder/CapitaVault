@@ -30,33 +30,32 @@ Follow these instructions to set up and run a local copy of the project.
 Prerequisites
 You will need the following software installed on your machine:
 
-[ Node.js] (Version X.X or higher)
+### Node.js
 
-[ npm ]
+### npm 
 
-Installation
+## Installation
 Clone the repository:
 
 Bash
 
-git clone https://github.com/abe-calder/CapitaVault.git
-cd CapitaVault
-Install dependencies:
+`git clone https://github.com/abe-calder/CapitaVault.git
+cd CapitaVault`
 
+Install dependencies:
 Bash
 
-### `npm install`
+`npm install`
 
-# For the frontend (if applicable, usually in a /client directory)
-# cd client
-# npm install
+### For the frontend 
+### cd client
 Configure environment variables:
 Create a file named .env in the root directory and add your configuration details:
-Will need a Polygon API key added to a .env file
+Will need a Polygon API key added to a .env file ( free on their website - https://polygon.io/dashboard )
 
 Bash
 
-npm run dev
+`npm run dev`
 Access the application:
 Open your web browser and navigate to:
 http://localhost:3000
