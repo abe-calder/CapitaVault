@@ -280,7 +280,7 @@ html {
   top: 3vh;
   width: 32vw;
   height: 80vh;
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 .profile {
@@ -305,7 +305,7 @@ html {
 .holdings {
   position: absolute;
   top: 12vh;
-  background-color: grey;
+  /* background-color: grey; */
   width: 32vw;
   height: 68vh;
 }
@@ -336,13 +336,13 @@ html {
   width: 32vw;
   height: 58vh;
   top: 10vh;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 
 .asset-holdings-wrapper {
   position: relative;
   width: 32vw;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .asset-holdings-name {

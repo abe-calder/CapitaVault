@@ -3,6 +3,7 @@ import {
   useQueries
 } from '@tanstack/react-query'
 import getAssetDataByTicker from '../apis/polygon'
+import { Asset } from '../../models/assets'
 
 export function useGetAssetDataByTicker(ticker: string) {
   const query = useQuery({
@@ -16,9 +17,7 @@ export function useGetAssetDataByTicker(ticker: string) {
   }
 }
 
-interface Asset {
-  ticker: string
-}
+
 
 export const useAssetsQueries = (userAssetData: Asset[]) => {
   const queries =
