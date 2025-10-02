@@ -9,6 +9,7 @@ export function up(knex) {
     table.string('auth0Id')
     table.string('name')
     table.string('email')
+    table.string('username')
   })
 }
 

@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { User, UserData } from '../../models/users.ts'
+import { NewUser, User, UserData } from '../../models/users.ts'
 
 const rootURL = new URL(`/api/v1`, document.baseURI)
 
@@ -17,7 +17,7 @@ export async function getUser({
 }
 
 interface AddUserFunction {
-  newUser: User
+  newUser: NewUser
   token: string
 }
 

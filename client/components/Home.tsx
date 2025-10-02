@@ -8,7 +8,7 @@ export default function Home() {
   const handleSignIn = () => {
     loginWithRedirect({
       authorizationParams: {
-        redirectUri: `${window.location.origin}/dashboard`,
+        redirectUri: `${window.location.origin}/register`,
       },
     })
   }
