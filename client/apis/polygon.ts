@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Result } from '../../models/polygon'
+import {  Result } from '../../models/polygon'
 
 const rootURL = new URL(`/api/v1`, document.baseURI)
 
