@@ -6,11 +6,13 @@ import Dashboard from './components/Dashboard.tsx'
 import Settings from './components/Settings.tsx'
 import AdjustHoldings from './components/AdjustHoldings.tsx'
 import ProfileSettings from './components/ProfileSettings.tsx'
+import Register from './components/Register.tsx'
 
 
 export default createRoutesFromElements(
   <Route path="/" element={<App />}>
     <Route index element={<Home />} />
+    <Route path='/register' element={<Register />} />
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/settings" element={<Settings />} />
     <Route path="/settings/adjust-holdings" element={<AdjustHoldings />} />

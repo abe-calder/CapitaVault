@@ -7,3 +7,7 @@ export interface User {
 export interface UserData extends User {
   id: number
 }
+
+export interface NewUser {
+  username: string
+}
