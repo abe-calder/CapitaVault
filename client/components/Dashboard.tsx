@@ -5,6 +5,7 @@ import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
 import { useQuery } from '@tanstack/react-query'
 import getAssetDataByTicker from '../apis/polygon'
+import { Results } from '../../models/polygon'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -30,6 +31,7 @@ export default function Dashboard() {
   if (error) {
     return <div>Error: {(error as Error).message}</div>
   }
+
 
 
   return (

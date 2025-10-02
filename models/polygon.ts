@@ -9,7 +9,11 @@ export interface Polygon {
   count: number
 }
 
-export interface Result extends Polygon {
+export interface Results {
+  results: Result[]
+}
+
+export interface Result extends Results {
   v: number
   vw: number
   o: number
