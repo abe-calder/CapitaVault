@@ -19,7 +19,6 @@ export default function Dashboard() {
     return
   }
 
-
   return (
     <>
       <div className="app2">
@@ -56,7 +55,7 @@ export default function Dashboard() {
                   className="profile-photo"
                 >
                   <img
-                    src="/home/abecalder/1projects/CapitaVault/public/images/profile-photo-fallback.webp"
+                    src="/images/profile-photo-fallback.webp"
                     alt="fallback-img"
                   ></img>
                 </object>

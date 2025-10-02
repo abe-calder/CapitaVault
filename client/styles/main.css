@@ -156,6 +156,88 @@ html {
 
 /* NAV END */
 
+
+
+/* REGISTER START */
+
+.register-form {
+  position: absolute;
+  width: 27.5vw;
+  left: 30vw;
+  top: 28vh;
+  padding: 2vw;
+  height: 40vh;
+}
+
+.register-button {
+  font-size: 0.6vw;
+  position: absolute;
+  bottom: 0vh;
+  width: 4vw;
+  height: 2vh;
+  color: white;
+  background-color: black;
+  border-radius: 0.5vw;
+}
+
+.username-label {
+  font-size: 0.9vw;
+  position: absolute;
+
+}
+
+.register-heading {
+  font-size: 1.2vw;
+  position: absolute;
+  font-weight: 500;
+  padding-top: 1vh;
+  top: -2vh
+}
+
+.username-input {
+  position: absolute;
+  top: 7vh;
+  width: 10vw;
+  height: 2.5vh;
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  color: black;
+}
+
+.email-label {
+  font-size: 0.9vw;
+  position: absolute;
+  top: 15vh;
+}
+
+.email-input {
+  position: absolute;
+  top: 18vh;
+  width: 10vw;
+  height: 2.5vh;
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  color: black;
+}
+
+.name-label {
+  font-size: 0.9vw;
+  position: absolute;
+  bottom: 10vh;
+}
+
+.name-input {
+  position: absolute;
+  bottom: 7vh;
+  width: 10vw;
+  height: 2.5vh;
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  color: black;
+}
+
+/* REGISTER END */
+
 /* INVEST / DASH / SETTINGS  BACKGROUND */
 
 .app2 {

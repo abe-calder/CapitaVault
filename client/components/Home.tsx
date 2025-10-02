@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 
 export default function Home() {
   const { loginWithRedirect, isAuthenticated } = useAuth0()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const handleSignIn = () => {
     loginWithRedirect({
       authorizationParams: {
@@ -13,14 +13,14 @@ export default function Home() {
     })
   }
 
-  // // If authenticated already then this will trigger user to navigate to /dashboard after 1 second delay - prevents being stuck at homepage
-  // const navToDash = () => {
-  //   setTimeout(runAfterDelay, 1000)
-  // }
+  // If authenticated already then this will trigger user to navigate to /dashboard after 1 second delay - prevents being stuck at homepage
+  const navToDash = () => {
+    setTimeout(runAfterDelay, 1000)
+  }
 
-  // const runAfterDelay = () => {
-  //   navigate('/dashboard')
-  // }
+  const runAfterDelay = () => {
+    navigate('/dashboard')
+  }
 
   return (
     <>

@@ -10,4 +10,7 @@ export interface UserData extends User {
 
 export interface NewUser {
   username: string
+  auth0Id: string
+  name: string
+  email: string
 }

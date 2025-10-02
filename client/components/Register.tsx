@@ -7,8 +7,8 @@ import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 function Register() {
   const [errorMsg, setErrorMsg] = useState('')
-  const { getAccessTokenSilently } = useAuth0()
-  const user = useUsers()
+  const { getAccessTokenSilently, user } = useAuth0()
+  const userHook = useUsers()
 
   const handleMutationSuccess = () => {
     setErrorMsg('')
@@ -30,11 +30,14 @@ function Register() {
   const navigate = useNavigate()
   const [form, setForm] = useState({
     username: '',
+    email: '',
+    name: '',
+    auth0Id: user?.sub as string,
   })
 
   useEffect(() => {
-    if (user.data) navigate('/')
-  }, [user.data, navigate])
+    if (userHook.data) navigate('/')
+  }, [userHook.data, navigate])
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -46,7 +49,7 @@ function Register() {
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     const token = await getAccessTokenSilently()
     evt.preventDefault()
-    user.add.mutate({ newUser: form, token }, mutationOptions)
+    userHook.add.mutate({ newUser: form, token }, mutationOptions)
     navigate('/')
   }
 
@@ -55,10 +58,10 @@ function Register() {
   }
 
   return (
-    <div className='app2'>
-      <div>
+    <div className="app2">
+      <div className="register-form">
         <IfAuthenticated>
-          <h1>Enter your Username</h1>
+          <h1 className="register-heading">Enter your details</h1>
           <p></p>
           {errorMsg && (
             <div>
@@ -68,17 +71,43 @@ function Register() {
           )}
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="playerTag">Username:</label>
+              <label className="username-label" htmlFor="playerTag">
+                Username:
+              </label>
               <input
                 type="text"
-                id="playerTag"
-                name="playerTag"
+                id="username"
+                name="username"
                 value={form.username}
                 onChange={handleChange}
+                className="username-input"
+              />
+
+              <label className="email-label" htmlFor="email">
+                Email:
+              </label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="email-input"
+              />
+              <label className="name-label" htmlFor="name">
+                Name:
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                className="name-input"
               />
             </div>
             <div>
-              <button>Register</button>
+              <button className="register-button">Register</button>
             </div>
           </form>
         </IfAuthenticated>
@@ -86,6 +115,12 @@ function Register() {
           <h1>Please sign in</h1>
         </IfNotAuthenticated>
       </div>
+
+      <img
+        alt="mini-CapitaVault-logo"
+        className="mini-sign-in-page-logo"
+        src="/images/CapitaVault-logo.webp"
+      ></img>
     </div>
   )
 }
