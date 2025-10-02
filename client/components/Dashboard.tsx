@@ -3,6 +3,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useGetAssets } from '../hooks/useAssets'
 import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
+import { useQuery } from '@tanstack/react-query'
+import getAssetDataByTicker from '../apis/polygon'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -10,7 +12,10 @@ export default function Dashboard() {
   const userId = getMe.data?.id
   const userAssets = useGetAssets(userId as number)
   const userAssetData = userAssets.data
-
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['myItemsData', userAssetData],
+    queryFn: () => getAssetDataByTicker(userAssetData),
+  })
 
   if (userAssets.isPending) {
     return
@@ -18,6 +23,14 @@ export default function Dashboard() {
   if (userAssets.isError) {
     return
   }
+
+  if (isLoading) {
+    return <div>Loading....</div>
+  }
+  if (error) {
+    return <div>Error: {(error as Error).message}</div>
+  }
+
 
   return (
     <>
@@ -77,8 +90,15 @@ export default function Dashboard() {
                     <div className="asset-holdings-wrapper" key={asset.id}>
                       <h1 className="asset-holdings-name">{asset.name}</h1>
                       <div className="asset-holdings-shares">
-                        {/* {/* <h1>${results && results[i].results[i].c * asset.shares}</h1> */}
-                        {asset.shares} {asset.ticker} 
+                        {data && data[i] && data[i].results && (
+                          <p className="asset-holdings-value">
+                            ${(data[i].results[0].c * asset.shares).toFixed(3)}
+                          </p>
+                        )}
+                        <p className="asset-shares">
+                          {asset.shares} {asset.ticker}
+                        </p>
+                        
                       </div>
                     </div>
                   )

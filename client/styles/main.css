@@ -133,6 +133,10 @@ html {
   width: 4vw;
 }
 
+.log-out-button:hover {
+  color: blue;
+}
+
 .settings-link {
   position: absolute;
   font-size: 1vw;
@@ -178,6 +182,10 @@ html {
   color: white;
   background-color: black;
   border-radius: 0.5vw;
+}
+
+.register-button:hover {
+  color: blue;
 }
 
 .username-label {
@@ -405,26 +413,27 @@ html {
   top: 5.5vh;
 }
 
+.holdings-buttons:hover {
+  color: blue;
+}
+
 .dashboard-radio-buttons {
   margin-right: 1.25vw;
 }
 
-.dashboard-holdings-buttons {
 
-}
 
 .holdings-display {
   position: absolute;
   width: 32vw;
   height: 58vh;
   top: 10vh;
-  /* background-color: aquamarine; */
 }
 
 .asset-holdings-wrapper {
   position: relative;
   width: 32vw;
-  /* background-color: yellow; */
+  display: flex;
 }
 
 .asset-holdings-name {
@@ -433,18 +442,30 @@ html {
   top: 0;
   font-size: 1.2vw;
   font-weight: 500;
+  width: 12vw;
 }
 
 .asset-holdings-shares {
   position: relative;
   width: 32vw;
   padding-bottom: 3vw;
-  left: 25vw;
-  top: 1.5vh;
+  left: 17.5vw;
 }
 
 .asset-USD-value {
   font-size: 0.9vw;
+}
+
+.asset-holdings-value {
+  font-size: 1.2vw;
+  font-weight: 400;
+  position: relative;
+
+}
+
+.asset-shares {
+  font-size: 0.7vw;
+  position: relative;
 }
 
 /* DASHBOARD PAGE END  */
