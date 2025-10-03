@@ -9,6 +9,7 @@ import ProfileSettings from './components/ProfileSettings.tsx'
 import Register from './components/Register.tsx'
 
 
+
 export default createRoutesFromElements(
   <Route path="/" element={<App />}>
     <Route index element={<Home />} />
@@ -17,5 +18,6 @@ export default createRoutesFromElements(
     <Route path="/settings" element={<Settings />} />
     <Route path="/settings/adjust-holdings" element={<AdjustHoldings />} />
     <Route path="/settings/profile-settings" element={<ProfileSettings />} />
+    <Route path='/investments'  />
   </Route>,
 )
