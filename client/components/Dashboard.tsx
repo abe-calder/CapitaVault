@@ -34,17 +34,13 @@ export default function Dashboard() {
 
   const resultsByTicker: Record<string, Results> = {}
   if (data) {
-    data.forEach((item: any) => {
-      // Use the correct property for ticker, e.g. item.ticker or item.symbol
-      if (item && item.ticker) {
-        resultsByTicker[item.ticker.replace(/^X:/, '').replace(/USD$/, '')] =
-          item
+    data.forEach((asset: any) => {
+      if (asset && asset.ticker) {
+        resultsByTicker[asset.ticker.replace(/^X:/, '').replace(/USD$/, '')] =
+          asset
       }
     })
   }
-
-  console.log('API data:', data)
-  console.log('resultsByTicker:', resultsByTicker)
 
   return (
     <>
