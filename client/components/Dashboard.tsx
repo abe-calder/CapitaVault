@@ -32,7 +32,19 @@ export default function Dashboard() {
     return <div>Error: {(error as Error).message}</div>
   }
 
+  const resultsByTicker: Record<string, Results> = {}
+  if (data) {
+    data.forEach((item: any) => {
+      // Use the correct property for ticker, e.g. item.ticker or item.symbol
+      if (item && item.ticker) {
+        resultsByTicker[item.ticker.replace(/^X:/, '').replace(/USD$/, '')] =
+          item
+      }
+    })
+  }
 
+  console.log('API data:', data)
+  console.log('resultsByTicker:', resultsByTicker)
 
   return (
     <>
@@ -87,23 +99,29 @@ export default function Dashboard() {
                 </button>
               </div>
               <div className="holdings-display">
-                {userAssetData.map((asset: AssetData, i: number) => {
-                  return (
-                    <div className="asset-holdings-wrapper" key={asset.id}>
-                      <h1 className="asset-holdings-name">{asset.name}</h1>
-                      <div className="asset-holdings-shares">
-                        {data && data[i] && data[i].results && (
-                          <p className="asset-holdings-value">
-                            ${(data[i].results[0].c * asset.shares).toFixed(3)}
-                          </p>
-                        )}
-                        <p className="asset-shares">
-                          {asset.shares} {asset.ticker}
-                        </p>
-                        
-                      </div>
-                    </div>
-                  )
+                {userAssetData.map((asset: AssetData) => {
+                   const cleanTicker = asset.ticker
+                     .replace(/^X:/, '')
+                     .replace(/USD$/, '')
+                   const assetData = resultsByTicker[cleanTicker]
+                   return (
+                     <div className="asset-holdings-wrapper" key={asset.id}>
+                       <h1 className="asset-holdings-name">{asset.name}</h1>
+                       <div className="asset-holdings-shares">
+                         {assetData && assetData.results && (
+                           <p className="asset-holdings-value">
+                             $
+                             {(assetData.results[0].c * asset.shares).toFixed(
+                               2,
+                             )}
+                           </p>
+                         )}
+                         <p className="asset-shares">
+                           {asset.shares} {asset.ticker}
+                         </p>
+                       </div>
+                     </div>
+                   )
                 })}
                 
               </div>
