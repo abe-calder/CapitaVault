@@ -88,11 +88,11 @@ export default function Dashboard() {
             <div className="holdings">
               <h1 className="holdings-heading">Holdings</h1>
               <div className="holdings-buttons">
-                <button className="dashboard-holdings-buttons">All</button>
+                {/* <button className="dashboard-holdings-buttons">All</button>
                 <button className="dashboard-holdings-buttons">Crypto</button>
                 <button className="dashboard-holdings-buttons">
                   Stocks and ETFs
-                </button>
+                </button> */}
               </div>
               <div className="holdings-display">
                 {userAssetData.map((asset: AssetData) => {
