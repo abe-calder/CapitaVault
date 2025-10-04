@@ -5,6 +5,7 @@ import { WebSocketServer } from 'ws'
 import assetRoutes from './routes/assets.ts'
 import userRoutes from './routes/users.ts'
 import polygonRoutes from './routes/polygon.ts'
+import fxratesRoutes from './routes/fxrates.ts'
 
 const app = express()
 
@@ -18,6 +19,8 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/assets', assetRoutes)
 
 app.use('/api/v1/polygon', polygonRoutes)
+
+app.use('/api/v1/fxrates', fxratesRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(Path.resolve('public')))
