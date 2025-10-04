@@ -7,7 +7,6 @@ import routes from './routes.tsx'
 import { Auth0Provider } from '@auth0/auth0-react'
 import '@radix-ui/themes/styles.css'
 
-
 const router = createBrowserRouter(routes)
 const queryClient = new QueryClient()
 
