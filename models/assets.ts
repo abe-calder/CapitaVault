@@ -3,6 +3,7 @@ export interface Asset {
   ticker: string
   name: string
   shares: number
+  cost: string
   userId: number
 }
 

@@ -54,7 +54,6 @@ export default function Dashboard() {
   function handleToggleCurrency(e: ToggleCurrencyEvent): void {
     e.preventDefault()
     const selectedCurrency: string = e.target.value
-    console.log('Selected currency:', selectedCurrency)
     setConvertToCurrency(e.target.value)
   }
 
@@ -62,7 +61,6 @@ export default function Dashboard() {
   const isFxError = convert.isError
   const fxRate =
     typeof convert.data?.result === 'number' ? convert.data.result : null
-  console.log('FX data:', convert.data?.result)
 
   return (
     <>
