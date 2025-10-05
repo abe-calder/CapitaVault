@@ -102,7 +102,7 @@ export default function Dashboard() {
                   <button className="toggle-currency-buttons" value="USD" name='USD' >
                     USD
                   </button>
-                  <button className="toggle-currency-buttons" value="NZD">
+                  <button className="toggle-currency-buttons" value="NZD" >
                     NZD
                   </button>
                   <button className="toggle-currency-buttons" value="AUD">
