@@ -7,7 +7,7 @@ export function useGetAssetDataByTicker(ticker: string) {
   const query = useQuery({
     queryKey: ['polygonData', ticker],
     queryFn: async () => {
-      return getAssetDataByTicker([{ ticker }])
+      return getAssetDataByTicker(ticker)
     }
   })
   return {

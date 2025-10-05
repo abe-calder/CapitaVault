@@ -24,15 +24,17 @@ export default function Dashboard() {
   const convert = useFxRates('USD', convertToCurrency, currencyAmount)
 
   if (userAssets.isPending) {
-    return
+    return 
   }
   if (userAssets.isError) {
     return
   }
 
   if (isLoading) {
+    
     return <div>Loading....</div>
   }
+
   if (error) {
     return <div>Error: {(error as Error).message}</div>
   }
