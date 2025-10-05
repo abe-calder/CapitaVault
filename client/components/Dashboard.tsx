@@ -21,8 +21,8 @@ export default function Dashboard() {
     queryFn: () => getAssetDataByTicker(userAssetData),
   })
   const [convertToCurrency, setConvertToCurrency] = useState('NZD')
-  const [currencyAmount, setCurrencyAmount] = useState(0)
-  const convert = useFxRates('USD', convertToCurrency, 50)
+  const [currencyAmount, setCurrencyAmount] = useState(1)
+  const convert = useFxRates('USD', convertToCurrency, currencyAmount)
 
   if (userAssets.isPending) {
     return
