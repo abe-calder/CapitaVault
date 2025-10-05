@@ -468,6 +468,24 @@ html {
   position: relative;
 }
 
+.toggle-currency-label {
+  display: flex;
+  gap: 0.5vw;
+  align-items: center;
+  margin-right: 1.25vw;
+  font-weight: 600;
+}
+
+.toggle-currency-buttons {
+  font-size: 0.7vw;
+  color: black;
+  background-color: lightgrey;
+  border-radius: 0.5vw;
+  width: 2vw;
+  height: 2vh;
+}
+
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */
