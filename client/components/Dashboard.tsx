@@ -6,6 +6,7 @@ import { AssetData } from '../../models/assets'
 import { useQuery } from '@tanstack/react-query'
 import getAssetDataByTicker from '../apis/polygon'
 import { Results } from '../../models/polygon'
+import { useFxRates } from '../hooks/useFxrates'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -17,6 +18,7 @@ export default function Dashboard() {
     queryKey: ['myItemsData', userAssetData],
     queryFn: () => getAssetDataByTicker(userAssetData),
   })
+  // const convert = useFxRates('USD', convertToCurrency, convertToValue)
 
   if (userAssets.isPending) {
     return
@@ -40,6 +42,10 @@ export default function Dashboard() {
           asset
       }
     })
+  }
+
+  function handleToggleCurrency() {
+
   }
 
   return (
@@ -88,38 +94,51 @@ export default function Dashboard() {
             <div className="holdings">
               <h1 className="holdings-heading">Holdings</h1>
               <div className="holdings-buttons">
-                {/* <button className="dashboard-holdings-buttons">All</button>
-                <button className="dashboard-holdings-buttons">Crypto</button>
-                <button className="dashboard-holdings-buttons">
-                  Stocks and ETFs
-                </button> */}
+                <label
+                  htmlFor="toggle-currency"
+                  className="toggle-currency-label"
+                >
+                  Toggle Currency
+                  <button className="toggle-currency-buttons" value="USD" name='USD' >
+                    USD
+                  </button>
+                  <button className="toggle-currency-buttons" value="NZD">
+                    NZD
+                  </button>
+                  <button className="toggle-currency-buttons" value="AUD">
+                    AUD
+                  </button>
+                  <button className="toggle-currency-buttons" value="EUR">
+                    EUR
+                  </button>
+                  <button className="toggle-currency-buttons" value="GBP">
+                    GBP
+                  </button>
+                </label>
               </div>
               <div className="holdings-display">
                 {userAssetData.map((asset: AssetData) => {
-                   const cleanTicker = asset.ticker
-                     .replace(/^X:/, '')
-                     .replace(/USD$/, '')
-                   const assetData = resultsByTicker[cleanTicker]
-                   return (
-                     <div className="asset-holdings-wrapper" key={asset.id}>
-                       <h1 className="asset-holdings-name">{asset.name}</h1>
-                       <div className="asset-holdings-shares">
-                         {assetData && assetData.results && (
-                           <p className="asset-holdings-value">
-                             $
-                             {(assetData.results[0].c * asset.shares).toFixed(
-                               2,
-                             )}
-                           </p>
-                         )}
-                         <p className="asset-shares">
-                           {asset.shares} {asset.ticker}
-                         </p>
-                       </div>
-                     </div>
-                   )
+                  const cleanTicker = asset.ticker
+                    .replace(/^X:/, '')
+                    .replace(/USD$/, '')
+                  const assetData = resultsByTicker[cleanTicker]
+                  return (
+                    <div className="asset-holdings-wrapper" key={asset.id}>
+                      <h1 className="asset-holdings-name">{asset.name}</h1>
+                      <div className="asset-holdings-shares">
+                        {assetData && assetData.results && (
+                          <p className="asset-holdings-value">
+                            $
+                            {(assetData.results[0].c * asset.shares).toFixed(2)}
+                          </p>
+                        )}
+                        <p className="asset-shares">
+                          {asset.shares} {asset.ticker}
+                        </p>
+                      </div>
+                    </div>
+                  )
                 })}
-                
               </div>
             </div>
           </div>
