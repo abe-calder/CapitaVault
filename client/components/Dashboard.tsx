@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query'
 import getAssetDataByTicker from '../apis/polygon'
 import { Results } from '../../models/polygon'
 import { useFxRates } from '../hooks/useFxrates'
+import e from 'express'
+import { useState } from 'react'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -18,7 +20,9 @@ export default function Dashboard() {
     queryKey: ['myItemsData', userAssetData],
     queryFn: () => getAssetDataByTicker(userAssetData),
   })
-  // const convert = useFxRates('USD', convertToCurrency, convertToValue)
+  const [convertToCurrency, setConvertToCurrency] = useState('NZD')
+  const [currencyAmount, setCurrencyAmount] = useState(0)
+  const convert = useFxRates('USD', convertToCurrency, 50)
 
   if (userAssets.isPending) {
     return
@@ -44,8 +48,19 @@ export default function Dashboard() {
     })
   }
 
-  function handleToggleCurrency() {
+  interface ToggleCurrencyEvent extends React.MouseEvent<HTMLButtonElement> {
+    target: HTMLButtonElement & EventTarget & { value: string }
+  }
 
+  function handleToggleCurrency(e: ToggleCurrencyEvent): void {
+    e.preventDefault()
+    const selectedCurrency: string = e.target.value
+    console.log('Selected currency:', selectedCurrency)
+    setConvertToCurrency(selectedCurrency)
+  }
+
+  function handleCurrencyValue() {
+    setCurrencyAmount()
   }
 
   return (
@@ -99,19 +114,39 @@ export default function Dashboard() {
                   className="toggle-currency-label"
                 >
                   Toggle Currency
-                  <button className="toggle-currency-buttons" value="USD" name='USD' >
+                  <button
+                    className="toggle-currency-buttons"
+                    value="USD"
+                    onClick={(e) => handleToggleCurrency(e)}
+                  >
                     USD
                   </button>
-                  <button className="toggle-currency-buttons" value="NZD" >
+                  <button
+                    className="toggle-currency-buttons"
+                    value="NZD"
+                    onClick={(e) => handleToggleCurrency(e)}
+                  >
                     NZD
                   </button>
-                  <button className="toggle-currency-buttons" value="AUD">
+                  <button
+                    className="toggle-currency-buttons"
+                    value="AUD"
+                    onClick={(e) => handleToggleCurrency(e)}
+                  >
                     AUD
                   </button>
-                  <button className="toggle-currency-buttons" value="EUR">
+                  <button
+                    className="toggle-currency-buttons"
+                    value="EUR"
+                    onClick={(e) => handleToggleCurrency(e)}
+                  >
                     EUR
                   </button>
-                  <button className="toggle-currency-buttons" value="GBP">
+                  <button
+                    className="toggle-currency-buttons"
+                    value="GBP"
+                    onClick={(e) => handleToggleCurrency(e)}
+                  >
                     GBP
                   </button>
                 </label>
