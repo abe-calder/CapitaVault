@@ -4,6 +4,6 @@
  */
 export async function seed(knex) {
   await knex('assets').insert([
-    {id: 1, ticker: 'BTC', name: 'Bitcoin', shares: '0.025322', user_id: 1},
+    {id: 1, ticker: 'BTC', name: 'Bitcoin', shares: '0.025322', user_id: 1, cost: '2000NZD'},
   ]);
 };

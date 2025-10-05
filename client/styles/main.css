@@ -160,8 +160,6 @@ html {
 
 /* NAV END */
 
-
-
 /* REGISTER START */
 
 .register-form {
@@ -191,7 +189,6 @@ html {
 .username-label {
   font-size: 0.9vw;
   position: absolute;
-
 }
 
 .register-heading {
@@ -199,7 +196,7 @@ html {
   position: absolute;
   font-weight: 500;
   padding-top: 1vh;
-  top: -2vh
+  top: -2vh;
 }
 
 .username-input {
@@ -421,8 +418,6 @@ html {
   margin-right: 1.25vw;
 }
 
-
-
 .holdings-display {
   position: absolute;
   width: 32vw;
@@ -460,7 +455,6 @@ html {
   font-size: 1.2vw;
   font-weight: 400;
   position: relative;
-
 }
 
 .asset-shares {
@@ -474,6 +468,7 @@ html {
   align-items: center;
   margin-right: 1.25vw;
   font-weight: 600;
+  color: black;
 }
 
 .toggle-currency-buttons {
@@ -485,6 +480,9 @@ html {
   height: 2vh;
 }
 
+.toggle-currency-buttons:hover {
+  color: rgb(127, 170, 61);
+}
 
 /* DASHBOARD PAGE END  */
 
@@ -636,7 +634,6 @@ html {
 }
 
 .user-assets-wrapper {
-
 }
 
 .user-assets-name {

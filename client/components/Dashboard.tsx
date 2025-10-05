@@ -7,7 +7,6 @@ import { useQuery } from '@tanstack/react-query'
 import getAssetDataByTicker from '../apis/polygon'
 import { Results } from '../../models/polygon'
 import { useFxRates } from '../hooks/useFxrates'
-import e from 'express'
 import { useState } from 'react'
 
 export default function Dashboard() {
@@ -55,13 +54,13 @@ export default function Dashboard() {
   function handleToggleCurrency(e: ToggleCurrencyEvent): void {
     e.preventDefault()
     const selectedCurrency: string = e.target.value
-    console.log('Selected currency:', selectedCurrency)
-    setConvertToCurrency(selectedCurrency)
+    setConvertToCurrency(e.target.value)
   }
 
-  function handleCurrencyValue() {
-    setCurrencyAmount()
-  }
+  const isFxLoading = convert.isLoading
+  const isFxError = convert.isError
+  const fxRate =
+    typeof convert.data?.result === 'number' ? convert.data.result : null
 
   return (
     <>
@@ -163,8 +162,15 @@ export default function Dashboard() {
                       <div className="asset-holdings-shares">
                         {assetData && assetData.results && (
                           <p className="asset-holdings-value">
-                            $
-                            {(assetData.results[0].c * asset.shares).toFixed(2)}
+                            {convertToCurrency === 'USD'
+                              ? `$${(assetData.results[0].c * asset.shares).toFixed(2)}`
+                              : isFxLoading
+                                ? 'Loading FX...'
+                                : isFxError
+                                  ? 'FX Error'
+                                  : fxRate
+                                    ? `${convertToCurrency} ${(assetData.results[0].c * asset.shares * fxRate).toFixed(2)}`
+                                    : 'No FX rate'}
                           </p>
                         )}
                         <p className="asset-shares">

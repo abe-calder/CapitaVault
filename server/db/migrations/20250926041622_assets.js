@@ -8,6 +8,7 @@ export async function up(knex) {
     table.string('ticker')
     table.string('name')
     table.integer('shares')
+    table.string('cost')
     table.integer('user_id').references('users.id')
   })
 };

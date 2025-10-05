@@ -19,13 +19,14 @@ router.get('/tickers', checkJwt, async (req: JwtRequest, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { ticker, name, shares, userId } = req.body
+    const { ticker, name, shares, cost, userId } = req.body
 
     const convert = {
       ticker: ticker as string,
       name: name as string,
       shares: shares as number,
       user_id: userId as number,
+      cost: cost as string
     }
 
     const result = await db.addAssets(convert)

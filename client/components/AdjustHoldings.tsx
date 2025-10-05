@@ -15,6 +15,7 @@ const emptyForm = {
   ticker: '',
   name: '',
   shares: '',
+  cost: '',
   userId: '',
 } as unknown as AssetData
 
@@ -152,6 +153,18 @@ export default function AdjustHoldings() {
                   required
                 />
               </label>
+              <label className="adjust-cost-form-label">
+                Input the cost of the shares when you bought them
+                <input
+                  type="string"
+                  name="cost"
+                  value={formState.cost}
+                  className="adjust-cost-input"
+                  placeholder="10,000NZD"
+                  onChange={handleChange}
+                  required
+                />
+              </label>
               <button
                 data-pending={addAssets.isPending}
                 className="adjust-form-submit-button"
@@ -168,7 +181,12 @@ export default function AdjustHoldings() {
                   <h1 className="user-assets-name">{asset.name}</h1>
                   <p className="user-assets-ticker">{asset.ticker}</p>
                   <p className="user-assets-shares">Shares: {asset.shares}</p>
-                  <button onClick={() => handleDelete(asset.id)} className="user-asset-delete">Delete</button>
+                  <button
+                    onClick={() => handleDelete(asset.id)}
+                    className="user-asset-delete"
+                  >
+                    Delete
+                  </button>
                 </div>
               )
             })}
