@@ -8,6 +8,7 @@ import getAssetDataByTicker from '../apis/polygon'
 import { Results } from '../../models/polygon'
 import { useFxRates } from '../hooks/useFxrates'
 import { useState } from 'react'
+import { PieChart, Pie, Tooltip, Legend, Cell } from 'recharts'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -111,6 +112,15 @@ export default function Dashboard() {
     })
   }
 
+  const pieChartData = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
+    { name: 'Group D', value: 200 },
+  ]
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
+
   return (
     <>
       <div className="app2">
@@ -144,21 +154,42 @@ export default function Dashboard() {
                         : 'No FX rate'}
                 <h1 className="total-balance-divider"> | </h1>
                 <p className="total-income-p">^ Income </p>
-                <p className='total-income-value'>{convertToCurrency === 'USD'
-                  ? `$${income.toFixed(2)}`
-                  : isFxLoading
-                    ? 'Loading FX...'
-                    : isFxError
-                      ? 'FX Error'
-                      : fxRate
-                        ? `${convertToCurrency} ${income.toFixed(2)}`
-                        : 'No FX rate'}</p>
+                <p className="total-income-value">
+                  {convertToCurrency === 'USD'
+                    ? `$${income.toFixed(2)}`
+                    : isFxLoading
+                      ? 'Loading FX...'
+                      : isFxError
+                        ? 'FX Error'
+                        : fxRate
+                          ? `${convertToCurrency} ${income.toFixed(2)}`
+                          : 'No FX rate'}
+                </p>
               </p>
             </div>
           </div>
           <div className="statistics-wrapper">
             <div className="statistics">
               <h2 className="statistics-heading">Statistics</h2>
+              <PieChart width={200} height={200}>
+                <Pie
+                  data={pieChartData}
+                  dataKey="value" // The key in your data that represents the slice size
+                  nameKey="name" // The key in your data for the label/name of each slice
+                  cx="50%" // Center x-coordinate of the pie
+                  cy="50%" // Center y-coordinate of the pie
+                  outerRadius={150} // Outer radius of the pie
+                  fill="#8884d8" // Default fill color
+                >
+                  {pieChartData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    /> // Custom colors for slices
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
             </div>
           </div>
           <div className="goals-wrapper">
