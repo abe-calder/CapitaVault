@@ -3,12 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useGetAssets } from '../hooks/useAssets'
 import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
-import { useQuery } from '@tanstack/react-query'
-import getAssetDataByTicker from '../apis/polygon'
 import { Results } from '../../models/polygon'
-import { useFxRates } from '../hooks/useFxrates'
 import { useState, useMemo } from 'react'
 import { PieChart, Pie, Tooltip, Cell } from 'recharts'
+import { useFxRatesContext } from '../context/FxRatesContext.tsx'
+import { usePolygonDataContext } from '../context/PolygonDataContext.tsx'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -16,37 +15,33 @@ export default function Dashboard() {
   const getMe = useUsers()
   const userId = getMe.data?.id
 
-  const userAssets = useGetAssets(userId as number)
-  const userAssetData = useMemo(() => {
-    return userAssets.data || []
-  }, [userAssets.data])
-  
-  const { data, isLoading } = useQuery({
-    queryKey: ['myItemsData', userAssetData],
-    queryFn: () => getAssetDataByTicker(userAssetData),
-    enabled: !!userAssetData && userAssetData.length > 0,
-  })
+  const { data: userAssetData = [] } = useGetAssets(userId)
+  const {
+    rates: fxRates,
+    isLoading: isFxLoading,
+    error: fxError,
+  } = useFxRatesContext()
+  const {
+    polygonData,
+    isLoading: isPolygonLoading,
+    error: polygonError,
+  } = usePolygonDataContext()
 
-  const [convertToCurrency, setConvertToCurrency] = useState('NZD')
-  const [currencyAmount] = useState(1)
-  const convert = useFxRates('USD', convertToCurrency, currencyAmount)
+  const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
 
   const resultsByTicker = useMemo(() => {
     const tickerMap: Record<string, Results> = {}
-    if (data) {
-      data.forEach((asset) => {
+    if (polygonData) {
+      polygonData.forEach((asset) => {
         if (asset && asset.ticker) {
           tickerMap[asset.ticker.replace(/^X:/, '').replace(/USD$/, '')] = asset
         }
       })
     }
     return tickerMap
-  }, [data])
+  }, [polygonData])
 
-  const isFxLoading = convert.isLoading
-  const isFxError = convert.isError
-  const fxRate =
-    typeof convert.data?.result === 'number' ? convert.data.result : null
+  const fxRate = fxRates[convertToCurrency] ?? null
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
@@ -59,7 +54,7 @@ export default function Dashboard() {
       return `$${usdValue.toFixed(2)}`
     }
     if (isFxLoading) return 'Loading FX...'
-    if (isFxError) return 'FX Error'
+    if (fxError) return 'FX Error'
     if (fxRate) {
       return `${convertToCurrency} ${(usdValue * fxRate).toFixed(2)}`
     }
@@ -122,18 +117,13 @@ export default function Dashboard() {
     )
   })
 
-  // --- Loading and Error States ---
-  if (getMe.isPending || userAssets.isPending) {
-    return <div>Loading user data...</div>
+  if (isPolygonLoading) {
+    return <div>Loading Dashboard...</div>
   }
 
-  if (getMe.isError || userAssets.isError) {
-    const errorMessage = (getMe.error || userAssets.error) as Error
+  if (polygonError) {
+    const errorMessage = polygonError
     return <div>Error: {errorMessage.message}</div>
-  }
-
-  if (isLoading) {
-    return <div>Loading asset data...</div>
   }
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
@@ -150,17 +140,15 @@ export default function Dashboard() {
               <p className="total-balance-value">
                 {convertToCurrency} {totalBalance.toFixed(2)}
               </p>
-              <p className="total-cost-value">
+              <div className="total-cost-value">
                 <p className="total-cost-expense-p">&#8964; Expense</p>
-                {
-                  formatCurrency(totalCost)
-                }
+                {formatCurrency(totalCost)}
                 <h1 className="total-balance-divider"> | </h1>
                 <p className="total-income-p">^ Income </p>
                 <p className="total-income-value">
                   {convertToCurrency} {income.toFixed(2)}
                 </p>
-              </p>
+              </div>
             </div>
           </div>
           <div className="statistics-wrapper">

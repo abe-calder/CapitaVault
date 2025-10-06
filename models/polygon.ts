@@ -10,11 +10,11 @@ export interface Polygon {
 }
 
 export interface Results {
+  ticker: string
   results: Result[]
 }
 
 export interface Result extends Results {
-  ticker: string
   v: number
   vw: number
   o: number

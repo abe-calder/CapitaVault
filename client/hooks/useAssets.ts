@@ -5,9 +5,13 @@ import {
   MutationFunction,
 } from '@tanstack/react-query'
 
-import { addAssets, deleteAssetById, getAssets, getUsersTickers } from '../apis/assets'
+import {
+  addAssets,
+  deleteAssetById,
+  getAssetsByUserId,
+  getUsersTickers,
+} from '../apis/assets'
 import { useAuth0 } from '@auth0/auth0-react'
-
 
 export function useUsersTickers() {
   const { user, getAccessTokenSilently } = useAuth0()
@@ -27,18 +31,24 @@ export function useUsersTickers() {
   }
 }
 
-export function useGetAssets(userId: number) {
+interface GetAssetsByIdType {
+  userId: number
+  token: string
+}
+
+export function useGetAssets(userId: number | undefined) {
   const { user, getAccessTokenSilently } = useAuth0()
 
   return useQuery({
-    queryKey: ['getAssetsByUserId', userId],
+    queryKey: ['getAssetsByUserId', userId as number],
     queryFn: async () => {
       const token = await getAccessTokenSilently()
-      return getAssets(userId, token)
+      return getAssetsByUserId({ userId, token } as GetAssetsByIdType)
     },
-    enabled: !!user,
+    enabled: !!userId && !!user,
     refetchOnWindowFocus: false,
     refetchInterval: 600000, // 10 minutes
+    
   })
 }
 
@@ -50,7 +60,7 @@ export function useAssetsMutation<TData = unknown, TVariables = unknown>(
     mutationFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['addAssets'] })
-    }
+    },
   })
   return mutation
 }

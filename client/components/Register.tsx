@@ -33,7 +33,7 @@ function Register() {
     username: '',
     email: user?.email ?? '',
     name: user?.name ?? '',
-    auth0Id: user?.sub,
+    auth0Id: user?.sub ?? '',
   })
 
   useEffect(() => {
@@ -44,9 +44,10 @@ function Register() {
     if (user) {
       setForm((prevForm) => ({
         ...prevForm,
-        auth0Id: user.sub,
-        email: user.email ?? prevForm.email,
-        name: user.name ?? prevForm.name,
+        auth0Id: user.sub ?? (prevForm.auth0Id) as string,
+        email: user.email ?? (prevForm.email as string),
+        name: user.name ?? (prevForm.name as string),
+        username: user.nickname ?? (prevForm.username as string),
       }))
     }
   }, [user])
