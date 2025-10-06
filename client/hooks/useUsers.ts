@@ -12,6 +12,7 @@ export function useUsers() {
       return getUser({ token })
     },
     enabled: !!user,
+    refetchOnWindowFocus: false,
   })
   return {
     ...query,

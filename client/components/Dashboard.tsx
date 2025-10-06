@@ -33,6 +33,7 @@ export default function Dashboard() {
   if (isLoading) {
     return <div>Loading....</div>
   }
+
   if (error) {
     return <div>Error: {(error as Error).message}</div>
   }
@@ -47,20 +48,68 @@ export default function Dashboard() {
     })
   }
 
-  interface ToggleCurrencyEvent extends React.MouseEvent<HTMLButtonElement> {
-    target: HTMLButtonElement & EventTarget & { value: string }
-  }
-
-  function handleToggleCurrency(e: ToggleCurrencyEvent): void {
+  function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
-    const selectedCurrency: string = e.target.value
-    setConvertToCurrency(e.target.value)
+    const selectedCurrency = (e.target as HTMLButtonElement).value
+    setConvertToCurrency(selectedCurrency)
   }
 
   const isFxLoading = convert.isLoading
   const isFxError = convert.isError
   const fxRate =
     typeof convert.data?.result === 'number' ? convert.data.result : null
+
+  const assetDataValues = userAssetData.map((asset: AssetData) => {
+    const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
+    const assetData = resultsByTicker[cleanTicker]
+    return (
+      <div className="asset-holdings-wrapper" key={asset.id}>
+        <h1 className="asset-holdings-name">{asset.name}</h1>
+        <div className="asset-holdings-shares">
+          {assetData && assetData.results && (
+            <p className="asset-holdings-value">
+              {convertToCurrency === 'USD'
+                ? `$${(assetData.results[0].c * asset.shares).toFixed(2)}`
+                : isFxLoading
+                  ? 'Loading FX...'
+                  : isFxError
+                    ? 'FX Error'
+                    : fxRate
+                      ? `${convertToCurrency} ${(assetData.results[0].c * asset.shares * fxRate).toFixed(2)}`
+                      : 'No FX rate'}
+            </p>
+          )}
+          <p className="asset-shares">
+            {asset.shares} {asset.ticker}
+          </p>
+        </div>
+      </div>
+    )
+  })
+  // const totalBalance =
+  let totalBalance = 0
+  let totalCost = 0
+  let income = 0
+  if (userAssetData && data) {
+    userAssetData.forEach((asset: AssetData) => {
+      const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
+      const assetData = resultsByTicker[cleanTicker]
+      if (assetData && assetData.results && assetData.results[0]) {
+        const usdValue = assetData.results[0].c * asset.shares
+        if (convertToCurrency === 'USD') {
+          totalBalance += usdValue
+        } else if (fxRate) {
+          totalBalance += usdValue * fxRate
+        }
+        const removedCurrencyLetters = asset.cost.replace(/[A-Za-z]+$/, '')
+
+        totalCost = Number(removedCurrencyLetters) + totalCost
+        console.log('Total Cost:', asset.cost.replace(/^[A-Z]/, ''))
+        
+        income = totalBalance - totalCost
+      }
+    })
+  }
 
   return (
     <>
@@ -71,6 +120,40 @@ export default function Dashboard() {
             <h1 className="dashboard-heading">Dashboard</h1>
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
+              <p className="total-balance-value">
+                {convertToCurrency === 'USD'
+                  ? `$${totalBalance.toFixed(2)}`
+                  : isFxLoading
+                    ? 'Loading FX...'
+                    : isFxError
+                      ? 'FX Error'
+                      : fxRate
+                        ? `${convertToCurrency} ${totalBalance.toFixed(2)}`
+                        : 'No FX rate'}
+              </p>
+              <p className="total-cost-value">
+                <p className="total-cost-expense-p">&#8964; Expense</p>
+                {convertToCurrency === 'USD'
+                  ? `$${totalCost.toFixed(2)}`
+                  : isFxLoading
+                    ? 'Loading FX...'
+                    : isFxError
+                      ? 'FX Error'
+                      : fxRate
+                        ? `${convertToCurrency} ${totalCost.toFixed(2)}`
+                        : 'No FX rate'}
+                <h1 className="total-balance-divider"> | </h1>
+                <p className="total-income-p">^ Income </p>
+                <p className='total-income-value'>{convertToCurrency === 'USD'
+                  ? `$${income.toFixed(2)}`
+                  : isFxLoading
+                    ? 'Loading FX...'
+                    : isFxError
+                      ? 'FX Error'
+                      : fxRate
+                        ? `${convertToCurrency} ${income.toFixed(2)}`
+                        : 'No FX rate'}</p>
+              </p>
             </div>
           </div>
           <div className="statistics-wrapper">
@@ -150,37 +233,7 @@ export default function Dashboard() {
                   </button>
                 </label>
               </div>
-              <div className="holdings-display">
-                {userAssetData.map((asset: AssetData) => {
-                  const cleanTicker = asset.ticker
-                    .replace(/^X:/, '')
-                    .replace(/USD$/, '')
-                  const assetData = resultsByTicker[cleanTicker]
-                  return (
-                    <div className="asset-holdings-wrapper" key={asset.id}>
-                      <h1 className="asset-holdings-name">{asset.name}</h1>
-                      <div className="asset-holdings-shares">
-                        {assetData && assetData.results && (
-                          <p className="asset-holdings-value">
-                            {convertToCurrency === 'USD'
-                              ? `$${(assetData.results[0].c * asset.shares).toFixed(2)}`
-                              : isFxLoading
-                                ? 'Loading FX...'
-                                : isFxError
-                                  ? 'FX Error'
-                                  : fxRate
-                                    ? `${convertToCurrency} ${(assetData.results[0].c * asset.shares * fxRate).toFixed(2)}`
-                                    : 'No FX rate'}
-                          </p>
-                        )}
-                        <p className="asset-shares">
-                          {asset.shares} {asset.ticker}
-                        </p>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              <div className="holdings-display">{assetDataValues}</div>
             </div>
           </div>
         </div>

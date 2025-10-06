@@ -143,6 +143,9 @@ html {
   bottom: -73vh;
   left: 2.5vw;
 }
+.settings-link:hover {
+  color: blue;
+}
 
 .mini-log-out-icon {
   position: absolute;
@@ -444,7 +447,7 @@ html {
   position: relative;
   width: 32vw;
   padding-bottom: 3vw;
-  left: 17.5vw;
+  left: 15.5vw;
 }
 
 .asset-USD-value {
@@ -482,6 +485,59 @@ html {
 
 .toggle-currency-buttons:hover {
   color: rgb(127, 170, 61);
+}
+
+.toggle-currency-buttons:active {
+  background-color: rgb(127, 170, 61);
+  color: red;
+}
+
+.total-balance-value {
+  position: absolute;
+  font-size: 1.5vw;
+  font-weight: 500;
+  top: 35%;
+  left: 0.7vw;
+}
+
+.total-cost-value {
+  position: absolute;
+  font-size: 0.85vw;
+  font-weight: 500;
+  bottom: 2vh;
+  right: 0.7vw;
+}
+
+.total-balance-divider {
+  position: absolute;
+  font-size: 1.5vw;
+  font-weight: 500;
+  bottom: -1vh;
+  left: -2.75vw;
+}
+
+.total-cost-expense-p {
+  font-size: 0.7vw;
+  font-weight: 500;
+  right: 0.7vw;
+  color: red;
+}
+
+.total-income-p {
+  position: absolute;
+  font-size: 0.7vw;
+  font-weight: 500;
+  left: -11vw;
+  color: rgb(34, 139, 34);
+  bottom: 2.25vh;
+}
+
+.total-income-value {
+  position: absolute;
+  font-size: 0.85vw;
+  font-weight: 500;
+  left: -11vw;
+  bottom: 0vh;
 }
 
 /* DASHBOARD PAGE END  */
@@ -523,9 +579,17 @@ html {
   left: 8vw;
 }
 
+.profile-settings-link:hover {
+  color: blue;
+}
+
 .adjust-holdings-link {
   position: absolute;
   top: 10vh;
+}
+
+.adjust-holdings-link:hover {
+  color: blue;
 }
 
 /* ADJUST HOLDINGS START */
@@ -558,26 +622,26 @@ html {
 
 .adjust-ticker-form-label {
   position: absolute;
-  width: 15vw;
+  width: 11vw;
   top: 0vh;
 }
 
 .adjust-asset-name-form-label {
   position: absolute;
-  width: 15vw;
+  width: 9.4vw;
   top: 15vh;
 }
 
 .adjust-shares-form-label {
   position: absolute;
   top: 30vh;
-  width: 15vw;
+  width: 9.3vw;
 }
 
 .adjust-form-submit-button {
   position: absolute;
   left: 0vw;
-  top: 45vh;
+  top: 57.5vh;
   color: white;
   background-color: black;
   border-radius: 0.5vw;
@@ -660,6 +724,25 @@ html {
   top: 10vh;
   padding-bottom: 3vh;
   color: red;
+}
+
+.adjust-cost-form-label {
+  position: absolute;
+  top: 45vh;
+  width: 17.6vw;
+}
+
+.adjust-cost-input {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.user-asset-cost {
+  position: relative;
+  top: 10vh;
+  font-size: 0.9vw;
 }
 
 /* ADJUST HOLDINGS END */
