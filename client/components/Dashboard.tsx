@@ -172,7 +172,7 @@ export default function Dashboard() {
           <div className="statistics-wrapper">
             <div className="statistics">
               <h2 className="statistics-heading">Statistics</h2>
-                    {currencyConvert}
+                    {/* {currencyConvert}
                     <PieChart width={200} height={200} className="pie-chart">
                       <Pie
                         data={pieChartData}
@@ -191,7 +191,7 @@ export default function Dashboard() {
                         ))}
                       </Pie>
                       <Tooltip />
-                    </PieChart>
+                    </PieChart> */}
             </div>
           </div>
           <div className="goals-wrapper">
