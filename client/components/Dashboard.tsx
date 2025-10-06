@@ -28,7 +28,7 @@ export default function Dashboard() {
     isLoading: isPolygonLoading,
     error: polygonError,
   } = usePolygonDataContext()
-
+  console.log(polygonData)
   const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
 
   const resultsByTicker = useMemo(() => {

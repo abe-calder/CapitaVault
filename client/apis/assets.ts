@@ -50,6 +50,5 @@ export async function getAssetsByUserId({ userId, token }: GetAssetByUserIdFunct
   const res = await request
     .get(`${rootURL}/assets/${userId}`)
     .set('Authorization', `Bearer ${token}`)
-  console.log(res.body)
   return res.body as AssetData[]
 }
