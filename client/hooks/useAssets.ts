@@ -45,7 +45,7 @@ export function useGetAssets(userId: number | undefined) {
       const token = await getAccessTokenSilently()
       return getAssetsByUserId({ userId, token } as GetAssetsByIdType)
     },
-    enabled: !!userId && !!user,
+    enabled: !!user,
     refetchOnWindowFocus: false,
     refetchInterval: 600000, // 10 minutes
     
