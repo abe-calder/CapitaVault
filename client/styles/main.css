@@ -496,7 +496,7 @@ html {
   position: absolute;
   font-size: 1.5vw;
   font-weight: 500;
-  top: 7.5vh;
+  top: 35%;
   left: 0.7vw;
 }
 
@@ -513,7 +513,7 @@ html {
   font-size: 1.5vw;
   font-weight: 500;
   bottom: -1vh;
-  left: -4vw;
+  left: -2.75vw;
 }
 
 .total-cost-expense-p {
@@ -533,7 +533,11 @@ html {
 }
 
 .total-income-value {
-  
+  position: absolute;
+  font-size: 0.85vw;
+  font-weight: 500;
+  left: -11vw;
+  bottom: 0vh;
 }
 
 /* DASHBOARD PAGE END  */

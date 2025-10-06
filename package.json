@@ -37,6 +37,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^2.1.5",
     "knex": "^2.5.1",
+    "recharts": "^3.2.1",
     "sqlite3": "^5.1.6",
     "superagent": "^10.2.2",
     "websocket": "^1.0.35",
