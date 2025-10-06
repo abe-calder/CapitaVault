@@ -487,6 +487,11 @@ html {
   color: rgb(127, 170, 61);
 }
 
+.toggle-currency-buttons:active {
+  background-color: rgb(127, 170, 61);
+  color: red;
+}
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */
