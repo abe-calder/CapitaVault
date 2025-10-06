@@ -10,6 +10,7 @@ export interface Polygon {
 }
 
 export interface Results {
+  ticker: string
   results: Result[]
 }
 

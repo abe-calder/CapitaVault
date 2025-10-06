@@ -3,50 +3,45 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useGetAssets } from '../hooks/useAssets'
 import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
-import { useQuery } from '@tanstack/react-query'
-import getAssetDataByTicker from '../apis/polygon'
 import { Results } from '../../models/polygon'
-import { useFxRates } from '../hooks/useFxrates'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+import { PieChart, Pie, Tooltip, Cell } from 'recharts'
+import { useFxRatesContext } from '../context/FxRatesContext.tsx'
+import { usePolygonDataContext } from '../context/PolygonDataContext.tsx'
 
 export default function Dashboard() {
   const { user } = useAuth0()
+
   const getMe = useUsers()
   const userId = getMe.data?.id
-  const userAssets = useGetAssets(userId as number)
-  const userAssetData = userAssets.data
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['myItemsData', userAssetData],
-    queryFn: () => getAssetDataByTicker(userAssetData),
-  })
-  const [convertToCurrency, setConvertToCurrency] = useState('NZD')
-  const [currencyAmount, setCurrencyAmount] = useState(1)
-  const convert = useFxRates('USD', convertToCurrency, currencyAmount)
 
-  if (userAssets.isPending) {
-    return
-  }
-  if (userAssets.isError) {
-    return
-  }
+  const { data: userAssetData = [] } = useGetAssets(userId)
+  const {
+    rates: fxRates,
+    isLoading: isFxLoading,
+    error: fxError,
+  } = useFxRatesContext()
+  const {
+    polygonData,
+    isLoading: isPolygonLoading,
+    error: polygonError,
+  } = usePolygonDataContext()
 
-  if (isLoading) {
-    return <div>Loading....</div>
-  }
+  const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
 
-  if (error) {
-    return <div>Error: {(error as Error).message}</div>
-  }
+  const resultsByTicker = useMemo(() => {
+    const tickerMap: Record<string, Results> = {}
+    if (polygonData) {
+      polygonData.forEach((asset) => {
+        if (asset && asset.ticker) {
+          tickerMap[asset.ticker.replace(/^X:/, '').replace(/USD$/, '')] = asset
+        }
+      })
+    }
+    return tickerMap
+  }, [polygonData])
 
-  const resultsByTicker: Record<string, Results> = {}
-  if (data) {
-    data.forEach((asset: any) => {
-      if (asset && asset.ticker) {
-        resultsByTicker[asset.ticker.replace(/^X:/, '').replace(/USD$/, '')] =
-          asset
-      }
-    })
-  }
+  const fxRate = fxRates[convertToCurrency] ?? null
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
@@ -54,31 +49,66 @@ export default function Dashboard() {
     setConvertToCurrency(selectedCurrency)
   }
 
-  const isFxLoading = convert.isLoading
-  const isFxError = convert.isError
-  const fxRate =
-    typeof convert.data?.result === 'number' ? convert.data.result : null
+  const formatCurrency = (usdValue: number) => {
+    if (convertToCurrency === 'USD') {
+      return `$${usdValue.toFixed(2)}`
+    }
+    if (isFxLoading) return 'Loading FX...'
+    if (fxError) return 'FX Error'
+    if (fxRate) {
+      return `${convertToCurrency} ${(usdValue * fxRate).toFixed(2)}`
+    }
+    return 'No FX rate'
+  }
+
+  const { totalBalance, totalCost, income, pieChartData } = useMemo(() => {
+    let runningTotalBalance = 0
+    let runningTotalCost = 0
+
+    const chartData = userAssetData.map((asset: AssetData) => {
+      const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
+      const assetData = resultsByTicker[cleanTicker]
+      let currentUsdValue = 0
+
+      if (assetData && assetData.results && assetData.results[0]) {
+        currentUsdValue = assetData.results[0].c * asset.shares
+        runningTotalBalance += currentUsdValue
+      }
+
+      // cost parsing
+      const costValue = parseFloat(asset.cost)
+      if (!isNaN(costValue)) {
+        runningTotalCost += costValue
+      }
+
+      return { name: asset.name, value: currentUsdValue }
+    })
+
+    const balanceInSelectedCurrency =
+      convertToCurrency === 'USD' || !fxRate
+        ? runningTotalBalance
+        : runningTotalBalance * fxRate
+
+    return {
+      totalBalance: balanceInSelectedCurrency,
+      totalCost: runningTotalCost,
+      income: balanceInSelectedCurrency - runningTotalCost,
+      pieChartData: chartData,
+    }
+  }, [userAssetData, resultsByTicker, convertToCurrency, fxRate])
 
   const assetDataValues = userAssetData.map((asset: AssetData) => {
     const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
     const assetData = resultsByTicker[cleanTicker]
+    const usdValue =
+      assetData && assetData.results?.[0]
+        ? assetData.results[0].c * asset.shares
+        : 0
     return (
       <div className="asset-holdings-wrapper" key={asset.id}>
         <h1 className="asset-holdings-name">{asset.name}</h1>
         <div className="asset-holdings-shares">
-          {assetData && assetData.results && (
-            <p className="asset-holdings-value">
-              {convertToCurrency === 'USD'
-                ? `$${(assetData.results[0].c * asset.shares).toFixed(2)}`
-                : isFxLoading
-                  ? 'Loading FX...'
-                  : isFxError
-                    ? 'FX Error'
-                    : fxRate
-                      ? `${convertToCurrency} ${(assetData.results[0].c * asset.shares * fxRate).toFixed(2)}`
-                      : 'No FX rate'}
-            </p>
-          )}
+          <p className="asset-holdings-value">{formatCurrency(usdValue)}</p>
           <p className="asset-shares">
             {asset.shares} {asset.ticker}
           </p>
@@ -86,30 +116,17 @@ export default function Dashboard() {
       </div>
     )
   })
-  // const totalBalance =
-  let totalBalance = 0
-  let totalCost = 0
-  let income = 0
-  if (userAssetData && data) {
-    userAssetData.forEach((asset: AssetData) => {
-      const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
-      const assetData = resultsByTicker[cleanTicker]
-      if (assetData && assetData.results && assetData.results[0]) {
-        const usdValue = assetData.results[0].c * asset.shares
-        if (convertToCurrency === 'USD') {
-          totalBalance += usdValue
-        } else if (fxRate) {
-          totalBalance += usdValue * fxRate
-        }
-        const removedCurrencyLetters = asset.cost.replace(/[A-Za-z]+$/, '')
 
-        totalCost = Number(removedCurrencyLetters) + totalCost
-        console.log('Total Cost:', asset.cost.replace(/^[A-Z]/, ''))
-        
-        income = totalBalance - totalCost
-      }
-    })
+  if (isPolygonLoading) {
+    return <div>Loading Dashboard...</div>
   }
+
+  if (polygonError) {
+    const errorMessage = polygonError
+    return <div>Error: {errorMessage.message}</div>
+  }
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
   return (
     <>
@@ -121,44 +138,45 @@ export default function Dashboard() {
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
               <p className="total-balance-value">
-                {convertToCurrency === 'USD'
-                  ? `$${totalBalance.toFixed(2)}`
-                  : isFxLoading
-                    ? 'Loading FX...'
-                    : isFxError
-                      ? 'FX Error'
-                      : fxRate
-                        ? `${convertToCurrency} ${totalBalance.toFixed(2)}`
-                        : 'No FX rate'}
+                {convertToCurrency} {totalBalance.toFixed(2)}
               </p>
-              <p className="total-cost-value">
+              <div className="total-cost-value">
                 <p className="total-cost-expense-p">&#8964; Expense</p>
-                {convertToCurrency === 'USD'
-                  ? `$${totalCost.toFixed(2)}`
-                  : isFxLoading
-                    ? 'Loading FX...'
-                    : isFxError
-                      ? 'FX Error'
-                      : fxRate
-                        ? `${convertToCurrency} ${totalCost.toFixed(2)}`
-                        : 'No FX rate'}
+                {formatCurrency(totalCost)}
                 <h1 className="total-balance-divider"> | </h1>
                 <p className="total-income-p">^ Income </p>
-                <p className='total-income-value'>{convertToCurrency === 'USD'
-                  ? `$${income.toFixed(2)}`
-                  : isFxLoading
-                    ? 'Loading FX...'
-                    : isFxError
-                      ? 'FX Error'
-                      : fxRate
-                        ? `${convertToCurrency} ${income.toFixed(2)}`
-                        : 'No FX rate'}</p>
-              </p>
+                <p className="total-income-value">
+                  {convertToCurrency} {income.toFixed(2)}
+                </p>
+              </div>
             </div>
           </div>
           <div className="statistics-wrapper">
             <div className="statistics">
               <h2 className="statistics-heading">Statistics</h2>
+              {pieChartData.length > 0 && (
+                <PieChart width={200} height={200} className="pie-chart">
+                  <Pie
+                    data={pieChartData}
+                    dataKey="value"
+                    nameKey="name"
+                    cx="5vw"
+                    cy="5vh"
+                    outerRadius={99}
+                    fill="#8884d8"
+                  >
+                    {pieChartData.map((_entry: unknown, index: number) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value: number) => formatCurrency(value)}
+                  />
+                </PieChart>
+              )}
             </div>
           </div>
           <div className="goals-wrapper">

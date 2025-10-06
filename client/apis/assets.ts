@@ -34,10 +34,21 @@ interface DeleteAssetFunction {
   id: number
   token: string
 }
+interface GetAssetByUserIdFunction {
+  userId: number
+  token: string
+}
 
 export async function deleteAssetById({ id, token }: DeleteAssetFunction) {
   await request
     .delete(`${rootURL}/assets/${id}`)
     .set('Authorization', `Bearer ${token}`)
   return 
+}
+
+export async function getAssetsByUserId({ userId, token }: GetAssetByUserIdFunction) {
+  await request
+    .get(`${rootURL}/assets/${userId}`)
+    .set('Authorization', `Bearer ${token}`)
+    return
 }

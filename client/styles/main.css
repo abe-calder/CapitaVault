@@ -540,6 +540,13 @@ html {
   bottom: 0vh;
 }
 
+.pie-chart {
+  position: absolute;
+  top: 5vh;
+  left: 13.5vw;
+  border-radius: 3vw;
+}
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */
