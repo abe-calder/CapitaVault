@@ -500,6 +500,42 @@ html {
   left: 0.7vw;
 }
 
+.total-cost-value {
+  position: absolute;
+  font-size: 0.85vw;
+  font-weight: 500;
+  bottom: 2vh;
+  right: 0.7vw;
+}
+
+.total-balance-divider {
+  position: absolute;
+  font-size: 1.5vw;
+  font-weight: 500;
+  bottom: -1vh;
+  left: -4vw;
+}
+
+.total-cost-expense-p {
+  font-size: 0.7vw;
+  font-weight: 500;
+  right: 0.7vw;
+  color: red;
+}
+
+.total-income-p {
+  position: absolute;
+  font-size: 0.7vw;
+  font-weight: 500;
+  left: -11vw;
+  color: rgb(34, 139, 34);
+  bottom: 2.25vh;
+}
+
+.total-income-value {
+  
+}
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */

@@ -89,6 +89,7 @@ export default function Dashboard() {
   // const totalBalance =
   let totalBalance = 0
   let totalCost = 0
+  let income = 0
   if (userAssetData && data) {
     userAssetData.forEach((asset: AssetData) => {
       const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
@@ -100,16 +101,12 @@ export default function Dashboard() {
         } else if (fxRate) {
           totalBalance += usdValue * fxRate
         }
+        const removedCurrencyLetters = asset.cost.replace(/[A-Za-z]+$/, '')
 
-        const assetCost = asset.cost
-          .replace(/^NZD/, '')
-          .replace(/^AUD/, '')
-          .replace(/^USD/, '')
-          .replace(/^EUR/, '')
-          .replace(/^GBP/, '')
-
-        totalCost += Number(assetCost) * Number(asset.shares)
-        // You can use totalCost if needed
+        totalCost = Number(removedCurrencyLetters) + totalCost
+        console.log('Total Cost:', asset.cost.replace(/^[A-Z]/, ''))
+        
+        income = totalBalance - totalCost
       }
     })
   }
@@ -134,7 +131,8 @@ export default function Dashboard() {
                         ? `${convertToCurrency} ${totalBalance.toFixed(2)}`
                         : 'No FX rate'}
               </p>
-              <p>
+              <p className="total-cost-value">
+                <p className="total-cost-expense-p">&#8964; Expense</p>
                 {convertToCurrency === 'USD'
                   ? `$${totalCost.toFixed(2)}`
                   : isFxLoading
@@ -144,6 +142,17 @@ export default function Dashboard() {
                       : fxRate
                         ? `${convertToCurrency} ${totalCost.toFixed(2)}`
                         : 'No FX rate'}
+                <h1 className="total-balance-divider"> | </h1>
+                <p className="total-income-p">^ Income </p>
+                <p className='total-income-value'>{convertToCurrency === 'USD'
+                  ? `$${income.toFixed(2)}`
+                  : isFxLoading
+                    ? 'Loading FX...'
+                    : isFxError
+                      ? 'FX Error'
+                      : fxRate
+                        ? `${convertToCurrency} ${income.toFixed(2)}`
+                        : 'No FX rate'}</p>
               </p>
             </div>
           </div>
