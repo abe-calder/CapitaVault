@@ -14,8 +14,10 @@ export default function Dashboard() {
 
   const getMe = useUsers()
   const userId = getMe.data?.id
-
-  const { data: userAssetData = [] } = useGetAssets(userId)
+  // @ts-expect-error enabled !!userId is the only option
+  const { data: userAssetData = [] } = useGetAssets(userId, {
+    enabled: !!userId,
+  })
   const {
     rates: fxRates,
     isLoading: isFxLoading,
@@ -76,9 +78,21 @@ export default function Dashboard() {
       }
 
       // cost parsing
-      const costValue = parseFloat(asset.cost)
+      const cleanedCost = asset.cost.replace(/[^0-9.]/g, '')
+      const currencyMatch = asset.cost.match(/[a-zA-Z]+/)
+      const costCurrency = currencyMatch
+        ? currencyMatch[0].toUpperCase()
+        : 'USD' // Default to USD if no currency found
+      const costValue = parseFloat(cleanedCost)
+
       if (!isNaN(costValue)) {
-        runningTotalCost += costValue
+        if (costCurrency === 'USD') {
+          runningTotalCost += costValue
+        } else {
+          const rate = fxRates[costCurrency]
+          // Convert cost to USD
+          if (rate) runningTotalCost += costValue / rate
+        }
       }
 
       return { name: asset.name, value: currentUsdValue }
@@ -95,7 +109,7 @@ export default function Dashboard() {
       income: balanceInSelectedCurrency - runningTotalCost,
       pieChartData: chartData,
     }
-  }, [userAssetData, resultsByTicker, convertToCurrency, fxRate])
+  }, [userAssetData, resultsByTicker, convertToCurrency, fxRate, fxRates])
 
   const assetDataValues = userAssetData.map((asset: AssetData) => {
     const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
@@ -123,7 +137,7 @@ export default function Dashboard() {
 
   if (polygonError) {
     const errorMessage = polygonError
-    return <div>Error: {errorMessage.message}</div>
+    return <div>Error: {errorMessage}</div>
   }
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
