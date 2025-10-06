@@ -14,6 +14,7 @@ export interface Results {
 }
 
 export interface Result extends Results {
+  ticker: string
   v: number
   vw: number
   o: number

@@ -11,6 +11,7 @@ function Register() {
   const userHook = useUsers()
 
   const handleMutationSuccess = () => {
+    navigate('/')
     setErrorMsg('')
   }
 
@@ -30,14 +31,25 @@ function Register() {
   const navigate = useNavigate()
   const [form, setForm] = useState({
     username: '',
-    email: '',
-    name: '',
-    auth0Id: user?.sub as string,
+    email: user?.email ?? '',
+    name: user?.name ?? '',
+    auth0Id: user?.sub,
   })
 
   useEffect(() => {
     if (userHook.data) navigate('/')
   }, [userHook.data, navigate])
+
+  useEffect(() => {
+    if (user) {
+      setForm((prevForm) => ({
+        ...prevForm,
+        auth0Id: user.sub,
+        email: user.email ?? prevForm.email,
+        name: user.name ?? prevForm.name,
+      }))
+    }
+  }, [user])
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -47,10 +59,13 @@ function Register() {
   }
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-    const token = await getAccessTokenSilently()
     evt.preventDefault()
+    if (!form.auth0Id) {
+      setErrorMsg('Could not get user ID. Please try signing in again.')
+      return
+    }
+    const token = await getAccessTokenSilently()
     userHook.add.mutate({ newUser: form, token }, mutationOptions)
-    navigate('/')
   }
 
   const hideError = () => {
@@ -107,7 +122,9 @@ function Register() {
               />
             </div>
             <div>
-              <button className="register-button">Register</button>
+              <button className="register-button" disabled={!form.auth0Id}>
+                Register
+              </button>
             </div>
           </form>
         </IfAuthenticated>
