@@ -3,6 +3,7 @@ import {
   useMutation,
   useQueryClient,
   MutationFunction,
+  UseQueryOptions,
 } from '@tanstack/react-query'
 
 import {
@@ -11,6 +12,7 @@ import {
   getAssetsByUserId,
   getUsersTickers,
 } from '../apis/assets'
+import { AssetData } from '../../models/assets'
 import { useAuth0 } from '@auth0/auth0-react'
 
 export function useUsersTickers() {
@@ -31,24 +33,22 @@ export function useUsersTickers() {
   }
 }
 
-interface GetAssetsByIdType {
-  userId: number
-  token: string
-}
-
-export function useGetAssets(userId: number | undefined) {
+export function useGetAssets(
+  userId: number | undefined,
+  options?: UseQueryOptions<AssetData[]>,
+) {
   const { user, getAccessTokenSilently } = useAuth0()
 
   return useQuery({
-    queryKey: ['getAssetsByUserId', userId as number],
+    queryKey: ['getAssetsByUserId', userId],
     queryFn: async () => {
       const token = await getAccessTokenSilently()
-      return getAssetsByUserId({ userId, token } as GetAssetsByIdType)
+      // The API function now expects only the token
+      return getAssetsByUserId(token)
     },
-    enabled: !!user,
-    refetchOnWindowFocus: false,
-    refetchInterval: 600000, // 10 minutes
-    
+    // Combine the base requirement with any options passed in
+    enabled: !!user && (options?.enabled ?? true),
+    ...options,
   })
 }
 

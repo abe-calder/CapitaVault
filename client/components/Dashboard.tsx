@@ -15,7 +15,9 @@ export default function Dashboard() {
   const getMe = useUsers()
   const userId = getMe.data?.id
 
-  const { data: userAssetData = [] } = useGetAssets(userId)
+  const { data: userAssetData = [] } = useGetAssets(userId, {
+    enabled: !!userId,
+  })
   const {
     rates: fxRates,
     isLoading: isFxLoading,
@@ -76,9 +78,21 @@ export default function Dashboard() {
       }
 
       // cost parsing
-      const costValue = parseFloat(asset.cost)
+      const cleanedCost = asset.cost.replace(/[^0-9.]/g, '')
+      const currencyMatch = asset.cost.match(/[a-zA-Z]+/)
+      const costCurrency = currencyMatch
+        ? currencyMatch[0].toUpperCase()
+        : 'USD' // Default to USD if no currency found
+      const costValue = parseFloat(cleanedCost)
+
       if (!isNaN(costValue)) {
-        runningTotalCost += costValue
+        if (costCurrency === 'USD') {
+          runningTotalCost += costValue
+        } else {
+          const rate = fxRates[costCurrency]
+          // Convert cost to USD
+          if (rate) runningTotalCost += costValue / rate
+        }
       }
 
       return { name: asset.name, value: currentUsdValue }

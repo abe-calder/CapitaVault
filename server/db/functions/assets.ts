@@ -18,9 +18,7 @@ export async function addAssets(newAsset: {
   cost: string
 }) {
   try {
-    const result = await db('assets')
-      .insert(newAsset)
-      .returning('*')
+    const result = await db('assets').insert(newAsset).returning('*')
     return result
   } catch (error) {
     console.log(error)
@@ -29,10 +27,22 @@ export async function addAssets(newAsset: {
 
 export async function getAssets(user_id: number) {
   try {
-    const result = await db('assets').where({user_id}).select('id as id', 'ticker as ticker', 'name as name', 'shares as shares', 'cost as cost', 'user_id as userId')
+    console.log(user_id)
+    const result = await db('assets')
+      .where({ user_id })
+      .select(
+        'id as id',
+        'ticker as ticker',
+        'name as name',
+        'shares as shares',
+        'cost as cost',
+        'user_id as userId',
+      )
+      console.log(result)
     return result
   } catch (error) {
     console.log(error)
+    throw error
   }
 }
 

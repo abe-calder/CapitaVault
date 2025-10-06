@@ -23,7 +23,7 @@ export async function addAssets({ newAsset, token }: AddAssetFunction) {
   return result.body
 }
 
-export async function getAssets( userId: number, token: string) {
+export async function getAssets(userId: number, token: string) {
   const response = await request
     .get(`${rootURL}/assets/${userId}`)
     .set('Authorization', `Bearer ${token}`)
@@ -43,12 +43,12 @@ export async function deleteAssetById({ id, token }: DeleteAssetFunction) {
   await request
     .delete(`${rootURL}/assets/${id}`)
     .set('Authorization', `Bearer ${token}`)
-  return 
+  return
 }
 
 export async function getAssetsByUserId({ userId, token }: GetAssetByUserIdFunction) {
-  await request
+  const res = await request
     .get(`${rootURL}/assets/${userId}`)
     .set('Authorization', `Bearer ${token}`)
-    return
+  return res.body as AssetData[]
 }

@@ -22,7 +22,7 @@ export function PolygonDataProvider({ children }: { children: ReactNode }) {
   const userId = userData?.id
 
   const { data: userAssetData = [], isPending: areAssetsPending } =
-    useGetAssets(userId)
+    useGetAssets(userId, { enabled: !!userId })
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['polygonMarketData', userAssetData],

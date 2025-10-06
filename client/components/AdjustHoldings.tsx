@@ -10,23 +10,28 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useUsers } from '../hooks/useUsers'
 import { useQueryClient } from '@tanstack/react-query'
 
-const emptyForm = {
-  id: '',
+interface FormState {
+  ticker: ''
+  name: ''
+  shares: ''
+  cost: ''
+}
+
+const emptyForm: FormState = {
   ticker: '',
   name: '',
   shares: '',
   cost: '',
-  userId: '',
-} as unknown as AssetData
+}
 
 export default function AdjustHoldings() {
   const queryClient = useQueryClient()
   const [formState, setFormState] = useState(emptyForm)
   const addAssets = useAddAssets()
   const { getAccessTokenSilently } = useAuth0()
-  const getMe = useUsers()
-  const userId = getMe.data?.id as number
-  const userAssets = useGetAssets(userId)
+  const getMe = useUsers() // This line is moved up
+
+  const userId = getMe.data?.id
   const delteAssetById = useDeleteAssetById()
 
   useEffect(() => {
@@ -44,46 +49,42 @@ export default function AdjustHoldings() {
       }
     }
 
-    ws.onclose = () => {}
+    ws.onclose = () => {
+      console.log('WebSocket Disconnected')
+    }
 
     ws.onerror = (error) => {
       console.error('WebSocket error:', error)
     }
 
-    return() => ws.close()
+    return () => ws.close()
   }, [queryClient])
 
+  const { data: userAssetData = [] } = useGetAssets(userId, {
+    enabled: !!userId,
+  })
+
   if (getMe.isPending) {
-    return <div className='app2'></div>
+    return <div className="app2"></div>
   }
   if (getMe.isError) {
     return <p>User data Error...</p>
   }
 
-  if (userAssets.isPending) {
-    return
-  }
-  if (userAssets.isError) {
-    return <p>Asset data Error...</p>
-  }
-
-  const userAssetData = userAssets.data
-
   async function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault()
     const token = await getAccessTokenSilently()
-    const myId = getMe.data && getMe.data.id
 
     if (addAssets.isPending) {
       return
     }
 
     const newAsset = {
-      ticker: formState.ticker as string,
-      name: formState.name as string,
-      shares: formState.shares as number,
-      userId: (formState.userId = myId as number),
-      cost: formState.cost as string,
+      ticker: formState.ticker,
+      name: formState.name,
+      shares: Number(formState.shares),
+      userId: userId as number,
+      cost: formState.cost,
     } as unknown as AssetData
     await addAssets.mutateAsync({ newAsset, token })
     setFormState(emptyForm)
@@ -100,13 +101,10 @@ export default function AdjustHoldings() {
       const token = await getAccessTokenSilently()
 
       await delteAssetById.mutateAsync({ id, token })
-
     } catch (error) {
       console.log(error)
     }
   }
-
-
 
   return (
     <>
@@ -157,7 +155,7 @@ export default function AdjustHoldings() {
               <label className="adjust-cost-form-label">
                 Input the cost of the shares when you bought them
                 <input
-                  type="string"
+                  type="text"
                   name="cost"
                   value={formState.cost}
                   className="adjust-cost-input"
@@ -182,7 +180,7 @@ export default function AdjustHoldings() {
                   <h1 className="user-assets-name">{asset.name}</h1>
                   <p className="user-assets-ticker">{asset.ticker}</p>
                   <p className="user-assets-shares">Shares: {asset.shares}</p>
-                  <p className='user-asset-cost'>Cost: {asset.cost}</p>
+                  <p className="user-asset-cost">Cost: {asset.cost}</p>
                   <button
                     onClick={() => handleDelete(asset.id)}
                     className="user-asset-delete"
