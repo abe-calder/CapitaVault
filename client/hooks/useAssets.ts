@@ -19,6 +19,8 @@ export function useUsersTickers() {
       return getUsersTickers(token)
     },
     enabled: !!user,
+    refetchOnWindowFocus: false,
+    refetchInterval: 600000, // 10 minutes
   })
   return {
     ...query,
@@ -32,9 +34,11 @@ export function useGetAssets(userId: number) {
     queryKey: ['getAssetsByUserId', userId],
     queryFn: async () => {
       const token = await getAccessTokenSilently()
-      return getAssets( userId, token )
+      return getAssets(userId, token)
     },
-    enabled: !!user
+    enabled: !!user,
+    refetchOnWindowFocus: false,
+    refetchInterval: 600000, // 10 minutes
   })
 }
 
@@ -45,7 +49,7 @@ export function useAssetsMutation<TData = unknown, TVariables = unknown>(
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['addAssets']})
+      queryClient.invalidateQueries({ queryKey: ['addAssets'] })
     }
   })
   return mutation

@@ -86,8 +86,28 @@ export default function Dashboard() {
       </div>
     )
   })
+  // const totalBalance =  
+  let totalBalance = 0
+  let totalCost = 0
+  if (userAssetData && data) {
+    userAssetData.forEach((asset: AssetData) => {
+      const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
+      const assetData = resultsByTicker[cleanTicker]
+      if (assetData && assetData.results && assetData.results[0]) {
+        const usdValue = assetData.results[0].c * asset.shares
+        if (convertToCurrency === 'USD') {
+          totalBalance += usdValue
+        } else if (fxRate) {
+          totalBalance += usdValue * fxRate
+        }
+         totalCost +=
+          Number(asset.cost) * Number(asset.shares)
+        // You can use totalCost if needed
 
-  assetDataValues.reduce(())
+      }
+    })
+  }
+
   return (
     <>
       <div className="app2">
@@ -97,6 +117,26 @@ export default function Dashboard() {
             <h1 className="dashboard-heading">Dashboard</h1>
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
+              <p className='total-balance-value'>
+                {convertToCurrency === 'USD'
+                  ? `$${totalBalance.toFixed(2)}`
+                  : isFxLoading
+                    ? 'Loading FX...'
+                    : isFxError
+                      ? 'FX Error'
+                      : fxRate
+                        ? `${convertToCurrency} ${totalBalance.toFixed(2)}`
+                        : 'No FX rate'}
+              </p>
+              <p>{convertToCurrency === 'USD'
+                  ? `$${totalCost.toFixed(2)}`
+                  : isFxLoading
+                    ? 'Loading FX...'
+                    : isFxError
+                      ? 'FX Error'
+                      : fxRate
+                        ? `${convertToCurrency} ${totalCost.toFixed(2)}`
+                        : 'No FX rate'}</p>
             </div>
           </div>
           <div className="statistics-wrapper">

@@ -83,6 +83,7 @@ export default function AdjustHoldings() {
       name: formState.name as string,
       shares: formState.shares as number,
       userId: (formState.userId = myId as number),
+      cost: formState.cost as string,
     } as unknown as AssetData
     await addAssets.mutateAsync({ newAsset, token })
     setFormState(emptyForm)
@@ -181,6 +182,7 @@ export default function AdjustHoldings() {
                   <h1 className="user-assets-name">{asset.name}</h1>
                   <p className="user-assets-ticker">{asset.ticker}</p>
                   <p className="user-assets-shares">Shares: {asset.shares}</p>
+                  <p className='user-asset-cost'>Cost: {asset.cost}</p>
                   <button
                     onClick={() => handleDelete(asset.id)}
                     className="user-asset-delete"

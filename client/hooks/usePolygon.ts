@@ -8,7 +8,9 @@ export function useGetAssetDataByTicker(ticker: string) {
     queryKey: ['polygonData', ticker],
     queryFn: async () => {
       return getAssetDataByTicker(ticker)
-    }
+    },
+    refetchOnWindowFocus: false,
+    refetchInterval: 600000, // 10 minutes
   })
   return {
     ...query

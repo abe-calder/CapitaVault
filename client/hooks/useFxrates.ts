@@ -3,12 +3,14 @@ import getConversionRate from "../apis/fxrates";
 
 export function useFxRates(from: string, to: string, amount: number) {
   const query = useQuery({
-    queryKey: ["fxrates", from, to, amount],
+    queryKey: ['fxrates', from, to, amount],
     queryFn: async () => {
       return getConversionRate({ from, to, amount })
     },
     enabled: !!from && !!to && amount > 0,
-  });
+    refetchOnWindowFocus: false,
+    refetchInterval: 600000, // 10 minutes
+  })
 
   return {
     ...query,
