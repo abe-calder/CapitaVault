@@ -36,7 +36,7 @@ export default function Dashboard() {
     if (polygonData) {
       polygonData.forEach((asset) => {
         if (asset && asset.ticker) {
-          tickerMap[asset.ticker.replace(/^X:/, '').replace(/USD$/, '')] = asset
+          tickerMap[asset.ticker] = asset
         }
       })
     }
@@ -68,8 +68,9 @@ export default function Dashboard() {
     let runningTotalCost = 0
 
     const chartData = userAssetData.map((asset: AssetData) => {
-      const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
-      const assetData = resultsByTicker[cleanTicker]
+      // format the ticker to match backend
+      const lookupTicker = `X:${asset.ticker.toUpperCase()}USD`
+      const assetData = resultsByTicker[lookupTicker]
       let currentUsdValue = 0
 
       if (assetData && assetData.results && assetData.results[0]) {
@@ -82,7 +83,7 @@ export default function Dashboard() {
       const currencyMatch = asset.cost.match(/[a-zA-Z]+/)
       const costCurrency = currencyMatch
         ? currencyMatch[0].toUpperCase()
-        : 'USD' // Default to USD if no currency found
+        : 'USD' // default to USD if no currency found
       const costValue = parseFloat(cleanedCost)
 
       if (!isNaN(costValue)) {
@@ -90,7 +91,7 @@ export default function Dashboard() {
           runningTotalCost += costValue
         } else {
           const rate = fxRates[costCurrency]
-          // Convert cost to USD
+          // convert cost to USD
           if (rate) runningTotalCost += costValue / rate
         }
       }
@@ -112,8 +113,8 @@ export default function Dashboard() {
   }, [userAssetData, resultsByTicker, convertToCurrency, fxRate, fxRates])
 
   const assetDataValues = userAssetData.map((asset: AssetData) => {
-    const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
-    const assetData = resultsByTicker[cleanTicker]
+    const lookupTicker = `X:${asset.ticker.toUpperCase()}USD`
+    const assetData = resultsByTicker[lookupTicker]
     const usdValue =
       assetData && assetData.results?.[0]
         ? assetData.results[0].c * asset.shares
@@ -124,7 +125,7 @@ export default function Dashboard() {
         <div className="asset-holdings-shares">
           <p className="asset-holdings-value">{formatCurrency(usdValue)}</p>
           <p className="asset-shares">
-            {asset.shares} {asset.ticker}
+            {asset.shares} {asset.ticker.toUpperCase()}
           </p>
         </div>
       </div>

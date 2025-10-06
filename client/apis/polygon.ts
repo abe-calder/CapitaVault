@@ -7,7 +7,13 @@ export default async function getAssetDataByTicker(
   tickerArray: { ticker: string }[],
 ) {
   const assetTickers = tickerArray
-    .map((asset) => `X:${asset.ticker}USD`)
+    .map((asset) => {
+      const upperTicker = asset.ticker.toUpperCase()
+      // format the ticker for the backend's first attempt (crypto).
+      // backend will handle retrying as a stock if this fails.
+      // prevents sending tickers like 'X:X:BTCUSDUSD' if user manually enters a full one.
+      return upperTicker.startsWith('X:') ? upperTicker : `X:${upperTicker}USD`
+    })
     .join(',')
   const queryString = `?tickers=${assetTickers}`
   const response = await request.get(`${rootURL}/polygon/${queryString}`)
