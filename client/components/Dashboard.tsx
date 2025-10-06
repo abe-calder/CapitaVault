@@ -24,14 +24,13 @@ export default function Dashboard() {
   const convert = useFxRates('USD', convertToCurrency, currencyAmount)
 
   if (userAssets.isPending) {
-    return 
+    return
   }
   if (userAssets.isError) {
     return
   }
 
   if (isLoading) {
-    
     return <div>Loading....</div>
   }
 
@@ -49,14 +48,10 @@ export default function Dashboard() {
     })
   }
 
-  interface ToggleCurrencyEvent extends React.MouseEvent<HTMLButtonElement> {
-    target: HTMLButtonElement & EventTarget & { value: string }
-  }
-
-  function handleToggleCurrency(e: ToggleCurrencyEvent): void {
+  function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
-    const selectedCurrency: string = e.target.value
-    setConvertToCurrency(e.target.value)
+    const selectedCurrency = (e.target as HTMLButtonElement).value
+    setConvertToCurrency(selectedCurrency)
   }
 
   const isFxLoading = convert.isLoading
@@ -64,6 +59,35 @@ export default function Dashboard() {
   const fxRate =
     typeof convert.data?.result === 'number' ? convert.data.result : null
 
+  const assetDataValues = userAssetData.map((asset: AssetData) => {
+    const cleanTicker = asset.ticker.replace(/^X:/, '').replace(/USD$/, '')
+    const assetData = resultsByTicker[cleanTicker]
+    return (
+      <div className="asset-holdings-wrapper" key={asset.id}>
+        <h1 className="asset-holdings-name">{asset.name}</h1>
+        <div className="asset-holdings-shares">
+          {assetData && assetData.results && (
+            <p className="asset-holdings-value">
+              {convertToCurrency === 'USD'
+                ? `$${(assetData.results[0].c * asset.shares).toFixed(2)}`
+                : isFxLoading
+                  ? 'Loading FX...'
+                  : isFxError
+                    ? 'FX Error'
+                    : fxRate
+                      ? `${convertToCurrency} ${(assetData.results[0].c * asset.shares * fxRate).toFixed(2)}`
+                      : 'No FX rate'}
+            </p>
+          )}
+          <p className="asset-shares">
+            {asset.shares} {asset.ticker}
+          </p>
+        </div>
+      </div>
+    )
+  })
+
+  assetDataValues.reduce(())
   return (
     <>
       <div className="app2">
@@ -152,37 +176,7 @@ export default function Dashboard() {
                   </button>
                 </label>
               </div>
-              <div className="holdings-display">
-                {userAssetData.map((asset: AssetData) => {
-                  const cleanTicker = asset.ticker
-                    .replace(/^X:/, '')
-                    .replace(/USD$/, '')
-                  const assetData = resultsByTicker[cleanTicker]
-                  return (
-                    <div className="asset-holdings-wrapper" key={asset.id}>
-                      <h1 className="asset-holdings-name">{asset.name}</h1>
-                      <div className="asset-holdings-shares">
-                        {assetData && assetData.results && (
-                          <p className="asset-holdings-value">
-                            {convertToCurrency === 'USD'
-                              ? `$${(assetData.results[0].c * asset.shares).toFixed(2)}`
-                              : isFxLoading
-                                ? 'Loading FX...'
-                                : isFxError
-                                  ? 'FX Error'
-                                  : fxRate
-                                    ? `${convertToCurrency} ${(assetData.results[0].c * asset.shares * fxRate).toFixed(2)}`
-                                    : 'No FX rate'}
-                          </p>
-                        )}
-                        <p className="asset-shares">
-                          {asset.shares} {asset.ticker}
-                        </p>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              <div className="holdings-display">{assetDataValues}</div>
             </div>
           </div>
         </div>
