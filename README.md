@@ -12,7 +12,7 @@ Know that your assets will only be viewed by you due to Auth0 integrated login.
 ## Technology Stack
 This project is built using the following core technologies:
 
-### Frontend: React, HTML/CSS/JS	
+### Frontend: React, TS, HTML/CSS/JS	
 Building the interactive user interface.
 
 ### Backend:	 Node.js (Express)	
