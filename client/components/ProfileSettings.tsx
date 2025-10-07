@@ -78,10 +78,48 @@ export default function ProfileSettings() {
       <Settings />
       <div className="profile-settings-wrapper">
         <h1 className="profile-settings-heading">Profile Settings</h1>
-        <img style={{ width: '6vw', borderRadius: '3vw', top: '7vh', left: '0vw' }} className="profile-photo" alt='profile-image' src={user && user.picture}></img>
+        <img
+          style={{ width: '6vw', borderRadius: '3vw', top: '7vh', left: '0vw' }}
+          className="profile-photo"
+          alt="profile-image"
+          src={user && user.picture}
+        ></img>
         <form onSubmit={handleSubmit}>
-          <label className="profile-form-label-name"> Change Your Name: 
-            <input onChange={handleChange} id="name" name="name" value={formState.name} placeholder="Name" type="text" className="profile-form-label-name"></input>
+          <label className="profile-form-label-name">
+            Change Your Name:
+            <input
+              onChange={handleChange}
+              id="name"
+              name="name"
+              value={formState.name}
+              placeholder="Name"
+              type="text"
+              className="profile-form-label-name"
+            ></input>
+          </label>
+          <label className="profile-form-label-email">
+            Change Your Name:
+            <input
+              onChange={handleChange}
+              id="email"
+              name="email"
+              value={formState.email}
+              placeholder="Email"
+              type="text"
+              className="profile-form-label-email"
+            ></input>
+          </label>
+          <label className="profile-form-label-username">
+            Change Your username:
+            <input
+              onChange={handleChange}
+              id="username"
+              name="username"
+              value={formState.username}
+              placeholder="Username"
+              type="text"
+              className="profile-form-label-username"
+            ></input>
           </label>
         </form>
       </div>
