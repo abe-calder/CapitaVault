@@ -150,9 +150,9 @@ export default function Dashboard() {
   }
 
  
-  const oneQuarterBalance = (totalBalance / 4).toFixed(2)
-  const oneHalfBalance = (totalBalance / 2).toFixed(2)
-  const threeQuartersBalance = ((totalBalance * 3) / 4).toFixed(2)
+  const oneQuarterBalance = (totalBalance / 8).toFixed(2)
+  const oneHalfBalance = (totalBalance / 4).toFixed(2)
+  const threeQuartersBalance = (totalBalance  / 2).toFixed(2)
   const fullBalance = totalBalance.toFixed(2)
 
 
@@ -169,28 +169,33 @@ export default function Dashboard() {
   const lineData = [
     {
       name: '0',
-      uv: 0,
+      CurrentBalance: 0,
       pv: 0,
+      end: 500000,
     },
     {
       name: '1/4',
-      pv: oneQuarterBalance,
+      CurrentBalance: oneQuarterBalance,
       uv: oneQuarterGoal,
+      end: 500000,
     },
     {
       name: '2/4',
-      pv: oneHalfBalance,
+      CurrentBalance: oneHalfBalance,
       uv: oneHalfGoal,
+      end: 500000,
     },
     {
       name: '3/4',
-      pv: threeQuartersBalance,
+      CurrentBalance: threeQuartersBalance,
       uv: threeQuartersGoal,
+      end: 500000,
     },
     {
       name: '4/4',
-      pv: fullBalance,
+      CurrentBalance: fullBalance,
       uv: fullGoal,
+      end: 500000,
     },
   ]
 
@@ -260,14 +265,15 @@ export default function Dashboard() {
               </h1>
               <LineChart
                 className="line-chart"
-                width={200}
-                height={150}
+                width={220}
+                height={175}
                 data={lineData}
               >
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+                <Line type="monotone" dataKey="CurrentBalance" stroke="#8884d8" />
+                <Line type="monotone" dataKey="end" stroke="#35c20aff" />
               </LineChart>
             </div>
           </div>
