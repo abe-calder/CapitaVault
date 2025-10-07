@@ -41,10 +41,8 @@ Bash
 
 ```sh
 git clone https://github.com/abe-calder/CapitaVault.git
-cd CapitaVault
 
-  # Install dependencies:
-  # Bash
+cd CapitaVault
 
 npm install
 ```
@@ -54,6 +52,14 @@ cd Client
 
 ### For the backend 
 cd Server  
+
+### Database Setup 
+Bash
+```sh
+npm run knex migrate:latest
+
+npm run knex seed:run
+```
 
 ### Configure environment variables:
 Create a file named .env in the root directory and add your configuration details:  
