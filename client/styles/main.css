@@ -764,7 +764,12 @@ html {
   left: 25.25vw;
 }
 
-
+.profile-settings-heading {
+  position: absolute;
+  font-size: 1.5vw;
+  top: 0vw;
+  left: 0vw;
+}
 
 
 /* PROFILE SETTINGS END */
