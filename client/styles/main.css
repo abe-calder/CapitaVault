@@ -806,7 +806,7 @@ html {
 .profile-form-label-name {
   position: absolute;
   width: 11vw;
-  top: 15vh;
+  top: 10vh;
 }
 
 .profile-form-input-name {
@@ -819,7 +819,7 @@ html {
 .profile-form-label-email {
   position: absolute;
   width: 11vw;
-  top: 32.5vh;
+  top: 20vh;
 }
 
 .profile-form-input-email {
@@ -832,7 +832,7 @@ html {
 .profile-form-label-username {
   position: absolute;
   width: 11vw;
-  top: 50vh;
+  top: 30vh;
 }
 
 .profile-form-input-username {
@@ -856,13 +856,27 @@ html {
 .profile-form-label-goal {
   position: absolute;
   width: 11vw;
-  top: 77.5vh;
+  top: 40vh;
   left: 0vw;
 }
 
 .profile-form-input-goal {  
   border: 2px solid black;
   border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.profile-form-label-goal-cost {
+  position: absolute;
+  width: 11vw;
+  top: 50vh;
+  left: 0vw;
+}
+
+.profile-form-input-goal-cost {
+  border: 2px solid black;
+  border-radius: 0.4vw; 
   padding-top: 0.5vh;
   margin-top: 0.5vh;
 }

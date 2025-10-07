@@ -11,7 +11,7 @@ export async function seed(knex) {
       email: 'abecalder@gmail.com',
       username: 'AbeC',
       goal: 'Buy a house',
-      goalCost: '200000NZD',
+      goalCost: '200000NZD'
     },
   ])
 }

@@ -140,13 +140,13 @@ function Register() {
                 className="goal-input"
                 placeholder="Goal"
               />
-              <label className="goal-cost-label" htmlFor="goal-cost">
+              <label className="goal-cost-label" htmlFor="goalCost">
                 Goal Cost:
               </label>
               <input
                 type="text"
-                id="goal-cost"
-                name="goal-cost"
+                id="goalCost"
+                name="goalCost"
                 onChange={handleChange}
                 className="goal-cost-input"
                 placeholder="100000NZD"

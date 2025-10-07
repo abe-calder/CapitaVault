@@ -147,10 +147,10 @@ export default function ProfileSettings() {
             Change Your Goal $ Value:
             <input
               onChange={handleChange}
-              id="goal-cost"
-              name="goal-cost"
+              id="goalCost"
+              name="goalCost"
               value={formState.goalCost}
-              placeholder="GoalCost"
+              placeholder="100000NZD"
               type="text"
               className="profile-form-input-goal-cost"
             ></input>
