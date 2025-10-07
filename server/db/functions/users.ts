@@ -25,3 +25,16 @@ export async function getUserById(
     console.log(err)
   }
 }
+
+export async function updateUser(auth0Id: string, updatedUser: {
+  name: string
+  email: string
+  username: string
+}): Promise<UserData | undefined> {
+  try {
+    console.log(updatedUser)
+    return await db('users').where('users.auth0id', auth0Id).update({ name: updatedUser.name, email: updatedUser.email, username: updatedUser.username })
+  } catch (err) {
+    console.log(err)
+  }
+} 

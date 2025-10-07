@@ -1,9 +1,13 @@
 import { Link } from "react-router";
 import Nav from "./Nav";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useUsers } from "../hooks/useUsers";
 
 export default function Settings() {
   const { user } = useAuth0()
+  const getMe = useUsers()
+  const userName = getMe.data?.username
+
 
   return (
     <>
@@ -13,13 +17,18 @@ export default function Settings() {
           <div className="profile-wrapper">
             <div className="profile">
               {user && (
-                <img
-                  alt="profile-photo"
-                  src={user.picture}
+                <object
+                  type="image/jpeg"
+                  data={user.picture}
                   className="profile-photo"
-                ></img>
+                >
+                  <img
+                    src="/images/profile-photo-fallback.webp"
+                    alt="fallback-img"
+                  ></img>
+                </object>
               )}
-              {user && <h1 className="profile-name">{user.name}</h1>}
+              {getMe && <h1 className="profile-name">{userName}</h1>}
             </div>
           </div>
           <div className="settings-tabs-wrapper">

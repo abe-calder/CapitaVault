@@ -34,7 +34,7 @@ export default function Nav() {
               ></img>
               Investments
             </Link>
-            <Link to="/settings" className='settings-link'><img alt='settings-icon' className='mini-settings-icon' src='/images/user-settings.webp'></img>Settings</Link>
+            <Link to="/settings/adjust-holdings" className='settings-link'><img alt='settings-icon' className='mini-settings-icon' src='/images/user-settings.webp'></img>Settings</Link>
 
             <button className="log-out-button" onClick={() => handleSignOut()}>
               <img alt="log-out-icon" src='/images/log-out-icon-.webp' className='mini-log-out-icon'></img>

@@ -14,6 +14,7 @@ export default function Dashboard() {
 
   const getMe = useUsers()
   const userId = getMe.data?.id
+  const userName = getMe.data?.username
   // @ts-expect-error enabled !!userId is the only option
   const { data: userAssetData = [] } = useGetAssets(userId, {
     enabled: !!userId,
@@ -219,7 +220,7 @@ export default function Dashboard() {
                   ></img>
                 </object>
               )}
-              {user && <h1 className="profile-name">{user.name}</h1>}
+              {getMe && <h1 className="profile-name">{userName}</h1>}
             </div>
             <div className="holdings">
               <h1 className="holdings-heading">Holdings</h1>
