@@ -15,6 +15,14 @@ export default function Dashboard() {
   const getMe = useUsers()
   const userId = getMe.data?.id
   const userName = getMe.data?.username
+
+  const userGoalData = useMemo(() => {
+    const userGoal = getMe.data?.goal
+    const userGoalCost = getMe.data?.goalCost
+    return { userGoal, userGoalCost }
+  
+  }, [getMe.data])
+  
   // @ts-expect-error enabled !!userId is the only option
   const { data: userAssetData = [] } = useGetAssets(userId, {
     enabled: !!userId,
@@ -197,7 +205,14 @@ export default function Dashboard() {
           <div className="goals-wrapper">
             <div className="goals">
               <h1 className="goals-heading">Goals</h1>
-              <h3 className="goals-sub-heading">Add Goals here</h3>
+              <h1 className="goals-sub-heading-user-goal">
+                {userGoalData && userGoalData.userGoal}
+              </h1>
+              <h1 className="goals-sub-heading-user-goal-cost">
+                <p>${totalBalance.toFixed(2)}</p>
+                out of
+                <p>${userGoalData && userGoalData.userGoalCost}</p>
+              </h1>
             </div>
           </div>
           <div className="spending-wrapper">

@@ -345,35 +345,6 @@ html {
   color: white;
 }
 
-.goals-wrapper {
-  position: absolute;
-  bottom: 27.5vh;
-  left: 25vw;
-}
-
-.goals {
-  position: absolute;
-  background-color: lightgrey;
-  width: 18vw;
-  height: 10vw;
-  margin-top: 1vh;
-}
-
-.goals-heading {
-  position: absolute;
-  font-size: 1vw;
-  font-weight: 500;
-  left: 0.7vw;
-  top: 0.7vh;
-}
-
-.goals-sub-heading {
-  position: absolute;
-  top: 3.5vh;
-  left: 0.6vw;
-  font-size: 0.7vw;
-}
-
 .spending-wrapper {
   position: absolute;
   bottom: 27.5vh;
@@ -390,7 +361,7 @@ html {
 
 .spending-heading {
   position: absolute;
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-weight: 500;
   left: 0.7vw;
   top: 0.7vh;
@@ -577,6 +548,52 @@ html {
   top: 7vh;
   left: 14vw;
   border-radius: 3vw;
+}
+
+.goals-wrapper {
+  position: absolute;
+  bottom: 27.5vh;
+  left: 25vw;
+  display: flex;
+}
+
+.goals {
+  position: absolute;
+  background-color: lightgrey;
+  width: 18vw;
+  height: 10vw;
+  margin-top: 1vh;
+}
+
+.goals-heading {
+  position: absolute;
+  font-size: 1.2vw;
+  font-weight: 500;
+  left: 0.7vw;
+  top: 0.7vh;
+}
+
+.goals-sub-heading {
+  position: absolute;
+  top: 3.5vh;
+  left: 0.6vw;
+  font-size: 0.7vw;
+}
+
+.goals-sub-heading-user-goal {
+  position: absolute;
+  top: 4.5vh;
+  left: 0.6vw;
+  font-size: 0.9vw;
+}
+
+.goals-sub-heading-user-goal-cost {
+  position: absolute;
+  bottom: 1.25vh;
+  right: 2vw;
+  font-size: 0.8vw;
+  display: flex;
+  gap: 0.3vw;
 }
 
 /* DASHBOARD PAGE END  */
