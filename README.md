@@ -12,7 +12,7 @@ Know that your assets will only be viewed by you due to Auth0 integrated login.
 ## Technology Stack
 This project is built using the following core technologies:
 
-### Frontend: React, HTML/CSS/JS	
+### Frontend: React, TS, HTML/CSS/JS	
 Building the interactive user interface.
 
 ### Backend:	 Node.js (Express)	
@@ -48,14 +48,18 @@ Bash
 `npm install`
 
 ### For the frontend 
-### cd client
-Configure environment variables:
-Create a file named .env in the root directory and add your configuration details:
-Will need a Polygon API key added to a .env file ( free on their website - https://polygon.io/dashboard )
+cd Client
 
-Bash
+### For the backend 
+cd Server  
 
+### Configure environment variables:
+Create a file named .env in the root directory and add your configuration details:  
+Will need a Polygon API key added to a .env file ( free on their website - https://polygon.io/dashboard ) name it `POLY_API_KEY`  
+Willl also need an fxrates API key added to the .env file aswell (free on their website too - https://fxratesapi.com/ ) name it `FX_RATE_API_KEY`
+
+### To view in browser (localhost:5173 - this is important for Auth0 allowed login and redirect URLs) - Bash
 `npm run dev`
-Access the application:
-Open your web browser and navigate to:
-http://localhost:3000
+Access the application:  
+Open your web browser and navigate to:  
+http://localhost:5173  |  http://localhost:3000 for server  
