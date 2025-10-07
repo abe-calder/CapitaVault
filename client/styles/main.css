@@ -11,7 +11,7 @@ html {
 
 .app {
   background-image: url('/images/Screenshot 2025-09-24 171203.webp');
-  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-size: 100vw 100vh; /* Ensures the image covers the entire viewport */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-attachment: fixed; /* Keeps the background image fixed when scrolling */
   margin: 0;
