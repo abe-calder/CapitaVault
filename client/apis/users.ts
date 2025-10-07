@@ -38,7 +38,6 @@ interface UpdateUserFunction {
 }
 
 export async function updateUser({ updatedUser, token }: UpdateUserFunction): Promise<User> {
-  console.log(updatedUser)
   return request
     .patch(`${rootURL}/users/me`)
     .set('Authorization', `Bearer ${token}`)

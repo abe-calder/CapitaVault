@@ -74,7 +74,6 @@ router.get('/', async (req, res) => {
       ...successfulFirstResponses,
       ...successfulSecondResponses,
     ]
-    console.log(allResults)
     res.json(allResults)
   }
 })

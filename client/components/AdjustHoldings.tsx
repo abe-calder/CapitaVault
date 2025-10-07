@@ -106,7 +106,6 @@ export default function AdjustHoldings() {
       console.log(error)
     }
   }
-  console.log(userAssetData)
 
   return (
     <>

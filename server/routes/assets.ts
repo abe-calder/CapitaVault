@@ -52,7 +52,6 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const user_id = Number(req.params.id)
-    console.log(user_id)
     const result = await db.getAssets(user_id)
     res.json(result)
   } catch (error) {

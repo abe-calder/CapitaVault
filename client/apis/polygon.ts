@@ -17,6 +17,5 @@ export default async function getAssetDataByTicker(
     .join(',')
   const queryString = `?tickers=${assetTickers}`
   const response = await request.get(`${rootURL}/polygon/${queryString}`)
-  console.log(response.body)
   return response.body as Result[]
 }

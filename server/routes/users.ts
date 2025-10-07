@@ -63,9 +63,6 @@ router.patch('/me', checkJwt, async (req: JwtRequest, res) => {
       }
     })
 
-    console.log(updatedUser)
-    console.log(result)
-
     res.json({ updatedUser: result })
   } catch (err) {
     console.log(err)
