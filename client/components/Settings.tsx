@@ -13,11 +13,16 @@ export default function Settings() {
           <div className="profile-wrapper">
             <div className="profile">
               {user && (
-                <img
-                  alt="profile-photo"
-                  src={user.picture}
+                <object
+                  type="image/jpeg"
+                  data={user.picture}
                   className="profile-photo"
-                ></img>
+                >
+                  <img
+                    src="/images/profile-photo-fallback.webp"
+                    alt="fallback-img"
+                  ></img>
+                </object>
               )}
               {user && <h1 className="profile-name">{user.name}</h1>}
             </div>

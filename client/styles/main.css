@@ -756,6 +756,17 @@ html {
 
 /* PROFILE SETTINGS START */
 
+.profile-settings-wrapper { 
+  position: absolute;
+  width: 40vw;
+  height: 60vh;
+  top: 25vh;
+  left: 25.25vw;
+}
+
+
+
+
 /* PROFILE SETTINGS END */
 
 /* SETTINGS PAGE END */

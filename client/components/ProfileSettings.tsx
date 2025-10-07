@@ -4,8 +4,8 @@ export default function ProfileSettings() {
   return (
     <>
       <Settings />
-      <div>
-
+      <div className="profile-settings-wrapper">
+        <h1 className="profile-settings-heading">Profile Settings</h1>
       </div>
     </>
   )
