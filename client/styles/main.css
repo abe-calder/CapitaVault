@@ -759,7 +759,7 @@ html {
 .profile-settings-wrapper { 
   position: absolute;
   width: 40vw;
-  height: 60vh;
+  height: 70vh;
   top: 25vh;
   left: 25.25vw;
 }
@@ -769,6 +769,56 @@ html {
   font-size: 1.5vw;
   top: 0vw;
   left: 0vw;
+}
+
+.profile-form-label-name {
+  position: absolute;
+  width: 11vw;
+  top: 15vh;
+}
+
+.profile-form-input-name {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.profile-form-label-email {
+  position: absolute;
+  width: 11vw;
+  top: 32.5vh;
+}
+
+.profile-form-input-email {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.profile-form-label-username {
+  position: absolute;
+  width: 11vw;
+  top: 50vh;
+}
+
+.profile-form-input-username {
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.profile-form-submit-button {
+  position: absolute;
+  left: 0vw;
+  top: 67.5vh;
+  color: white;
+  background-color: black;
+  border-radius: 0.5vw;
+  width: 20vw;
+  height: 4vh;
 }
 
 

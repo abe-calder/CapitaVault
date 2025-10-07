@@ -2,6 +2,7 @@ export interface User {
   auth0Id: number
   name: string
   email: string
+  username: string
 }
 
 export interface UserData extends User {

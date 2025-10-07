@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Settings from "./Settings";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useUpdateUser, useUsers } from "../hooks/useUsers";
+import { useUpdateUser } from "../hooks/useUsers";
 import { UpdatedUser } from "../../models/users";
 
 interface FormState {
@@ -79,7 +79,7 @@ export default function ProfileSettings() {
       <div className="profile-settings-wrapper">
         <h1 className="profile-settings-heading">Profile Settings</h1>
         <img
-          style={{ width: '6vw', borderRadius: '3vw', top: '7vh', left: '0vw' }}
+          style={{ width: '6vw', borderRadius: '3vw', top: '5vh', left: '15vw' }}
           className="profile-photo"
           alt="profile-image"
           src={user && user.picture}
@@ -94,11 +94,11 @@ export default function ProfileSettings() {
               value={formState.name}
               placeholder="Name"
               type="text"
-              className="profile-form-label-name"
+              className="profile-form-input-name"
             ></input>
           </label>
           <label className="profile-form-label-email">
-            Change Your Name:
+            Change Your Email:
             <input
               onChange={handleChange}
               id="email"
@@ -106,11 +106,11 @@ export default function ProfileSettings() {
               value={formState.email}
               placeholder="Email"
               type="text"
-              className="profile-form-label-email"
+              className="profile-form-input-email"
             ></input>
           </label>
           <label className="profile-form-label-username">
-            Change Your username:
+            Change Your Username:
             <input
               onChange={handleChange}
               id="username"
@@ -118,9 +118,10 @@ export default function ProfileSettings() {
               value={formState.username}
               placeholder="Username"
               type="text"
-              className="profile-form-label-username"
+              className="profile-form-input-username"
             ></input>
           </label>
+          <button data-pending={updateUserFn.isPending} className="profile-form-submit-button">Submit</button>
         </form>
       </div>
     </>
