@@ -5,9 +5,9 @@ import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 import { useState, useMemo } from 'react'
-import { PieChart, Pie, Tooltip, Cell } from 'recharts'
 import { useFxRatesContext } from '../context/FxRatesContext.tsx'
 import { usePolygonDataContext } from '../context/PolygonDataContext.tsx'
+import {PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -149,6 +149,16 @@ export default function Dashboard() {
     return <div>Error: {errorMessage}</div>
   }
 
+
+  const lineData = [
+    { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
+    { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+    // ... more data
+  ]
+
+
+
+
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
   return (
@@ -213,6 +223,17 @@ export default function Dashboard() {
                 out of
                 <p>${userGoalData && userGoalData.userGoalCost}</p>
               </h1>
+              <LineChart
+                className="line-chart"
+                width={200}
+                height={150}
+                data={lineData}
+              >
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+              </LineChart>
             </div>
           </div>
           <div className="spending-wrapper">

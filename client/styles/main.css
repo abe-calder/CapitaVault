@@ -596,6 +596,12 @@ html {
   gap: 0.3vw;
 }
 
+.line-chart {
+  position: absolute;
+  top: 1.5vh;
+  left: 5vw;
+}
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */
