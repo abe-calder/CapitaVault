@@ -7,7 +7,17 @@ import { Results } from '../../models/polygon'
 import { useState, useMemo } from 'react'
 import { useFxRatesContext } from '../context/FxRatesContext.tsx'
 import { usePolygonDataContext } from '../context/PolygonDataContext.tsx'
-import {PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
+import {
+  PieChart,
+  Pie,
+  Cell,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -20,9 +30,8 @@ export default function Dashboard() {
     const userGoal = getMe.data?.goal
     const userGoalCost = getMe.data?.goalCost.replace(/[a-zA-Z]+/, '')
     return { userGoal, userGoalCost }
-  
-  }, [getMe.data]) 
-  
+  }, [getMe.data])
+
   // @ts-expect-error enabled !!userId is the only option
   const { data: userAssetData = [] } = useGetAssets(userId, {
     enabled: !!userId,
@@ -149,12 +158,10 @@ export default function Dashboard() {
     return <div>Error: {errorMessage}</div>
   }
 
- 
   const oneQuarterBalance = (totalBalance / 8).toFixed(2)
   const oneHalfBalance = (totalBalance / 4).toFixed(2)
-  const threeQuartersBalance = (totalBalance  / 2).toFixed(2)
+  const threeQuartersBalance = (totalBalance / 2).toFixed(2)
   const fullBalance = totalBalance.toFixed(2)
-
 
   const oneQuarterGoal =
     userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 4
@@ -164,7 +171,6 @@ export default function Dashboard() {
     userGoalData.userGoalCost && (Number(userGoalData.userGoalCost) * 3) / 4
   const fullGoal =
     userGoalData.userGoalCost && Number(userGoalData.userGoalCost)
-
 
   const lineData = [
     {
@@ -228,27 +234,31 @@ export default function Dashboard() {
             <div className="statistics">
               <h2 className="statistics-heading">Statistics</h2>
               {pieChartData.length > 0 && (
-                <PieChart width={200} height={200} className="pie-chart">
-                  <Pie
-                    data={pieChartData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="5vw"
-                    cy="5vh"
-                    outerRadius={99}
-                    fill="#8884d8"
-                  >
-                    {pieChartData.map((_entry: unknown, index: number) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
+                <div className="pie-chart">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={pieChartData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius="90%"
+                        fill="#8884d8"
+                      >
+                        {pieChartData.map((_entry: unknown, index: number) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={COLORS[index % COLORS.length]}
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip
+                        formatter={(value: number) => formatCurrency(value)}
                       />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value: number) => formatCurrency(value)}
-                  />
-                </PieChart>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
               )}
             </div>
           </div>
@@ -263,18 +273,21 @@ export default function Dashboard() {
                 out of
                 <p>${userGoalData && userGoalData.userGoalCost}</p>
               </h1>
-              <LineChart
-                className="line-chart"
-                width={220}
-                height={175}
-                data={lineData}
-              >
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="CurrentBalance" stroke="#8884d8" />
-                <Line type="monotone" dataKey="end" stroke="#35c20aff" />
-              </LineChart>
+              <div className="line-chart">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={lineData}>
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="CurrentBalance"
+                      stroke="#8884d8"
+                    />
+                    <Line type="monotone" dataKey="end" stroke="#35c20aff" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
           <div className="spending-wrapper">
