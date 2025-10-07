@@ -43,7 +43,7 @@ Bash
 git clone https://github.com/abe-calder/CapitaVault.git
 cd CapitaVault
 
- [Install dependencies: Bash]: #
+ <-- Install dependencies: Bash -->
 
 npm install
 ```
