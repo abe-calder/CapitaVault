@@ -171,7 +171,7 @@ html {
   left: 30vw;
   top: 28vh;
   padding: 2vw;
-  height: 40vh;
+  height: 60vh;
 }
 
 .register-button {
@@ -215,12 +215,12 @@ html {
 .email-label {
   font-size: 0.9vw;
   position: absolute;
-  top: 15vh;
+  top: 14vh;
 }
 
 .email-input {
   position: absolute;
-  top: 18vh;
+  top: 17vh;
   width: 10vw;
   height: 2.5vh;
   border: 2px solid black;
@@ -237,6 +237,38 @@ html {
 .name-input {
   position: absolute;
   bottom: 7vh;
+  width: 10vw;
+  height: 2.5vh;
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  color: black;
+}
+
+.goal-label {
+  font-size: 0.9vw;
+  position: absolute;
+  bottom: 32vh;
+}
+
+.goal-input {
+  position: absolute;
+  bottom: 29vh;
+  width: 10vw;
+  height: 2.5vh;
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  color: black;
+}
+
+.goal-cost-label {
+  font-size: 0.9vw;
+  position: absolute;
+  bottom: 21vh;
+}
+
+.goal-cost-input {
+  position: absolute;
+  bottom: 18vh;
   width: 10vw;
   height: 2.5vh;
   border: 2px solid black;
@@ -774,7 +806,7 @@ html {
 .profile-form-label-name {
   position: absolute;
   width: 11vw;
-  top: 15vh;
+  top: 10vh;
 }
 
 .profile-form-input-name {
@@ -787,7 +819,7 @@ html {
 .profile-form-label-email {
   position: absolute;
   width: 11vw;
-  top: 32.5vh;
+  top: 20vh;
 }
 
 .profile-form-input-email {
@@ -800,7 +832,7 @@ html {
 .profile-form-label-username {
   position: absolute;
   width: 11vw;
-  top: 50vh;
+  top: 30vh;
 }
 
 .profile-form-input-username {
@@ -819,6 +851,34 @@ html {
   border-radius: 0.5vw;
   width: 20vw;
   height: 4vh;
+}
+
+.profile-form-label-goal {
+  position: absolute;
+  width: 11vw;
+  top: 40vh;
+  left: 0vw;
+}
+
+.profile-form-input-goal {  
+  border: 2px solid black;
+  border-radius: 0.4vw;
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
+}
+
+.profile-form-label-goal-cost {
+  position: absolute;
+  width: 11vw;
+  top: 50vh;
+  left: 0vw;
+}
+
+.profile-form-input-goal-cost {
+  border: 2px solid black;
+  border-radius: 0.4vw; 
+  padding-top: 0.5vh;
+  margin-top: 0.5vh;
 }
 
 

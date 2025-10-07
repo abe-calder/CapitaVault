@@ -3,6 +3,8 @@ export interface User {
   name: string
   email: string
   username: string
+  goal: string
+  goalCost: string
 }
 
 export interface UserData extends User {
@@ -14,10 +16,14 @@ export interface NewUser {
   auth0Id: string
   name: string
   email: string
+  goal: string
+  goalCost: string
 }
 
 export interface UpdatedUser {
   name: string
   email: string
   username: string
+  goal: string
+  goalCost: string
 }

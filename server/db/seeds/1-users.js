@@ -1,9 +1,8 @@
 /**
  * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
+ * @returns { Promise<void> }
  */
 export async function seed(knex) {
-
   await knex('users').insert([
     {
       id: 1,
@@ -11,7 +10,8 @@ export async function seed(knex) {
       name: 'Abe',
       email: 'abecalder@gmail.com',
       username: 'AbeC',
+      goal: 'Buy a house',
+      goalCost: '200000NZD'
     },
   ])
-};
-
+}

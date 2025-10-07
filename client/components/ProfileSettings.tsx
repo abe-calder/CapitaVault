@@ -9,13 +9,16 @@ interface FormState {
   name: ''
   email: ''
   username: ''
-
+  goal: ''
+  goalCost: ''
 }
 
 const emptyForm: FormState = {
   name: '',
   email: '',
   username: '',
+  goal: '',
+  goalCost: ''
 }
 
 export default function ProfileSettings() {
@@ -61,7 +64,9 @@ export default function ProfileSettings() {
       const updatedUser = {
         name: formState.name,
         emai: formState.email,
-        username: formState.username
+        username: formState.username,
+        goal: formState.goal,
+        goalCost: formState.goalCost
       } as unknown as UpdatedUser
       await updateUserFn.mutateAsync({ updatedUser, token })
       setFormState(emptyForm)
@@ -79,7 +84,12 @@ export default function ProfileSettings() {
       <div className="profile-settings-wrapper">
         <h1 className="profile-settings-heading">Profile Settings</h1>
         <img
-          style={{ width: '6vw', borderRadius: '3vw', top: '5vh', left: '15vw' }}
+          style={{
+            width: '6vw',
+            borderRadius: '3vw',
+            top: '5vh',
+            left: '15vw',
+          }}
           className="profile-photo"
           alt="profile-image"
           src={user && user.picture}
@@ -121,7 +131,36 @@ export default function ProfileSettings() {
               className="profile-form-input-username"
             ></input>
           </label>
-          <button data-pending={updateUserFn.isPending} className="profile-form-submit-button">Submit</button>
+          <label className="profile-form-label-goal">
+            Change Your Goal:
+            <input
+              onChange={handleChange}
+              id="goal"
+              name="goal"
+              value={formState.goal}
+              placeholder="Goal"
+              type="text"
+              className="profile-form-input-goal"
+            ></input>
+          </label>
+          <label className="profile-form-label-goal-cost">
+            Change Your Goal $ Value:
+            <input
+              onChange={handleChange}
+              id="goalCost"
+              name="goalCost"
+              value={formState.goalCost}
+              placeholder="100000NZD"
+              type="text"
+              className="profile-form-input-goal-cost"
+            ></input>
+          </label>
+          <button
+            data-pending={updateUserFn.isPending}
+            className="profile-form-submit-button"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </>

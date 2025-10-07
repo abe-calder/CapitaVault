@@ -38,7 +38,6 @@ export async function getAssets(user_id: number) {
         'cost as cost',
         'user_id as userId',
       )
-      console.log(result)
     return result
   } catch (error) {
     console.log(error)
