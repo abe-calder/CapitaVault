@@ -10,6 +10,8 @@ export function up(knex) {
     table.string('name')
     table.string('email')
     table.string('username')
+    table.string('goal')
+    table.string('goalCost')
   })
 }
 

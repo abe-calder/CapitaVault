@@ -34,6 +34,8 @@ function Register() {
     email: user?.email ?? '',
     name: user?.name ?? '',
     auth0Id: user?.sub ?? '',
+    goal: user?.goal ?? '',
+    goalCost: user?.goalCost ?? '',
   })
 
   useEffect(() => {
@@ -44,10 +46,12 @@ function Register() {
     if (user) {
       setForm((prevForm) => ({
         ...prevForm,
-        auth0Id: user.sub ?? (prevForm.auth0Id) as string,
+        auth0Id: user.sub ?? (prevForm.auth0Id as string),
         email: user.email ?? (prevForm.email as string),
         name: user.name ?? (prevForm.name as string),
         username: user.nickname ?? (prevForm.username as string),
+        goal: user.goal ?? (prevForm.goal as string),
+        goalCost: user.goalCost ?? (prevForm.goalCost as string),
       }))
     }
   }, [user])
@@ -97,6 +101,7 @@ function Register() {
                 value={form.username}
                 onChange={handleChange}
                 className="username-input"
+                placeholder="Username"
               />
 
               <label className="email-label" htmlFor="email">
@@ -109,6 +114,7 @@ function Register() {
                 value={form.email}
                 onChange={handleChange}
                 className="email-input"
+                placeholder="Email"
               />
               <label className="name-label" htmlFor="name">
                 Name:
@@ -120,6 +126,31 @@ function Register() {
                 value={form.name}
                 onChange={handleChange}
                 className="name-input"
+                placeholder="Name"
+              />
+              <label className="goal-label" htmlFor="goal">
+                Goal:
+              </label>
+              <input
+                type="text"
+                id="goal"
+                name="goal"
+                value={form.goal}
+                onChange={handleChange}
+                className="goal-input"
+                placeholder="Goal"
+              />
+              <label className="goal-cost-label" htmlFor="goal-cost">
+                Goal $ Value:
+              </label>
+              <input
+                type="text"
+                id="goal-cost"
+                name="goal-cost"
+                value={form.goalCost}
+                onChange={handleChange}
+                className="goal-cost-input"
+                placeholder="100000NZD"
               />
             </div>
             <div>
