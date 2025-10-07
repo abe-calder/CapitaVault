@@ -177,7 +177,8 @@ export default function AdjustHoldings() {
               </form>
             </div>
             <div className="display-holdings">
-              <h1 className="current-holdings-heading">Current Holdings</h1>
+              <h1 className="current-holdings-heading">Current Holdings </h1>
+              <p className='current-holdings-disclaimer'>Please only add up to 5 assets, as that is all the free polygon API can traffic per minute.<br></br>If you have more than 5 assets, you will notice that not all of them return data.</p>
               {userAssetData.map((asset: AssetData) => {
                 return (
                   <div className="user-assets-wrapper" key={asset.id}>

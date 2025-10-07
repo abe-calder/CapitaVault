@@ -27,7 +27,6 @@ export async function addAssets(newAsset: {
 
 export async function getAssets(user_id: number) {
   try {
-    console.log(user_id)
     const result = await db('assets')
       .where({ user_id })
       .select(

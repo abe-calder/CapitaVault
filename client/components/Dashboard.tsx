@@ -18,6 +18,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts'
+import AssetDistributionChart from './AssetDistributionChart'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -80,54 +81,56 @@ export default function Dashboard() {
     return 'No FX rate'
   }
 
-  const { totalBalance, totalCost, income, pieChartData } = useMemo(() => {
-    let runningTotalBalance = 0
-    let runningTotalCost = 0
+  const { totalBalance, totalCost, income, pieChartData, totalBalanceUsd } =
+    useMemo(() => {
+      let runningTotalBalance = 0
+      let runningTotalCost = 0
 
-    const chartData = userAssetData.map((asset: AssetData) => {
-      // format the ticker to match backend
-      const lookupTicker = `X:${asset.ticker.toUpperCase()}USD`
-      const assetData = resultsByTicker[lookupTicker]
-      let currentUsdValue = 0
+      const chartData = userAssetData.map((asset: AssetData) => {
+        // format the ticker to match backend
+        const lookupTicker = `X:${asset.ticker.toUpperCase()}USD`
+        const assetData = resultsByTicker[lookupTicker]
+        let currentUsdValue = 0
 
-      if (assetData && assetData.results && assetData.results[0]) {
-        currentUsdValue = assetData.results[0].c * asset.shares
-        runningTotalBalance += currentUsdValue
-      }
-
-      // cost parsing
-      const cleanedCost = asset.cost.replace(/[^0-9.]/g, '')
-      const currencyMatch = asset.cost.match(/[a-zA-Z]+/)
-      const costCurrency = currencyMatch
-        ? currencyMatch[0].toUpperCase()
-        : 'USD' // default to USD if no currency found
-      const costValue = parseFloat(cleanedCost)
-
-      if (!isNaN(costValue)) {
-        if (costCurrency === 'USD') {
-          runningTotalCost += costValue
-        } else {
-          const rate = fxRates[costCurrency]
-          // convert cost to USD
-          if (rate) runningTotalCost += costValue / rate
+        if (assetData && assetData.results && assetData.results[0]) {
+          currentUsdValue = assetData.results[0].c * asset.shares
+          runningTotalBalance += currentUsdValue
         }
+
+        // cost parsing
+        const cleanedCost = asset.cost.replace(/[^0-9.]/g, '')
+        const currencyMatch = asset.cost.match(/[a-zA-Z]+/)
+        const costCurrency = currencyMatch
+          ? currencyMatch[0].toUpperCase()
+          : 'USD' // default to USD if no currency found
+        const costValue = parseFloat(cleanedCost)
+
+        if (!isNaN(costValue)) {
+          if (costCurrency === 'USD') {
+            runningTotalCost += costValue
+          } else {
+            const rate = fxRates[costCurrency]
+            // convert cost to USD
+            if (rate) runningTotalCost += costValue / rate
+          }
+        }
+
+        return { name: asset.name, value: currentUsdValue }
+      })
+
+      const balanceInSelectedCurrency =
+        convertToCurrency === 'USD' || !fxRate
+          ? runningTotalBalance
+          : runningTotalBalance * fxRate
+
+      return {
+        totalBalance: balanceInSelectedCurrency,
+        totalCost: runningTotalCost,
+        income: balanceInSelectedCurrency - runningTotalCost,
+        totalBalanceUsd: runningTotalBalance,
+        pieChartData: chartData,
       }
-
-      return { name: asset.name, value: currentUsdValue }
-    })
-
-    const balanceInSelectedCurrency =
-      convertToCurrency === 'USD' || !fxRate
-        ? runningTotalBalance
-        : runningTotalBalance * fxRate
-
-    return {
-      totalBalance: balanceInSelectedCurrency,
-      totalCost: runningTotalCost,
-      income: balanceInSelectedCurrency - runningTotalCost,
-      pieChartData: chartData,
-    }
-  }, [userAssetData, resultsByTicker, convertToCurrency, fxRate, fxRates])
+    }, [userAssetData, resultsByTicker, convertToCurrency, fxRate, fxRates])
 
   const assetDataValues = userAssetData.map((asset: AssetData) => {
     const lookupTicker = `X:${asset.ticker.toUpperCase()}USD`
@@ -177,31 +180,31 @@ export default function Dashboard() {
       name: '0',
       CurrentBalance: 0,
       pv: 0,
-      end: 500000,
+      goal: 500000,
     },
     {
       name: '1/4',
       CurrentBalance: oneQuarterBalance,
       uv: oneQuarterGoal,
-      end: 500000,
+      goal: 500000,
     },
     {
       name: '2/4',
       CurrentBalance: oneHalfBalance,
       uv: oneHalfGoal,
-      end: 500000,
+      goal: 500000,
     },
     {
       name: '3/4',
       CurrentBalance: threeQuartersBalance,
       uv: threeQuartersGoal,
-      end: 500000,
+      goal: 500000,
     },
     {
       name: '4/4',
       CurrentBalance: fullBalance,
       uv: fullGoal,
-      end: 500000,
+      goal: 500000,
     },
   ]
 
@@ -284,7 +287,7 @@ export default function Dashboard() {
                       dataKey="CurrentBalance"
                       stroke="#8884d8"
                     />
-                    <Line type="monotone" dataKey="end" stroke="#35c20aff" />
+                    <Line type="monotone" dataKey="goal" stroke="#35c20aff" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -292,7 +295,13 @@ export default function Dashboard() {
           </div>
           <div className="spending-wrapper">
             <div className="spending">
-              <h2 className="spending-heading">Spending Overview</h2>
+              <h2 className="spending-heading">Asset Distribution</h2>
+              <div className="asset-distribution-chart">
+                <AssetDistributionChart
+                  data={pieChartData}
+                  totalBalance={totalBalanceUsd}
+                />
+              </div>
             </div>
           </div>
           <div className="profile-and-holdings-wrapper">
