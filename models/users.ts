@@ -14,3 +14,9 @@ export interface NewUser {
   name: string
   email: string
 }
+
+export interface UpdatedUser {
+  name: string
+  email: string
+  username: string
+}

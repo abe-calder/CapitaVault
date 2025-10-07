@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { addUser, getUser } from '../apis/users'
+import { addUser, getUser, updateUser } from '../apis/users'
 import { MutationFunction, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export function useUsers() {
@@ -37,4 +37,8 @@ export function useUserMutation<TData = unknown, TVariables = unknown>(
 
 export function useAddUser() {
   return useUserMutation(addUser)
+}
+
+export function useUpdateUser() {
+  return useUserMutation(updateUser)
 }

@@ -1,5 +1,5 @@
 import connection from '../connection.ts'
-import { UserData } from '../../../models/users.ts'
+import { UpdatedUser, UserData } from '../../../models/users.ts'
 const db = connection
 
 export async function addUser(newUser: {
@@ -25,3 +25,12 @@ export async function getUserById(
     console.log(err)
   }
 }
+
+export async function updateUser(auth0Id: string, updatedUser: UpdatedUser): Promise<UserData | undefined> {
+  try {
+    console.log(updatedUser)
+    return await db('users').where('users.auth0id', auth0Id).update({ updatedUser, auth0Id })
+  } catch (err) {
+    console.log(err)
+  }
+} 
