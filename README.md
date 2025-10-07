@@ -39,13 +39,15 @@ Clone the repository:
 
 Bash
 
-`git clone https://github.com/abe-calder/CapitaVault.git
-cd CapitaVault`
+```sh
+git clone https://github.com/abe-calder/CapitaVault.git
+cd CapitaVault
 
 Install dependencies:
 Bash
 
-`npm install`
+npm install
+```
 
 ### For the frontend 
 cd Client
