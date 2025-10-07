@@ -150,14 +150,39 @@ export default function Dashboard() {
   }
 
 
+  const oneQuarterBalance = (totalBalance / 4).toFixed(2)
+  const oneHalfBalance = (totalBalance / 2).toFixed(2)
+  const threeQuartersBalance = (totalBalance * 3) / 4
+  const fullBalance = totalBalance.toFixed(2)
+
+  const oneQuarterGoal = userGoalData && Number(userGoalData.userGoalCost) / 4
+  const oneHalfGoal = userGoalData && Number(userGoalData.userGoalCost) / 2
+  const threeQuartersGoal = userGoalData && Number(userGoalData.userGoalCost) * 3 / 4
+  const fullGoal = userGoalData && Number(userGoalData.userGoalCost)
+
+
   const lineData = [
-    { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-    { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-    // ... more data
+    {
+      name: '1/4',
+      uv: oneQuarterGoal,
+      pv: oneQuarterBalance,
+    },
+    {
+      name: '2/4',
+      uv: oneHalfGoal,
+      pv: oneHalfBalance,
+    },
+    {
+      name: '3/4',
+      uv: threeQuartersGoal,
+      pv: threeQuartersBalance,
+    },
+    {
+      name: '4/4',
+      uv: fullGoal,
+      pv: fullBalance,
+    },
   ]
-
-
-
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
