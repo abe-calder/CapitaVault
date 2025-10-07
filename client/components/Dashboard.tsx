@@ -5,9 +5,9 @@ import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 import { useState, useMemo } from 'react'
-import { PieChart, Pie, Tooltip, Cell } from 'recharts'
 import { useFxRatesContext } from '../context/FxRatesContext.tsx'
 import { usePolygonDataContext } from '../context/PolygonDataContext.tsx'
+import {PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -15,6 +15,14 @@ export default function Dashboard() {
   const getMe = useUsers()
   const userId = getMe.data?.id
   const userName = getMe.data?.username
+
+  const userGoalData = useMemo(() => {
+    const userGoal = getMe.data?.goal
+    const userGoalCost = getMe.data?.goalCost.replace(/[a-zA-Z]+/, '')
+    return { userGoal, userGoalCost }
+  
+  }, [getMe.data]) 
+  
   // @ts-expect-error enabled !!userId is the only option
   const { data: userAssetData = [] } = useGetAssets(userId, {
     enabled: !!userId,
@@ -141,6 +149,56 @@ export default function Dashboard() {
     return <div>Error: {errorMessage}</div>
   }
 
+ 
+  const oneQuarterBalance = (totalBalance / 8).toFixed(2)
+  const oneHalfBalance = (totalBalance / 4).toFixed(2)
+  const threeQuartersBalance = (totalBalance  / 2).toFixed(2)
+  const fullBalance = totalBalance.toFixed(2)
+
+
+  const oneQuarterGoal =
+    userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 4
+  const oneHalfGoal =
+    userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 2
+  const threeQuartersGoal =
+    userGoalData.userGoalCost && (Number(userGoalData.userGoalCost) * 3) / 4
+  const fullGoal =
+    userGoalData.userGoalCost && Number(userGoalData.userGoalCost)
+
+
+  const lineData = [
+    {
+      name: '0',
+      CurrentBalance: 0,
+      pv: 0,
+      end: 500000,
+    },
+    {
+      name: '1/4',
+      CurrentBalance: oneQuarterBalance,
+      uv: oneQuarterGoal,
+      end: 500000,
+    },
+    {
+      name: '2/4',
+      CurrentBalance: oneHalfBalance,
+      uv: oneHalfGoal,
+      end: 500000,
+    },
+    {
+      name: '3/4',
+      CurrentBalance: threeQuartersBalance,
+      uv: threeQuartersGoal,
+      end: 500000,
+    },
+    {
+      name: '4/4',
+      CurrentBalance: fullBalance,
+      uv: fullGoal,
+      end: 500000,
+    },
+  ]
+
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
   return (
@@ -197,7 +255,26 @@ export default function Dashboard() {
           <div className="goals-wrapper">
             <div className="goals">
               <h1 className="goals-heading">Goals</h1>
-              <h3 className="goals-sub-heading">Add Goals here</h3>
+              <h1 className="goals-sub-heading-user-goal">
+                {userGoalData && userGoalData.userGoal}
+              </h1>
+              <h1 className="goals-sub-heading-user-goal-cost">
+                <p>${totalBalance.toFixed(2)}</p>
+                out of
+                <p>${userGoalData && userGoalData.userGoalCost}</p>
+              </h1>
+              <LineChart
+                className="line-chart"
+                width={220}
+                height={175}
+                data={lineData}
+              >
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="CurrentBalance" stroke="#8884d8" />
+                <Line type="monotone" dataKey="end" stroke="#35c20aff" />
+              </LineChart>
             </div>
           </div>
           <div className="spending-wrapper">

@@ -11,7 +11,7 @@ html {
 
 .app {
   background-image: url('/images/Screenshot 2025-09-24 171203.webp');
-  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-size: 100vw 100vh; /* Ensures the image covers the entire viewport */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-attachment: fixed; /* Keeps the background image fixed when scrolling */
   margin: 0;
@@ -282,9 +282,8 @@ html {
 
 .app2 {
   background-image: url('/images/Dashboard-background.webp');
-  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-size: 100vw 100vh; 
   background-repeat: no-repeat; /* Prevents the image from repeating */
-  background-attachment: fixed; /* Keeps the background image fixed when scrolling */
   margin: 0;
   height: 100vh;
   width: 100vw;
@@ -345,35 +344,6 @@ html {
   color: white;
 }
 
-.goals-wrapper {
-  position: absolute;
-  bottom: 27.5vh;
-  left: 25vw;
-}
-
-.goals {
-  position: absolute;
-  background-color: lightgrey;
-  width: 18vw;
-  height: 10vw;
-  margin-top: 1vh;
-}
-
-.goals-heading {
-  position: absolute;
-  font-size: 1vw;
-  font-weight: 500;
-  left: 0.7vw;
-  top: 0.7vh;
-}
-
-.goals-sub-heading {
-  position: absolute;
-  top: 3.5vh;
-  left: 0.6vw;
-  font-size: 0.7vw;
-}
-
 .spending-wrapper {
   position: absolute;
   bottom: 27.5vh;
@@ -390,7 +360,7 @@ html {
 
 .spending-heading {
   position: absolute;
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-weight: 500;
   left: 0.7vw;
   top: 0.7vh;
@@ -577,6 +547,60 @@ html {
   top: 7vh;
   left: 14vw;
   border-radius: 3vw;
+}
+
+.goals-wrapper {
+  position: absolute;
+  bottom: 27.5vh;
+  left: 25vw;
+  display: flex;
+}
+
+.goals {
+  position: absolute;
+  background-color: lightgrey;
+  width: 18vw;
+  height: 10vw;
+  margin-top: 1vh;
+}
+
+.goals-heading {
+  position: absolute;
+  font-size: 1.2vw;
+  font-weight: 500;
+  left: 0.7vw;
+  top: 0.7vh;
+}
+
+.goals-sub-heading {
+  position: absolute;
+  top: 3.5vh;
+  left: 0.6vw;
+  font-size: 0.7vw;
+}
+
+.goals-sub-heading-user-goal {
+  position: absolute;
+  top: 4.5vh;
+  left: 0.6vw;
+  font-size: 0.9vw;
+}
+
+.goals-sub-heading-user-goal-cost {
+  position: absolute;
+  bottom: 1.25vh;
+  right: 2vw;
+  font-size: 0.8vw;
+  display: flex;
+  gap: 0.3vw;
+}
+
+.line-chart {
+  position: absolute;
+  top: 1.5vh;
+  left: 5vw;
+  width: 20vw;
+  height: 20vh;
 }
 
 /* DASHBOARD PAGE END  */

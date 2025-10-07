@@ -129,6 +129,7 @@ export default function ProfileSettings() {
               placeholder="Username"
               type="text"
               className="profile-form-input-username"
+              required
             ></input>
           </label>
           <label className="profile-form-label-goal">
@@ -141,6 +142,7 @@ export default function ProfileSettings() {
               placeholder="Goal"
               type="text"
               className="profile-form-input-goal"
+              required
             ></input>
           </label>
           <label className="profile-form-label-goal-cost">
@@ -153,6 +155,7 @@ export default function ProfileSettings() {
               placeholder="100000NZD"
               type="text"
               className="profile-form-input-goal-cost"
+              required
             ></input>
           </label>
           <button
