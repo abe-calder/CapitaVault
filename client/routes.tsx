@@ -16,7 +16,7 @@ export default createRoutesFromElements(
     <Route path='/register' element={<Register />} />
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/settings" element={<Settings />} />
-    <Route path="/settings/adjust-holdings" element={<AdjustHoldings />} />
+    <Route path="/adjust-holdings" element={<AdjustHoldings />} />
     <Route path="/settings/profile-settings" element={<ProfileSettings />} />
     <Route path='/investments'  />
   </Route>,

@@ -1,4 +1,3 @@
-import Settings from './Settings'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import {
   useAddAssets,
@@ -9,6 +8,7 @@ import { AssetData } from '../../models/assets'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useUsers } from '../hooks/useUsers'
 import { useQueryClient } from '@tanstack/react-query'
+import Nav from './Nav'
 
 interface FormState {
   ticker: ''
@@ -109,88 +109,92 @@ export default function AdjustHoldings() {
 
   return (
     <>
-      <Settings />
-      <div className="adjust-holdings-wrapper">
-        <div className="adjust-holdings">
-          <h1 className="adjust-holdings-heading">Adjust Your Holdings Here</h1>
-          <div className="adjust-holdings-form">
-            <form onSubmit={handleSubmit}>
-              <label className="adjust-ticker-form-label">
-                Input the ticker tag for the asset
-                <input
-                  type="text"
-                  name="ticker"
-                  id="ticker"
-                  value={formState.ticker}
-                  className="adjust-ticker-input"
-                  placeholder="BTC"
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <label className="adjust-asset-name-form-label">
-                Input the name of the asset
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={formState.name}
-                  className="adjust-name-input"
-                  placeholder="BitCoin"
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <label className="adjust-shares-form-label">
-                Input the amount of shares
-                <input
-                  type="number"
-                  name="shares"
-                  value={formState.shares}
-                  className="adjust-shares-input"
-                  placeholder="0.23447"
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <label className="adjust-cost-form-label">
-                Input the cost of the shares when you bought them
-                <input
-                  type="text"
-                  name="cost"
-                  value={formState.cost}
-                  className="adjust-cost-input"
-                  placeholder="10,000NZD"
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              <button
-                data-pending={addAssets.isPending}
-                className="adjust-form-submit-button"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-          <div className="display-holdings">
-            <h1 className="current-holdings-heading">Current Holdings</h1>
-            {userAssetData.map((asset: AssetData) => {
-              return (
-                <div className="user-assets-wrapper" key={asset.id}>
-                  <h1 className="user-assets-name">{asset.name}</h1>
-                  <p className="user-assets-ticker">{asset.ticker}</p>
-                  <p className="user-assets-shares">Shares: {asset.shares}</p>
-                  <p className="user-asset-cost">Cost: {asset.cost}</p>
-                  <button
-                    onClick={() => handleDelete(asset.id)}
-                    className="user-asset-delete"
-                  >
-                    Delete
-                  </button>
-                </div>
-              )
-            })}
+      <div className='app2'>
+        <Nav />
+        <div className="adjust-holdings-wrapper">
+          <div className="adjust-holdings">
+            <h1 className="adjust-holdings-heading">
+              Adjust Your Holdings Here
+            </h1>
+            <div className="adjust-holdings-form">
+              <form onSubmit={handleSubmit}>
+                <label className="adjust-ticker-form-label">
+                  Input the ticker tag for the asset
+                  <input
+                    type="text"
+                    name="ticker"
+                    id="ticker"
+                    value={formState.ticker}
+                    className="adjust-ticker-input"
+                    placeholder="BTC"
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <label className="adjust-asset-name-form-label">
+                  Input the name of the asset
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={formState.name}
+                    className="adjust-name-input"
+                    placeholder="BitCoin"
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <label className="adjust-shares-form-label">
+                  Input the amount of shares
+                  <input
+                    type="number"
+                    name="shares"
+                    value={formState.shares}
+                    className="adjust-shares-input"
+                    placeholder="0.23447"
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <label className="adjust-cost-form-label">
+                  Input the cost of the shares when you bought them
+                  <input
+                    type="text"
+                    name="cost"
+                    value={formState.cost}
+                    className="adjust-cost-input"
+                    placeholder="10,000NZD"
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <button
+                  data-pending={addAssets.isPending}
+                  className="adjust-form-submit-button"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+            <div className="display-holdings">
+              <h1 className="current-holdings-heading">Current Holdings</h1>
+              {userAssetData.map((asset: AssetData) => {
+                return (
+                  <div className="user-assets-wrapper" key={asset.id}>
+                    <h1 className="user-assets-name">{asset.name}</h1>
+                    <p className="user-assets-ticker">{asset.ticker}</p>
+                    <p className="user-assets-shares">Shares: {asset.shares}</p>
+                    <p className="user-asset-cost">Cost: {asset.cost}</p>
+                    <button
+                      onClick={() => handleDelete(asset.id)}
+                      className="user-asset-delete"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>

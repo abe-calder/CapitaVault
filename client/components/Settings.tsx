@@ -34,12 +34,6 @@ export default function Settings() {
           <div className="settings-tabs-wrapper">
             <h1 className="settings-heading">Settings</h1>
             <Link
-              to="/settings/adjust-holdings"
-              className="adjust-holdings-link"
-            >
-              Adjust Holdings
-            </Link>
-            <Link
               to="/settings/profile-settings"
               className="profile-settings-link"
             >

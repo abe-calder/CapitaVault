@@ -282,7 +282,7 @@ html {
 
 .app2 {
   background-image: url('/images/Dashboard-background.webp');
-  background-size: 100vw 100vh; 
+  background-size: 100vw 100vh;
   background-repeat: no-repeat; /* Prevents the image from repeating */
   margin: 0;
   height: 100vh;
@@ -544,9 +544,10 @@ html {
 
 .pie-chart {
   position: absolute;
-  top: 7vh;
-  left: 14vw;
-  border-radius: 3vw;
+  top: 5vh;
+  left: 11vw;
+  width: 15vw;
+  height: 25vh;
 }
 
 .goals-wrapper {
@@ -597,10 +598,10 @@ html {
 
 .line-chart {
   position: absolute;
-  top: 1.5vh;
+  top: 2.7vh;
+  width: 70%;
+  height: 70%;
   left: 5vw;
-  width: 20vw;
-  height: 20vh;
 }
 
 /* DASHBOARD PAGE END  */
@@ -639,7 +640,7 @@ html {
 .profile-settings-link {
   position: absolute;
   top: 10vh;
-  left: 8vw;
+  left: 0vw;
 }
 
 .profile-settings-link:hover {
@@ -648,7 +649,9 @@ html {
 
 .adjust-holdings-link {
   position: absolute;
-  top: 10vh;
+  top: 27.5vh;
+  left: 0;
+  width:10vw;
 }
 
 .adjust-holdings-link:hover {
@@ -687,18 +690,21 @@ html {
   position: absolute;
   width: 11vw;
   top: 0vh;
+  font-size: 0.75vw;
 }
 
 .adjust-asset-name-form-label {
   position: absolute;
   width: 9.4vw;
   top: 15vh;
+  font-size: 0.75vw;
 }
 
 .adjust-shares-form-label {
   position: absolute;
   top: 30vh;
   width: 9.3vw;
+  font-size: 0.75vw;
 }
 
 .adjust-form-submit-button {
@@ -729,6 +735,7 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .adjust-shares-input {
@@ -736,6 +743,7 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .adjust-ticker-input {
@@ -743,6 +751,7 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .display-holdings {
@@ -793,6 +802,7 @@ html {
   position: absolute;
   top: 45vh;
   width: 17.6vw;
+  font-size: 0.75vw;
 }
 
 .adjust-cost-input {
@@ -800,6 +810,7 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .user-asset-cost {
@@ -808,11 +819,16 @@ html {
   font-size: 0.9vw;
 }
 
+.mini-adjust-holdings-icon {
+  width: 2vw;
+  margin-right: 0.5vw;
+}
+
 /* ADJUST HOLDINGS END */
 
 /* PROFILE SETTINGS START */
 
-.profile-settings-wrapper { 
+.profile-settings-wrapper {
   position: absolute;
   width: 40vw;
   height: 70vh;
@@ -831,6 +847,7 @@ html {
   position: absolute;
   width: 11vw;
   top: 10vh;
+  font-size: 0.8vw;
 }
 
 .profile-form-input-name {
@@ -838,12 +855,14 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .profile-form-label-email {
   position: absolute;
   width: 11vw;
   top: 20vh;
+  font-size: 0.8vw;
 }
 
 .profile-form-input-email {
@@ -851,12 +870,14 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .profile-form-label-username {
   position: absolute;
   width: 11vw;
   top: 30vh;
+  font-size: 0.8vw;
 }
 
 .profile-form-input-username {
@@ -864,6 +885,7 @@ html {
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .profile-form-submit-button {
@@ -882,13 +904,15 @@ html {
   width: 11vw;
   top: 40vh;
   left: 0vw;
+  font-size: 0.8vw;
 }
 
-.profile-form-input-goal {  
+.profile-form-input-goal {
   border: 2px solid black;
   border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
 
 .profile-form-label-goal-cost {
@@ -896,15 +920,16 @@ html {
   width: 11vw;
   top: 50vh;
   left: 0vw;
+  font-size: 0.8vw;
 }
 
 .profile-form-input-goal-cost {
   border: 2px solid black;
-  border-radius: 0.4vw; 
+  border-radius: 0.4vw;
   padding-top: 0.5vh;
   margin-top: 0.5vh;
+  width: 9vw;
 }
-
 
 /* PROFILE SETTINGS END */
 
