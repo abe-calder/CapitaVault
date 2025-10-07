@@ -34,8 +34,8 @@ function Register() {
     email: user?.email ?? '',
     name: user?.name ?? '',
     auth0Id: user?.sub ?? '',
-    goal: user?.goal ?? '',
-    goalCost: user?.goalCost ?? '',
+    goal: user?.goal ?? '' as string,
+    goalCost: user?.goalCost ?? '' as string,
   })
 
   useEffect(() => {
@@ -141,16 +141,16 @@ function Register() {
                 placeholder="Goal"
               />
               <label className="goal-cost-label" htmlFor="goal-cost">
-                Goal $ Value:
+                Goal Cost:
               </label>
               <input
                 type="text"
                 id="goal-cost"
                 name="goal-cost"
-                value={form.goalCost}
                 onChange={handleChange}
                 className="goal-cost-input"
                 placeholder="100000NZD"
+                value={form.goalCost}
               />
             </div>
             <div>
