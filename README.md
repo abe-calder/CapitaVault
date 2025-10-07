@@ -44,6 +44,8 @@ git clone https://github.com/abe-calder/CapitaVault.git
 cd CapitaVault
 
  <-- Install dependencies: Bash -->
+ <!-- This is a comment that will not appear in the rendered Markdown. -->
+ [comment]: # (This is another type of comment.)
 
 npm install
 ```
