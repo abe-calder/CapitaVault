@@ -15,6 +15,7 @@ router.get('/:from/:to/:amount', async (req, res) => {
         `https://api.fxratesapi.com/convert?from=${from}&to=${to}&amount=${amount}`,
       )
       .set('Authorization', `Bearer ${process.env.FX_RATE_API_KEY}`)
+    // console.log('fxRates Request', response.body)
     res.json(response.body)
   } catch (error) {
     console.error(error)

@@ -366,6 +366,14 @@ html {
   top: 0.7vh;
 }
 
+.asset-distribution-chart {
+  position: absolute;
+  top: 5vh;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 5vh);
+}
+
 .profile-and-holdings-wrapper {
   position: absolute;
   right: 2vw;
@@ -664,7 +672,7 @@ html {
   position: absolute;
   width: 60vw;
   height: 70vh;
-  top: 25vh;
+  top: 8vh;
   left: 25.25vw;
 }
 
@@ -676,7 +684,8 @@ html {
 
 .adjust-holdings-heading {
   position: absolute;
-  font-size: 1.5vw;
+  font-size: 2vw;
+  font-weight: 500;
   top: 0vw;
   left: 0vw;
 }
@@ -757,19 +766,22 @@ html {
 .display-holdings {
   position: absolute;
   width: 49.75vw;
-  height: 70vh;
-  left: 25vw;
+  height: 78vh;
+  left: 41vw;
   overflow-y: auto;
+  top: 8vh;
 }
 
 .current-holdings-heading {
   position: absolute;
-  font-size: 1.5vw;
+  font-size: 2vw;
+  font-weight: 500;
   top: 0vw;
   left: 0vw;
 }
 
 .user-assets-wrapper {
+  margin-top: 1vw;
 }
 
 .user-assets-name {
@@ -822,6 +834,13 @@ html {
 .mini-adjust-holdings-icon {
   width: 2vw;
   margin-right: 0.5vw;
+}
+
+.current-holdings-disclaimer {
+  position: absolute;
+  top: 5.5vh;
+  font-size: 0.75vw;
+  margin-top: 0.3vw;
 }
 
 /* ADJUST HOLDINGS END */

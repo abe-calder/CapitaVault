@@ -4,7 +4,7 @@ import getConversionRate from '../apis/fxrates.ts'
 
 // The list of currencies to get rates for, relative to USD.
 const TARGET_CURRENCIES = ['NZD', 'AUD', 'EUR', 'GBP'] // Exclude USD 
-const REFETCH_INTERVAL = 1000 * 60 * 60 // 1 hour in milliseconds
+const REFETCH_INTERVAL = 4000 * 60 * 60 // 1 hour in milliseconds
 
 interface FxRatesState {
   rates: Record<string, number>
@@ -22,9 +22,10 @@ export function FxRatesProvider({ children }: { children: ReactNode }) {
         queryFn: () =>
           getConversionRate({ from: 'USD', to: targetCurrency, amount: 1 }),
         staleTime: REFETCH_INTERVAL,
+        cacheTime: REFETCH_INTERVAL,
         refetchInterval: REFETCH_INTERVAL,
         refetchOnWindowFocus: false,
-        retry: 3,
+        retry: 2,
       })),
     [],
   )
