@@ -18,10 +18,10 @@ export default function Dashboard() {
 
   const userGoalData = useMemo(() => {
     const userGoal = getMe.data?.goal
-    const userGoalCost = getMe.data?.goalCost
+    const userGoalCost = getMe.data?.goalCost.replace(/[a-zA-Z]+/, '')
     return { userGoal, userGoalCost }
   
-  }, [getMe.data])
+  }, [getMe.data]) 
   
   // @ts-expect-error enabled !!userId is the only option
   const { data: userAssetData = [] } = useGetAssets(userId, {
@@ -149,38 +149,48 @@ export default function Dashboard() {
     return <div>Error: {errorMessage}</div>
   }
 
-
+ 
   const oneQuarterBalance = (totalBalance / 4).toFixed(2)
   const oneHalfBalance = (totalBalance / 2).toFixed(2)
-  const threeQuartersBalance = (totalBalance * 3) / 4
+  const threeQuartersBalance = ((totalBalance * 3) / 4).toFixed(2)
   const fullBalance = totalBalance.toFixed(2)
 
-  const oneQuarterGoal = userGoalData && Number(userGoalData.userGoalCost) / 4
-  const oneHalfGoal = userGoalData && Number(userGoalData.userGoalCost) / 2
-  const threeQuartersGoal = userGoalData && Number(userGoalData.userGoalCost) * 3 / 4
-  const fullGoal = userGoalData && Number(userGoalData.userGoalCost)
+
+  const oneQuarterGoal =
+    userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 4
+  const oneHalfGoal =
+    userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 2
+  const threeQuartersGoal =
+    userGoalData.userGoalCost && (Number(userGoalData.userGoalCost) * 3) / 4
+  const fullGoal =
+    userGoalData.userGoalCost && Number(userGoalData.userGoalCost)
 
 
   const lineData = [
     {
+      name: '0',
+      uv: 0,
+      pv: 0,
+    },
+    {
       name: '1/4',
-      uv: oneQuarterGoal,
       pv: oneQuarterBalance,
+      uv: oneQuarterGoal,
     },
     {
       name: '2/4',
-      uv: oneHalfGoal,
       pv: oneHalfBalance,
+      uv: oneHalfGoal,
     },
     {
       name: '3/4',
-      uv: threeQuartersGoal,
       pv: threeQuartersBalance,
+      uv: threeQuartersGoal,
     },
     {
       name: '4/4',
-      uv: fullGoal,
       pv: fullBalance,
+      uv: fullGoal,
     },
   ]
 
