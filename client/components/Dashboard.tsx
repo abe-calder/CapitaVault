@@ -1,5 +1,4 @@
 import Nav from './Nav'
-import { useAuth0 } from '@auth0/auth0-react'
 import { useGetAssets } from '../hooks/useAssets'
 import { useUsers } from '../hooks/useUsers'
 import { AssetData } from '../../models/assets'
@@ -22,11 +21,8 @@ import AssetDistributionChart from './AssetDistributionChart'
 import TopRightProfile from './TopRightProfile.tsx'
 
 export default function Dashboard() {
-  const { user } = useAuth0()
-
   const getMe = useUsers()
   const userId = getMe.data?.id
-  const userName = getMe.data?.username
 
   const userGoalData = useMemo(() => {
     const userGoal = getMe.data?.goal
@@ -181,31 +177,31 @@ export default function Dashboard() {
       name: '0',
       CurrentBalance: 0,
       pv: 0,
-      goal: 500000,
+      goal: fullGoal,
     },
     {
       name: '1/4',
       CurrentBalance: oneQuarterBalance,
       uv: oneQuarterGoal,
-      goal: 500000,
+      goal: fullGoal,
     },
     {
       name: '2/4',
       CurrentBalance: oneHalfBalance,
       uv: oneHalfGoal,
-      goal: 500000,
+      goal: fullGoal,
     },
     {
       name: '3/4',
       CurrentBalance: threeQuartersBalance,
       uv: threeQuartersGoal,
-      goal: 500000,
+      goal: fullGoal,
     },
     {
       name: '4/4',
       CurrentBalance: fullBalance,
       uv: fullGoal,
-      goal: 500000,
+      goal: fullGoal,
     },
   ]
 

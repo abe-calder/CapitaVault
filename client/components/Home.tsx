@@ -1,5 +1,6 @@
 import { IfNotAuthenticated } from './Authenticated.tsx'
 import { useAuth0 } from '@auth0/auth0-react'
+import { ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 
 export default function Home() {
@@ -14,8 +15,9 @@ export default function Home() {
   }
 
   // If authenticated already then this will trigger user to navigate to /dashboard after 1 second delay - prevents being stuck at homepage
-  const navToDash = () => {
+  const navToDash = (): ReactNode => {
     setTimeout(runAfterDelay, 1000)
+    return null
   }
 
   const runAfterDelay = () => {
