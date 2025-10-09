@@ -981,15 +981,30 @@ html {
 }
 
 .total-investments-wrapper {
-  position: absoute;
+  position: absolute;
+  top: 13.5vh;
+  width: 20vw;
+  height: 16vh;
+  background-color: lightgray;
   
 }
 
 .number-of-investments-wrapper {
-
+  position: absolute;
+  top: 13.5vh;
+  width: 20vw;
+  height: 16vh;
+  background-color: lightgray;
+  left: 25vw;
 }
 
 .rate-of-return-wrapper {
+  position: absolute;
+  top: 13.5vh;
+  width: 20vw;
+  height: 16vh;
+  background-color: lightgray;
+  left: 50vw;
 
 }
 
