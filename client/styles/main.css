@@ -961,7 +961,7 @@ html {
 .investments-wrapper {
   position: absolute;
   width: 73vw;
-  height: 90vh;
+  height: 95vh;
   left: 25vw;
   background-color: rgb(156, 206, 162);
 }
@@ -1006,6 +1006,63 @@ html {
   background-color: lightgray;
   left: 50vw;
 
+}
+
+.rate-of-return-icon {
+  position: absolute;
+  width: 3.5vw;
+  border-radius: 1.7vw;
+  background-color: rgb(184, 184, 184);
+  padding: 0.6vw;
+  top: 4.5vh;
+  left: 4.5vw;
+}
+
+.stack-of-coins-icon {
+  position: absolute;
+  width: 3.5vw;
+  border-radius: 1.7vw;
+  background-color: rgb(184, 184, 184);
+  padding: 0.6vw;
+  top: 4.5vh;
+  left: 4.5vw;
+}
+
+.dollar-sign-icon {
+  position: absolute;
+  width: 3.5vw;
+  border-radius: 1.7vw;
+  background-color: rgb(184, 184, 184);
+  padding: 0.6vw;
+  top: 4.5vh;
+  left: 4.5vw;
+}
+
+.total-investments-heading {
+  position: absolute;
+  font-weight: 400;
+  color: rgb(92, 92, 92);
+  font-size: 0.8vw;
+  top: 4.5vh;
+  left: 8.5vw;
+}
+
+.number-of-investments-heading {
+  position: absolute;
+  font-weight: 400;
+  color: rgb(92, 92, 92);
+  font-size: 0.8vw;
+  top: 4.5vh;
+  left: 8.5vw;
+}
+
+.rate-of-return-heading {
+  position: absolute;
+  font-weight: 400;
+  color: rgb(92, 92, 92);
+  font-size: 0.8vw;
+  top: 4.5vh;
+  left: 8.5vw;
 }
 
 /* INVESTMENTS PAGE END */
