@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useUsers } from '../hooks/useUsers'
 import { useQueryClient } from '@tanstack/react-query'
 import Nav from './Nav'
+import TopRightProfile from './TopRightProfile'
 
 interface FormState {
   ticker: ''
@@ -109,8 +110,9 @@ export default function AdjustHoldings() {
 
   return (
     <>
-      <div className='app2'>
+      <div className="app2">
         <Nav />
+        <TopRightProfile />
         <div className="adjust-holdings-wrapper">
           <div className="adjust-holdings">
             <h1 className="adjust-holdings-heading">
@@ -178,7 +180,11 @@ export default function AdjustHoldings() {
             </div>
             <div className="display-holdings">
               <h1 className="current-holdings-heading">Current Holdings </h1>
-              <p className='current-holdings-disclaimer'>Please only add up to 5 assets, as that is all the free polygon API can traffic per minute.<br></br>If you have more than 5 assets, you will notice that not all of them return data.</p>
+              <p className="current-holdings-disclaimer">
+                Please only add up to 5 assets, as that is all the free polygon
+                API can traffic per minute.<br></br>If you have more than 5
+                assets, you will notice that not all of them return data.
+              </p>
               {userAssetData.map((asset: AssetData) => {
                 return (
                   <div className="user-assets-wrapper" key={asset.id}>

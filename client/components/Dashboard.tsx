@@ -19,6 +19,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import AssetDistributionChart from './AssetDistributionChart'
+import TopRightProfile from './TopRightProfile.tsx'
 
 export default function Dashboard() {
   const { user } = useAuth0()
@@ -214,6 +215,7 @@ export default function Dashboard() {
     <>
       <div className="app2">
         <Nav />
+        <TopRightProfile />
         <div className="dashboard-wrapper">
           <div className="heading-and-total-balance-wrapper">
             <h1 className="dashboard-heading">Dashboard</h1>
@@ -305,21 +307,6 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="profile-and-holdings-wrapper">
-            <div className="profile">
-              {user && (
-                <object
-                  type="image/jpeg"
-                  data={user.picture}
-                  className="profile-photo"
-                >
-                  <img
-                    src="/images/profile-photo-fallback.webp"
-                    alt="fallback-img"
-                  ></img>
-                </object>
-              )}
-              {getMe && <h1 className="profile-name">{userName}</h1>}
-            </div>
             <div className="holdings">
               <h1 className="holdings-heading">Holdings</h1>
               <div className="holdings-buttons">
