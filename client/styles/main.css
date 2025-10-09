@@ -953,3 +953,44 @@ html {
 /* PROFILE SETTINGS END */
 
 /* SETTINGS PAGE END */
+
+
+
+/* INVESTMENTS PAGE START */
+
+.investments-wrapper {
+  position: absolute;
+  width: 73vw;
+  height: 90vh;
+  left: 25vw;
+  background-color: rgb(156, 206, 162);
+}
+
+.investments-heading-profile-overview-wrapper {
+  position: absolute;
+  background-color: chartreuse;
+  width: 73vw;
+  height: 30vh;
+}
+
+.investments-heading {
+  position: absolute;
+  font-size: 2vw;
+  font-weight: 500;
+  top: 7vh;
+}
+
+.total-investments-wrapper {
+  position: absoute;
+  
+}
+
+.number-of-investments-wrapper {
+
+}
+
+.rate-of-return-wrapper {
+
+}
+
+/* INVESTMENTS PAGE END */
