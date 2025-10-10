@@ -1,32 +1,7 @@
-import { useMemo, useState } from "react";
-import { useFxRatesContext } from "../context/FxRatesContext";
-import { usePolygonDataContext } from "../context/PolygonDataContext";
-import Nav from "./Nav";
-import TopRightProfile from "./TopRightProfile";
-import { useGetAssets } from "../hooks/useAssets";
-import { useUsers } from "../hooks/useUsers";
+import Nav from './Nav'
+import TopRightProfile from './TopRightProfile'
 
 export default function Investments() {
-  const getMe = useUsers()
-  const userId = getMe.data?.id
-  // @ts-expect-error enabled !!userId is the only option
-  // const { data: userAssetData = [] } = useGetAssets(userId, {
-  //   enabled: !!userId,
-  // })
-  // const {
-  //   rates: fxRates,
-  //   isLoading: isFxLoading,
-  //   error: fxError,
-  // } = useFxRatesContext()
-  // const {
-  //   polygonData,
-  //   isLoading: isPolygonLoading,
-  //   error: polygonError,
-  // } = usePolygonDataContext()
-  // const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
-
- 
-  
   return (
     <>
       <div className="app2">

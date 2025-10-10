@@ -78,8 +78,8 @@ export default function Dashboard() {
     return 'No FX rate'
   }
 
-   const { totalBalance, totalCost, income, pieChartData, totalBalanceUsd } =
-      useMemo(() => {
+  const { totalBalance, totalCost, income, pieChartData, totalBalanceUsd } =
+    useMemo(() => {
       let runningTotalBalance = 0
       let runningTotalCost = 0
 
@@ -207,15 +207,33 @@ export default function Dashboard() {
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
-  
-
   function gainOrLoss() {
     const percentageGainOrLoss =
       ((totalBalance - totalCost) / totalBalance) * 100
     if (percentageGainOrLoss > 0) {
-      return <> <img alt='up-arrow-gain' className='up-arrow-gain' src='/images/up-arrow-gain.webp'></img> {percentageGainOrLoss.toFixed(1)}% </>
+      return (
+        <>
+          {' '}
+          <img
+            alt="up-arrow-gain"
+            className="up-arrow-gain"
+            src="/images/up-arrow-gain.webp"
+          ></img>{' '}
+          {percentageGainOrLoss.toFixed(1)}%{' '}
+        </>
+      )
     } else if (percentageGainOrLoss < 0) {
-      return <> <img alt='down-arrow-loss' className='down-arrow-loss' src='/images/down-arrow-loss.webp'></img> {percentageGainOrLoss.toFixed(1)}% </>
+      return (
+        <>
+          {' '}
+          <img
+            alt="down-arrow-loss"
+            className="down-arrow-loss"
+            src="/images/down-arrow-loss.webp"
+          ></img>{' '}
+          {percentageGainOrLoss.toFixed(1)}%{' '}
+        </>
+      )
     } else {
       return '0%'
     }
@@ -231,7 +249,9 @@ export default function Dashboard() {
             <h1 className="dashboard-heading">Dashboard</h1>
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
-              <p className='total-balance-percentage-gain-or-loss'>{gainOrLoss()}</p>
+              <p className="total-balance-percentage-gain-or-loss">
+                {gainOrLoss()}
+              </p>
               <p className="total-balance-value">
                 {convertToCurrency} {totalBalance.toFixed(2)}
               </p>
