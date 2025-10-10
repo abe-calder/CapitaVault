@@ -36,9 +36,21 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   } = useFxRatesContext()
   const {
     polygonData,
-    isLoading: isFxLoading,
-    error: fxError,
-  } = useFxRatesContext()
+    isLoading: isPolygonLoading,
+    error: polygonError,
+  } = usePolygonDataContext()
+  const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
 
+  const resultsByTicker = useMemo(() => {
+    const tickerMap: Record<string, Results> = {}
+    if (polygonData) {
+      polygonData.forEach((asset) => {
+        if (asset && aset.ticker) {
+          tickerMap[asset.ticker] = asset
+        }
+      })
+    }
+    return tickerMap
+  })
 
 }
