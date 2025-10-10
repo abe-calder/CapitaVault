@@ -78,8 +78,8 @@ export default function Dashboard() {
     return 'No FX rate'
   }
 
-  const { totalBalance, totalCost, income, pieChartData, totalBalanceUsd } =
-    useMemo(() => {
+   const { totalBalance, totalCost, income, pieChartData, totalBalanceUsd } =
+      useMemo(() => {
       let runningTotalBalance = 0
       let runningTotalCost = 0
 
@@ -207,6 +207,8 @@ export default function Dashboard() {
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
+  const percentageGainOrLoss = (totalBalance - totalCost) / totalBalance * 100
+
   return (
     <>
       <div className="app2">
@@ -217,6 +219,7 @@ export default function Dashboard() {
             <h1 className="dashboard-heading">Dashboard</h1>
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
+              <p className='total-balance-percentage-gain-or-loss'>{percentageGainOrLoss.toFixed(1)}%</p>
               <p className="total-balance-value">
                 {convertToCurrency} {totalBalance.toFixed(2)}
               </p>

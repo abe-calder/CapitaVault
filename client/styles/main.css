@@ -613,6 +613,10 @@ html {
   left: 5vw;
 }
 
+.total-balance-percentage-gain-or-loss {
+  position: absolute;
+}
+
 /* DASHBOARD PAGE END  */
 
 /* SETTINGS PAGE START */
