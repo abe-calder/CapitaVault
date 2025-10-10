@@ -10,20 +10,20 @@ export default function Investments() {
   const getMe = useUsers()
   const userId = getMe.data?.id
   // @ts-expect-error enabled !!userId is the only option
-  const { data: userAssetData = [] } = useGetAssets(userId, {
-    enabled: !!userId,
-  })
-  const {
-    rates: fxRates,
-    isLoading: isFxLoading,
-    error: fxError,
-  } = useFxRatesContext()
-  const {
-    polygonData,
-    isLoading: isPolygonLoading,
-    error: polygonError,
-  } = usePolygonDataContext()
-  const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
+  // const { data: userAssetData = [] } = useGetAssets(userId, {
+  //   enabled: !!userId,
+  // })
+  // const {
+  //   rates: fxRates,
+  //   isLoading: isFxLoading,
+  //   error: fxError,
+  // } = useFxRatesContext()
+  // const {
+  //   polygonData,
+  //   isLoading: isPolygonLoading,
+  //   error: polygonError,
+  // } = usePolygonDataContext()
+  // const [convertToCurrency, setConvertToCurrency] = useState('NZD') // state for user selection
 
  
   

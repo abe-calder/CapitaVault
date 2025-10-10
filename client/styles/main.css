@@ -615,6 +615,21 @@ html {
 
 .total-balance-percentage-gain-or-loss {
   position: absolute;
+  right: 0.5vw;
+  font-size: 0.8vw;
+  top: 0.5vh;
+}
+
+.up-arrow-gain {
+  position: absolute;
+  width: 1.15vw;
+  left: -1.3vw;
+}
+
+.down-arrow-loss {
+  position: absolute;
+  width: 1.15vw;
+  left: -1.3vw;
 }
 
 /* DASHBOARD PAGE END  */
