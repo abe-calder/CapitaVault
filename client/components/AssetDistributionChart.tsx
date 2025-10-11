@@ -12,6 +12,8 @@ import {
 interface AssetData {
   name: string
   value: number
+  ticker: string
+  shares: number
 }
 
 interface Props {
@@ -31,10 +33,10 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
 
     if (sortedData.length > 5) {
       const top4 = sortedData.slice(0, 4)
-      const otherValue = sortedData
+      const otherValues = sortedData
         .slice(4)
         .reduce((acc, asset) => acc + asset.value, 0)
-      const otherAsset = { name: 'Other', value: otherValue }
+      const otherAsset = { name: 'Other', value: otherValues, ticker: 'Other', shares: 0}
       chartData = [...top4, otherAsset]
     } else {
       chartData = sortedData
@@ -60,7 +62,7 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
         <XAxis type="number" hide domain={[0, 100]} />
         <YAxis
           type="category"
-          dataKey="name"
+          dataKey="ticker"
           axisLine={false}
           tickLine={false}
           tick={{ fill: 'black', fontSize: '0.7vw' }}

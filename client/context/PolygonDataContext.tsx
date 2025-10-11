@@ -1,8 +1,7 @@
 import { createContext, useContext, ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useUsers } from '../hooks/useUsers'
-import { useGetAssets } from '../hooks/useAssets'
 import getAssetDataByTicker from '../apis/polygon'
+import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 
 const REFETCH_INTERVAL = 500 * 60 * 60 // 1 hour
@@ -17,17 +16,17 @@ const PolygonDataContext = createContext<PolygonDataContextState | undefined>(
   undefined,
 )
 
-export function PolygonDataProvider({ children }: { children: ReactNode }) {
-  const { data: userData, isPending: isUserPending } = useUsers()
-  const userId = userData?.id
-
-  const { data: userAssetData = [], isPending: areAssetsPending } =
-    useGetAssets(userId)
-
+export function PolygonDataProvider({
+  children,
+  assets,
+}: {
+  children: ReactNode
+  assets: AssetData[]
+}) {
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['polygonMarketData', userAssetData],
-    queryFn: () => getAssetDataByTicker(userAssetData),
-    enabled: userAssetData.length > 0,
+    queryKey: ['polygonMarketData', assets],
+    queryFn: () => getAssetDataByTicker(assets),
+    enabled: assets.length > 0,
     staleTime: REFETCH_INTERVAL,
     refetchInterval: REFETCH_INTERVAL,
     refetchOnWindowFocus: false,
@@ -35,7 +34,7 @@ export function PolygonDataProvider({ children }: { children: ReactNode }) {
 
   const value = {
     polygonData: data || [],
-    isLoading: isUserPending || areAssetsPending || isLoading,
+    isLoading: isLoading,
     error: isError ? (error as Error).message : null,
   }
 

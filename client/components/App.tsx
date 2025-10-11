@@ -2,7 +2,7 @@ import { Theme } from '@radix-ui/themes'
 
 import { Outlet } from 'react-router'
 import { FxRatesProvider } from '../context/FxRatesContext.tsx'
-import { PolygonDataProvider } from '../context/PolygonDataContext.tsx'
+import { PortfolioProvider } from '../context/PortfolioContext.tsx'
 
 function App() {
   return (
@@ -10,9 +10,9 @@ function App() {
       <div className="">
         <Theme>
           <FxRatesProvider>
-            <PolygonDataProvider>
+            <PortfolioProvider>
               <Outlet />
-            </PolygonDataProvider>
+            </PortfolioProvider>
           </FxRatesProvider>
         </Theme>
       </div>

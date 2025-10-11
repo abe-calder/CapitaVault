@@ -30,7 +30,7 @@ export default function AdjustHoldings() {
   const [formState, setFormState] = useState(emptyForm)
   const addAssets = useAddAssets()
   const { getAccessTokenSilently } = useAuth0()
-  const getMe = useUsers() // This line is moved up
+  const getMe = useUsers()
 
   const userId = getMe.data?.id
   const delteAssetById = useDeleteAssetById()
