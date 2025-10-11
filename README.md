@@ -58,6 +58,7 @@ Bash
 ```sh
 npm run knex migrate:latest
 
+# OPTIONAL for seeds - no real point it's just my own data for testing anyway
 npm run knex seed:run
 ```
 
