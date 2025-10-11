@@ -27,7 +27,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   // @ts-expect-error enabled !!userId is the only option
   const { data: userAssetData = [] } = useGetAssets(userId, {
     enabled: !!userId,
-  },)
+  })
 
   const {
     rates: fxRates,
@@ -44,13 +44,41 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const resultsByTicker = useMemo(() => {
     const tickerMap: Record<string, Results> = {}
     if (polygonData) {
-      polygonData.forEach((asset) => {
-        if (asset && aset.ticker) {
+      polygonData.forEach((asset: Results) => {
+        if (asset && asset.ticker) {
           tickerMap[asset.ticker] = asset
         }
       })
     }
     return tickerMap
+  }, [polygonData])
+
+  const portfolioMetrics = useMemo(() => {
+    let toalBalance = 0
+    let totalCost = 0
+    let totalBanaceUsd = 0
+    const pieChartData: { name: string; value: number }[] = []
+    
+    if (
+      userAssetData.length > 0 &&
+      Object.keys(resultsByTicker).length > 0 &&
+      Object.keys(fxRates).length > 0
+    ) {
+      userAssetData.forEach((asset: AssetData) => {
+        const marketData = resultsByTicker[asset.symbol]
+        if (!marketData) return
+
+        const currentPrice = marketData.c // closing price from polygon
+        const quantity = asset.quantity 
+        const averageCost = asset.average_cost 
+        
+        const assetCurrency = asset.currency.toUpperCase()
+        const toCurrency = convertToCurrency.toUpperCase()
+
+        // Get conversion rates, default to 1 if not found
+        const rateToSelected = fxRates['USD'] / fxRates[assetCurrency] || 1
+      })
+    }
   })
 
 }
