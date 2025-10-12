@@ -150,7 +150,7 @@ export default function Dashboard() {
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
               <p className="total-balance-percentage-gain-or-loss">
-                {gainOrLoss}
+                {gainOrLoss()}
               </p>
               <p className="total-balance-value">
                 {convertCurrency} {totalBalance.toFixed(2)}

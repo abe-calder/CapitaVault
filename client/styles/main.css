@@ -1120,5 +1120,58 @@ html {
   left: 8.5vw;
 }
 
+.my-investments-wrapper {
+  position: absolute;
+  bottom: 0vh;
+  width: 41vw;
+  height: 35vh;
+  overflow-y: auto;
+}
+
+.my-investments-heading {
+  position: relative;
+  left: 0vw;
+  top: 0vh;
+  font-size: 1.7vw;
+  font-weight: 500;
+  width: 13vw;
+  margin-bottom: 3vh;
+}
+
+.my-investments {
+  position: relative;
+  display: inline-flex;
+  width: 40vw;
+  margin-bottom: 3vh;
+  border-bottom: 0.1vh solid lightgray;
+}
+
+.investments-asset-name {
+  position: relative;
+  left: 0vw;
+  top: 0vh;
+  font-size: 1vw;
+  font-weight: 500;
+  width: 13vw;
+}
+
+.investments-asset-value {
+  position: relative;
+  left: 10vw;
+}
+
+.investments-asset-gain-or-loss {
+  position: relative;
+  left: 20vw;
+}
+
+.yearly-total-revenue-wrapper {
+  position: absolute;
+  width: 35vw;
+  height: 25vh;
+  background-color: rgb(104, 104, 104);
+  top: 32vh;
+
+}
 
 /* INVESTMENTS PAGE END */

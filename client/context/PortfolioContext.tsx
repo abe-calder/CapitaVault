@@ -18,6 +18,7 @@ interface PortfolioState {
     cost: number
     ticker: string
     shares: number
+    yearlyRevenue: number
   }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
@@ -86,6 +87,7 @@ export function PortfolioProvider({
       shares: number
       ticker: string
       cost: number
+      yearlyRevenue: number
     }[] = []
 
     if (
@@ -124,6 +126,9 @@ export function PortfolioProvider({
         const costInSelectedCurrency = !isNaN(costValue)
           ? costValue * costToSelectedRate
           : 0
+        
+        const yearlyRevenueInSelectedCurrency = costInSelectedCurrency - currentValueInSelectedCurrency
+        
         const currentValueInUsd = currentPrice * quantity * rateToUsd
 
         totalBalance += currentValueInSelectedCurrency
@@ -136,6 +141,7 @@ export function PortfolioProvider({
           ticker: asset.ticker,
           cost: costInSelectedCurrency,
           shares: asset.shares,
+          yearlyRevenue: yearlyRevenueInSelectedCurrency,
         })
       })
     }
@@ -184,7 +190,7 @@ export function PortfolioProvider({
       } else if (percentageGainOrLoss < 0) {
         return (
           <>
-            <h1>-{percentageGainOrLoss.toFixed(1)}%</h1>
+            <h1>{percentageGainOrLoss.toFixed(1)}%</h1>
           </>
         )
       } else {
