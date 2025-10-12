@@ -6,6 +6,7 @@ import { useFxRatesContext } from './FxRatesContext'
 import getAssetDataByTicker from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
+import { Value } from '@radix-ui/themes/components/data-list'
 
 interface PortfolioState {
   totalBalance: number
@@ -15,12 +16,14 @@ interface PortfolioState {
   pieChartData: {
     name: string
     value: number
+    cost: number
     ticker: string
     shares: number
   }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
-  gainOrLoss: JSX.Element,
+  gainOrLoss: JSX.Element
+  individualGainOrLoss: (value: number, cost: number) => JSX.Element
   isLoading: boolean
   error: string | null
 }
@@ -78,7 +81,13 @@ export function PortfolioProvider({
     let totalBalance = 0
     let totalCost = 0
     let totalBalanceUsd = 0
-    const pieChartData: { name: string; value: number; shares: number; ticker: string}[] = []
+    const pieChartData: {
+      name: string
+      value: number
+      shares: number
+      ticker: string
+      cost: number
+    }[] = []
 
     if (
       userAssetData.length > 0 &&
@@ -126,11 +135,10 @@ export function PortfolioProvider({
           name: asset.name,
           value: currentValueInSelectedCurrency,
           ticker: asset.ticker,
+          cost: costInSelectedCurrency,
           shares: asset.shares,
         })
       })
-
-      
     }
 
     function gainOrLoss() {
@@ -165,6 +173,30 @@ export function PortfolioProvider({
       }
     }
 
+    function individualGainOrLoss(value: number, cost: number) {
+      const percentageGainOrLoss = ((value - cost) / cost) * 100
+
+      if (percentageGainOrLoss > 0) {
+        return (
+          <>
+            <h1>+{percentageGainOrLoss.toFixed(1)}%</h1>
+          </>
+        )
+      } else if (percentageGainOrLoss < 0) {
+        return (
+          <>
+            <h1>-{percentageGainOrLoss.toFixed(1)}%</h1>
+          </>
+        )
+      } else {
+        return (
+          <>
+            <h1>0%</h1>
+          </>
+        )
+      }
+    }
+
     return {
       totalBalance,
       totalCost,
@@ -172,6 +204,7 @@ export function PortfolioProvider({
       pieChartData,
       income: 0,
       gainOrLoss,
+      individualGainOrLoss,
     }
   }, [userAssetData, resultsByTicker, convertCurrency, fxRates])
 
@@ -187,6 +220,8 @@ export function PortfolioProvider({
     convertCurrency: convertCurrency,
     setConvertCurrency,
     gainOrLoss: portfolioMetrics.gainOrLoss() as JSX.Element,
+    individualGainOrLoss:
+      portfolioMetrics.individualGainOrLoss(0, 0) as JSX.Element,
     isLoading,
     error: error || null,
   }

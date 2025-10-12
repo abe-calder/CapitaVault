@@ -3,7 +3,7 @@ import TopRightProfile from './TopRightProfile'
 import { usePortfolio } from '../context/PortfolioContext'
 
 export default function Investments() {
-  const { totalBalance, totalCost, income, pieChartData, setConvertCurrency, convertCurrency, gainOrLoss } = usePortfolio()
+  const { totalCost, pieChartData, setConvertCurrency, convertCurrency, gainOrLoss } = usePortfolio()
   
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
@@ -12,6 +12,8 @@ export default function Investments() {
   }
 
   const totalShares = pieChartData.reduce((a, c) => a + c.shares, 0)
+
+  
   
   return (
     <>
