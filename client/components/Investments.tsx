@@ -11,8 +11,8 @@ export default function Investments() {
     setConvertCurrency(selectedCurrency)
   }
 
-  
-
+  const tt = pieChartData.reduce((a, c) => a + c.shares, 0)
+  console.log(tt)
   return (
     <>
       <div className="app2">
@@ -41,6 +41,7 @@ export default function Investments() {
               <h1 className="number-of-investments-heading">
                 No. of Investments
               </h1>
+              <h1 className="number-of-investments-value">{tt.toFixed(2)}</h1>
             </div>
             <div className="rate-of-return-wrapper">
               <img
@@ -49,7 +50,7 @@ export default function Investments() {
                 src="/images/rate-of-return-icon.webp"
               ></img>
               <h1 className="rate-of-return-heading">Rate of Return</h1>
-              <h1 className='rate-of-return-value'>{gainOrLoss}</h1>
+              <h1 className="rate-of-return-value">{gainOrLoss}</h1>
             </div>
           </div>
           <div className="investments-buttons">

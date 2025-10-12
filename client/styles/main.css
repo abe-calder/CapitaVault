@@ -1110,7 +1110,14 @@ html {
   font-size: 1.4vw;
   top: 7vh;
   right: 6.5vw;
+}
 
+.number-of-investments-value {
+  position: absolute;
+  font-weight: 450;
+  font-size: 1.4vw;
+  top: 7vh;
+  left: 8.5vw;
 }
 
 
