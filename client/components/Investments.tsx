@@ -11,6 +11,7 @@ export default function Investments() {
     convertCurrency,
     gainOrLoss,
     individualGainOrLoss,
+    income,
   } = usePortfolio()
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
@@ -81,7 +82,7 @@ export default function Investments() {
           </div>
           <div className='yearly-total-revenue-wrapper'>
             <h1 className='yearly-total-revenue-heading'>Yearly Total Revenue</h1>
-
+            <h1 className='yearly-total-revenue-value'>{formatCurrency(revenue, convertCurrency)}</h1>
           </div>
           <div className="my-investments-wrapper">
             <h1 className="my-investments-heading">My Investments</h1>

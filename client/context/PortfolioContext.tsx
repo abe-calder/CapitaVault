@@ -127,7 +127,8 @@ export function PortfolioProvider({
           ? costValue * costToSelectedRate
           : 0
         
-        const yearlyRevenueInSelectedCurrency = costInSelectedCurrency - currentValueInSelectedCurrency
+        const yearlyRevenueInSelectedCurrency =
+          currentValueInSelectedCurrency - costInSelectedCurrency
         
         const currentValueInUsd = currentPrice * quantity * rateToUsd
 

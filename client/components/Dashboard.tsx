@@ -26,7 +26,6 @@ export default function Dashboard() {
     totalBalance,
     totalCost,
     pieChartData,
-    // totalBalanceUsd,
     convertCurrency,
     setConvertCurrency,
     isLoading,

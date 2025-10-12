@@ -1179,4 +1179,10 @@ html {
   color: white;
 }
 
+.yearly-total-revenue-value {
+  position: absolute;
+  top: 10vh;
+  color: white;
+}
+
 /* INVESTMENTS PAGE END */
