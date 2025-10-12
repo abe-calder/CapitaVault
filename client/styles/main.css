@@ -1090,4 +1090,15 @@ html {
   left: 8.5vw;
 }
 
+.total-invested-value {
+  position: absolute;
+  font-weight: 500;
+  font-size: 1.3vw;
+}
+
+.investments-buttons {
+  position: absolute;
+  
+}
+
 /* INVESTMENTS PAGE END */
