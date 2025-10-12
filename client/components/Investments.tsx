@@ -3,13 +3,15 @@ import TopRightProfile from './TopRightProfile'
 import { usePortfolio } from '../context/PortfolioContext'
 
 export default function Investments() {
-  const { totalBalance, totalCost, income, pieChartData, setConvertCurrency, convertCurrency } = usePortfolio()
+  const { totalBalance, totalCost, income, pieChartData, setConvertCurrency, convertCurrency, gainOrLoss } = usePortfolio()
   
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
     const selectedCurrency = (e.target as HTMLButtonElement).value
     setConvertCurrency(selectedCurrency)
   }
+
+  
 
   return (
     <>
@@ -26,7 +28,9 @@ export default function Investments() {
                 src="/images/hand-and-dollar-sign-icon.webp"
               ></img>
               <h1 className="total-investments-heading">Total Invested</h1>
-              <h2 className="total-invested-value">${totalCost.toFixed(2)}</h2>
+              <h2 className="total-invested-value">
+                {convertCurrency} {totalCost.toFixed(2)}
+              </h2>
             </div>
             <div className="number-of-investments-wrapper">
               <img
@@ -45,6 +49,7 @@ export default function Investments() {
                 src="/images/rate-of-return-icon.webp"
               ></img>
               <h1 className="rate-of-return-heading">Rate of Return</h1>
+              <h1 className='rate-of-return-value'>{gainOrLoss}</h1>
             </div>
           </div>
           <div className="investments-buttons">

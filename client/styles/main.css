@@ -1092,13 +1092,26 @@ html {
 
 .total-invested-value {
   position: absolute;
-  font-weight: 500;
-  font-size: 1.3vw;
+  font-weight: 450;
+  font-size: 1.5vw;
+  top: 7vh;
+  left: 8.5vw;
 }
 
 .investments-buttons {
   position: absolute;
-  
+  top: 9vh;
+  left: 25.5vw;
 }
+
+.rate-of-return-value {
+  position: absolute;
+  font-weight: 450;
+  font-size: 1.4vw;
+  top: 7vh;
+  right: 6.5vw;
+
+}
+
 
 /* INVESTMENTS PAGE END */

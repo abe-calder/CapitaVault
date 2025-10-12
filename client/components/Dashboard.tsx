@@ -30,6 +30,7 @@ export default function Dashboard() {
     setConvertCurrency,
     isLoading,
     error,
+    gainOrLoss,
   } = usePortfolio()
 
   const userGoalData = useMemo(() => {
@@ -138,38 +139,6 @@ export default function Dashboard() {
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
-  function gainOrLoss() {
-    const percentageGainOrLoss =
-      ((totalBalance - totalCost) / totalBalance) * 100
-    if (percentageGainOrLoss > 0) {
-      return (
-        <>
-          {' '}
-          <img
-            alt="up-arrow-gain"
-            className="up-arrow-gain"
-            src="/images/up-arrow-gain.webp"
-          ></img>{' '}
-          {percentageGainOrLoss.toFixed(1)}%{' '}
-        </>
-      )
-    } else if (percentageGainOrLoss < 0) {
-      return (
-        <>
-          {' '}
-          <img
-            alt="down-arrow-loss"
-            className="down-arrow-loss"
-            src="/images/down-arrow-loss.webp"
-          ></img>{' '}
-          {percentageGainOrLoss.toFixed(1)}%{' '}
-        </>
-      )
-    } else {
-      return '0%'
-    }
-  }
-
   return (
     <>
       <div className="app2">
@@ -181,7 +150,7 @@ export default function Dashboard() {
             <div className="total-balance">
               <h2 className="total-balance-heading">Total Balance</h2>
               <p className="total-balance-percentage-gain-or-loss">
-                {gainOrLoss()}
+                {gainOrLoss}
               </p>
               <p className="total-balance-value">
                 {convertCurrency} {totalBalance.toFixed(2)}
@@ -236,9 +205,9 @@ export default function Dashboard() {
                 {userGoalData.userGoal}
               </h1>
               <h1 className="goals-sub-heading-user-goal-cost">
-                <p>${totalBalance.toFixed(2)}</p>
+                <p>{totalBalance.toFixed(2)}</p>
                 out of
-                <p>${userGoalData && userGoalData.userGoalCost}</p>
+                <p>{userGoalData && userGoalData.userGoalCost}</p>
               </h1>
               <div className="line-chart">
                 <ResponsiveContainer width="100%" height="100%">
