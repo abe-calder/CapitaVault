@@ -15,12 +15,15 @@ interface PortfolioState {
   pieChartData: {
     name: string
     value: number
+    cost: number
     ticker: string
     shares: number
+    yearlyRevenue: number
   }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
-  gainOrLoss: JSX.Element,
+  gainOrLoss: () => JSX.Element
+  individualGainOrLoss: (value: number, cost: number) => JSX.Element
   isLoading: boolean
   error: string | null
 }
@@ -78,7 +81,14 @@ export function PortfolioProvider({
     let totalBalance = 0
     let totalCost = 0
     let totalBalanceUsd = 0
-    const pieChartData: { name: string; value: number; shares: number; ticker: string}[] = []
+    const pieChartData: {
+      name: string
+      value: number
+      shares: number
+      ticker: string
+      cost: number
+      yearlyRevenue: number
+    }[] = []
 
     if (
       userAssetData.length > 0 &&
@@ -116,6 +126,10 @@ export function PortfolioProvider({
         const costInSelectedCurrency = !isNaN(costValue)
           ? costValue * costToSelectedRate
           : 0
+        
+        const yearlyRevenueInSelectedCurrency =
+          currentValueInSelectedCurrency - costInSelectedCurrency
+        
         const currentValueInUsd = currentPrice * quantity * rateToUsd
 
         totalBalance += currentValueInSelectedCurrency
@@ -126,11 +140,11 @@ export function PortfolioProvider({
           name: asset.name,
           value: currentValueInSelectedCurrency,
           ticker: asset.ticker,
+          cost: costInSelectedCurrency,
           shares: asset.shares,
+          yearlyRevenue: yearlyRevenueInSelectedCurrency,
         })
       })
-
-      
     }
 
     function gainOrLoss() {
@@ -161,7 +175,31 @@ export function PortfolioProvider({
           </>
         )
       } else {
-        return '0%'
+        return <p>0%</p>
+      }
+    }
+
+    function individualGainOrLoss(value: number, cost: number) {
+      const percentageGainOrLoss = ((value - cost) / cost) * 100
+
+      if (percentageGainOrLoss > 0) {
+        return (
+          <>
+            <h1>+{percentageGainOrLoss.toFixed(1)}%</h1>
+          </>
+        )
+      } else if (percentageGainOrLoss < 0) {
+        return (
+          <>
+            <h1>{percentageGainOrLoss.toFixed(1)}%</h1>
+          </>
+        )
+      } else {
+        return (
+          <>
+            <h1>0%</h1>
+          </>
+        )
       }
     }
 
@@ -172,6 +210,7 @@ export function PortfolioProvider({
       pieChartData,
       income: 0,
       gainOrLoss,
+      individualGainOrLoss,
     }
   }, [userAssetData, resultsByTicker, convertCurrency, fxRates])
 
@@ -186,7 +225,6 @@ export function PortfolioProvider({
     ...portfolioMetrics,
     convertCurrency: convertCurrency,
     setConvertCurrency,
-    gainOrLoss: portfolioMetrics.gainOrLoss() as JSX.Element,
     isLoading,
     error: error || null,
   }

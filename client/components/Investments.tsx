@@ -1,18 +1,42 @@
 import Nav from './Nav'
 import TopRightProfile from './TopRightProfile'
 import { usePortfolio } from '../context/PortfolioContext'
+import { formatCurrency } from './formatCurrency'
 
 export default function Investments() {
-  const { totalBalance, totalCost, income, pieChartData, setConvertCurrency, convertCurrency, gainOrLoss } = usePortfolio()
-  
+  const {
+    totalCost,
+    pieChartData,
+    setConvertCurrency,
+    convertCurrency,
+    gainOrLoss,
+    individualGainOrLoss,
+  } = usePortfolio()
+
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
     const selectedCurrency = (e.target as HTMLButtonElement).value
     setConvertCurrency(selectedCurrency)
   }
 
-  const tt = pieChartData.reduce((a, c) => a + c.shares, 0)
-  console.log(tt)
+  const totalShares = pieChartData.reduce((a, c) => a + c.shares, 0)
+
+  const assetValues = pieChartData.map((asset, i) => {
+    return (
+      <div key={asset.ticker[i]} className="my-investments">
+        <h1 className="investments-asset-name">{asset.name}</h1>
+        <h1 className="investments-asset-value">
+          {formatCurrency(asset.value, convertCurrency)}
+        </h1>
+        <h1 className="investments-asset-gain-or-loss">
+          {individualGainOrLoss(asset.value, asset.cost)}
+        </h1>
+      </div>
+    )
+  })
+
+  const revenue = pieChartData.reduce((a, c) => a + c.yearlyRevenue, 0)
+
   return (
     <>
       <div className="app2">
@@ -41,7 +65,9 @@ export default function Investments() {
               <h1 className="number-of-investments-heading">
                 No. of Investments
               </h1>
-              <h1 className="number-of-investments-value">{tt.toFixed(2)}</h1>
+              <h1 className="number-of-investments-value">
+                {totalShares.toFixed(2)}
+              </h1>
             </div>
             <div className="rate-of-return-wrapper">
               <img
@@ -50,8 +76,16 @@ export default function Investments() {
                 src="/images/rate-of-return-icon.webp"
               ></img>
               <h1 className="rate-of-return-heading">Rate of Return</h1>
-              <h1 className="rate-of-return-value">{gainOrLoss}</h1>
+              <h1 className="rate-of-return-value">{gainOrLoss()}</h1>
             </div>
+          </div>
+          <div className='yearly-total-revenue-wrapper'>
+            <h1 className='yearly-total-revenue-heading'>Yearly Total Revenue</h1>
+            <h1 className='yearly-total-revenue-value'>{formatCurrency(revenue, convertCurrency)}</h1>
+          </div>
+          <div className="my-investments-wrapper">
+            <h1 className="my-investments-heading">My Investments</h1>
+            {assetValues}
           </div>
           <div className="investments-buttons">
             <label htmlFor="toggle-currency" className="toggle-currency-label">
