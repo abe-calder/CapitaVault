@@ -872,7 +872,7 @@ html {
 
 /* ADJUST HOLDINGS END */
 
-/* PROFILE SETTINGS START */
+/* PROFILE SETTINGS STAR */
 
 .profile-settings-wrapper {
   position: absolute;
@@ -1089,5 +1089,36 @@ html {
   top: 4.5vh;
   left: 8.5vw;
 }
+
+.total-invested-value {
+  position: absolute;
+  font-weight: 450;
+  font-size: 1.5vw;
+  top: 7vh;
+  left: 8.5vw;
+}
+
+.investments-buttons {
+  position: absolute;
+  top: 9vh;
+  left: 25.5vw;
+}
+
+.rate-of-return-value {
+  position: absolute;
+  font-weight: 450;
+  font-size: 1.4vw;
+  top: 7vh;
+  right: 6.5vw;
+}
+
+.number-of-investments-value {
+  position: absolute;
+  font-weight: 450;
+  font-size: 1.4vw;
+  top: 7vh;
+  left: 8.5vw;
+}
+
 
 /* INVESTMENTS PAGE END */

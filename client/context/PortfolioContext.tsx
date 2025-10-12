@@ -12,9 +12,15 @@ interface PortfolioState {
   totalCost: number
   income: number
   totalBalanceUsd: number
-  pieChartData: { name: string; value: number; ticker: string; shares: number}[]
+  pieChartData: {
+    name: string
+    value: number
+    ticker: string
+    shares: number
+  }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
+  gainOrLoss: JSX.Element,
   isLoading: boolean
   error: string | null
 }
@@ -123,6 +129,40 @@ export function PortfolioProvider({
           shares: asset.shares,
         })
       })
+
+      
+    }
+
+    function gainOrLoss() {
+      const percentageGainOrLoss =
+        ((totalBalance - totalCost) / totalBalance) * 100
+      if (percentageGainOrLoss > 0) {
+        return (
+          <>
+            {' '}
+            <img
+              alt="up-arrow-gain"
+              className="up-arrow-gain"
+              src="/images/up-arrow-gain.webp"
+            ></img>{' '}
+            {percentageGainOrLoss.toFixed(1)}%{' '}
+          </>
+        )
+      } else if (percentageGainOrLoss < 0) {
+        return (
+          <>
+            {' '}
+            <img
+              alt="down-arrow-loss"
+              className="down-arrow-loss"
+              src="/images/down-arrow-loss.webp"
+            ></img>{' '}
+            {percentageGainOrLoss.toFixed(1)}%{' '}
+          </>
+        )
+      } else {
+        return '0%'
+      }
     }
 
     return {
@@ -131,6 +171,7 @@ export function PortfolioProvider({
       totalBalanceUsd,
       pieChartData,
       income: 0,
+      gainOrLoss,
     }
   }, [userAssetData, resultsByTicker, convertCurrency, fxRates])
 
@@ -144,7 +185,8 @@ export function PortfolioProvider({
   const value: PortfolioState = {
     ...portfolioMetrics,
     convertCurrency: convertCurrency,
-    setConvertCurrency: setConvertCurrency,
+    setConvertCurrency,
+    gainOrLoss: portfolioMetrics.gainOrLoss() as JSX.Element,
     isLoading,
     error: error || null,
   }
