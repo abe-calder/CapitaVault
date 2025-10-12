@@ -1171,7 +1171,12 @@ html {
   height: 25vh;
   background-color: rgb(104, 104, 104);
   top: 32vh;
+}
 
+.yearly-total-revenue-heading {
+  position: absolute;
+  font-size: 1.4vw;
+  color: white;
 }
 
 /* INVESTMENTS PAGE END */

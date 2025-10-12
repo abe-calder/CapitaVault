@@ -1,6 +1,7 @@
 import Nav from './Nav'
 import TopRightProfile from './TopRightProfile'
 import { usePortfolio } from '../context/PortfolioContext'
+import { formatCurrency } from './formatCurrency'
 
 export default function Investments() {
   const {
@@ -18,10 +19,6 @@ export default function Investments() {
     setConvertCurrency(selectedCurrency)
   }
 
-  const formatCurrency = (value: number) => {
-    return `${convertCurrency} ${value.toFixed(2)}`
-  }
-
   const totalShares = pieChartData.reduce((a, c) => a + c.shares, 0)
 
   const assetValues = pieChartData.map((asset, i) => {
@@ -29,7 +26,7 @@ export default function Investments() {
       <div key={asset.ticker[i]} className="my-investments">
         <h1 className="investments-asset-name">{asset.name}</h1>
         <h1 className="investments-asset-value">
-          {formatCurrency(asset.value)}
+          {formatCurrency(asset.value, convertCurrency)}
         </h1>
         <h1 className="investments-asset-gain-or-loss">
           {individualGainOrLoss(asset.value, asset.cost)}
@@ -83,6 +80,7 @@ export default function Investments() {
             </div>
           </div>
           <div className='yearly-total-revenue-wrapper'>
+            <h1 className='yearly-total-revenue-heading'>Yearly Total Revenue</h1>
 
           </div>
           <div className="my-investments-wrapper">

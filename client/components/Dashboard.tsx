@@ -16,6 +16,7 @@ import AssetDistributionChart from './AssetDistributionChart'
 import TopRightProfile from './TopRightProfile.tsx'
 import { usePortfolio } from '../context/PortfolioContext.tsx'
 import { useFxRatesContext } from '../context/FxRatesContext.tsx'
+import { formatCurrency } from './formatCurrency.ts'
 
 export default function Dashboard() {
   const getMe = useUsers()
@@ -59,10 +60,6 @@ export default function Dashboard() {
   }
   const income = totalBalance - totalCost
 
-  const formatCurrency = (value: number) => {
-    return `${convertCurrency} ${value.toFixed(2)}`
-  }
-
   const formatTooltip = (value: number) => {
     return `${convertCurrency} ${value.toFixed(2)}`
   }
@@ -72,7 +69,7 @@ export default function Dashboard() {
       <div className="asset-holdings-wrapper" key={asset.name}>
         <h1 className="asset-holdings-name">{asset.name}</h1>
         <div className="asset-holdings-shares">
-          <p className="asset-holdings-value">{formatCurrency(asset.value)}</p>
+          <p className="asset-holdings-value">{formatCurrency(asset.value, convertCurrency)}</p>
           <p className="asset-shares">
             {asset.shares} {asset.ticker}
           </p>
