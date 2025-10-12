@@ -6,7 +6,6 @@ import { useFxRatesContext } from './FxRatesContext'
 import getAssetDataByTicker from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
-import { Value } from '@radix-ui/themes/components/data-list'
 
 interface PortfolioState {
   totalBalance: number
@@ -22,7 +21,7 @@ interface PortfolioState {
   }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
-  gainOrLoss: JSX.Element
+  gainOrLoss: () => JSX.Element
   individualGainOrLoss: (value: number, cost: number) => JSX.Element
   isLoading: boolean
   error: string | null
@@ -169,7 +168,7 @@ export function PortfolioProvider({
           </>
         )
       } else {
-        return '0%'
+        return <p>0%</p>
       }
     }
 
@@ -219,9 +218,6 @@ export function PortfolioProvider({
     ...portfolioMetrics,
     convertCurrency: convertCurrency,
     setConvertCurrency,
-    gainOrLoss: portfolioMetrics.gainOrLoss() as JSX.Element,
-    individualGainOrLoss:
-      portfolioMetrics.individualGainOrLoss(0, 0) as JSX.Element,
     isLoading,
     error: error || null,
   }
