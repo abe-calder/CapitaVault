@@ -11,7 +11,6 @@ export default function Investments() {
     convertCurrency,
     gainOrLoss,
     individualGainOrLoss,
-    income,
   } = usePortfolio()
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
