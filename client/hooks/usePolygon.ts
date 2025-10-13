@@ -18,12 +18,12 @@ export function useGetAssetDataByTicker(ticker: string) {
 }
 
 
-export function useGetHolidayData() {
-  return useQuery({
-    queryKey: ['upcomingMarketHolidays'],
-    queryFn: () => getMarketHolidays(),
-    staleTime: 750 * 60 * 60, // 45 mins
-    refetchInterval: 750 * 60 * 60, // 45 mins
-    refetchOnWindowFocus: false,
-  })
-}
+// export function useGetHolidayData() {
+//   return useQuery({
+//     queryKey: ['upcomingMarketHolidays'],
+//     queryFn: () => getMarketHolidays(),
+//     staleTime: 750 * 60 * 60, // 45 mins
+//     refetchInterval: 750 * 60 * 60, // 45 mins
+//     refetchOnWindowFocus: false,
+//   })
+// }

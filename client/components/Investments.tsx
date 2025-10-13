@@ -10,6 +10,7 @@ import {
   Tooltip,
   Line,
 } from 'recharts'
+import { useMarketHolidays } from '../context/MarketHolidaysContext'
 
 export default function Investments() {
   const {
@@ -21,6 +22,8 @@ export default function Investments() {
     individualGainOrLoss,
     monthlyData,
   } = usePortfolio()
+
+  const { marketHolidays } = useMarketHolidays()
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
@@ -47,6 +50,17 @@ export default function Investments() {
   const formatTooltip = (value: number) => {
     return formatCurrency(value, convertCurrency)
   }
+
+  console.log(marketHolidays)
+
+  const holidayValues = marketHolidays.map((holiday) => {
+    return (
+      <div key={holiday.date} className="upcoming-market-holidays">
+        <h1 className="upcoming-market-holidays-name">{holiday.name}</h1>
+        <h1 className="upcoming-market-holidays-date">{holiday.date}</h1>
+      </div>
+    )
+  })
 
   return (
     <>
@@ -115,6 +129,7 @@ export default function Investments() {
             <h1 className="upcoming-market-holidays-heading">
               Upcoming Market Holidays
             </h1>
+            <div>{holidayValues}</div>
           </div>
           <div className="investments-buttons">
             <label htmlFor="toggle-currency" className="toggle-currency-label">
