@@ -1169,20 +1169,29 @@ html {
   position: absolute;
   width: 35vw;
   height: 25vh;
-  background-color: rgb(104, 104, 104);
+  /* background-color: rgb(104, 104, 104); */
   top: 32vh;
 }
 
 .yearly-total-revenue-heading {
   position: absolute;
   font-size: 1.4vw;
-  color: white;
+  /* color: white; */
 }
 
 .yearly-total-revenue-value {
   position: absolute;
   top: 10vh;
   color: white;
+}
+
+.monthly-line-chart-data {
+  position: absolute;
+  top: 8vh;
+  left: 0;
+  width: 10vw;
+  height: 10vh;
+
 }
 
 /* INVESTMENTS PAGE END */

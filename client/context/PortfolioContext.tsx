@@ -20,6 +20,10 @@ interface PortfolioState {
     shares: number
     yearlyRevenue: number
   }[]
+  monthlyData: {
+    month: string
+    value: number
+  }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
   gainOrLoss: () => JSX.Element
@@ -92,6 +96,14 @@ export function PortfolioProvider({
     return tickerMap
   }, [polygonData])
 
+  const userAssetsByTicker = useMemo(() => {
+    const assetMap: Record<string, AssetData> = {}
+    userAssetData.forEach((asset) => {
+      assetMap[asset.ticker] = asset
+    })
+    return assetMap
+  }, [userAssetData])
+
   const portfolioMetrics = useMemo(() => {
     let totalBalance = 0
     let totalCost = 0
@@ -103,6 +115,11 @@ export function PortfolioProvider({
       ticker: string
       cost: number
       yearlyRevenue: number
+    }[] = []
+    const monthlyTotals = new Map<number, number>()
+    const monthlyData: {
+      month: string
+      value: number
     }[] = []
 
     if (
@@ -160,6 +177,38 @@ export function PortfolioProvider({
           yearlyRevenue: yearlyRevenueInSelectedCurrency,
         })
       })
+
+      historicalData.forEach((assetHistory) => {
+        const asset = userAssetsByTicker[assetHistory.ticker]
+        if (!asset) return
+
+        assetHistory.results.forEach((monthlyResult) => {
+          const monthTimestamp = monthlyResult.t
+          const price = monthlyResult.c
+          const valueForAsset = price * asset.shares
+
+          const currentTotal = monthlyTotals.get(monthTimestamp) || 0
+          monthlyTotals.set(monthTimestamp, currentTotal + valueForAsset)
+        })
+      })
+
+      const sortedMonthlyData = Array.from(monthlyTotals.entries()).sort(
+        (a, b) => a[0] - b[0],
+      )
+
+      const toCurrency = convertCurrency.toUpperCase()
+      const marketToSelectedRate = fxRates[toCurrency] / fxRates['USD']
+
+      sortedMonthlyData.forEach(([timestamp, value]) => {
+        const valueInSelectedCurrency = value * marketToSelectedRate
+
+        monthlyData.push({
+          month: new Date(timestamp).toLocaleString('default', {
+            month: 'short',
+          }),
+          value: valueInSelectedCurrency,
+        })
+      })
     }
 
     function gainOrLoss() {
@@ -200,24 +249,23 @@ export function PortfolioProvider({
       if (percentageGainOrLoss > 0) {
         return (
           <>
-            <h1>+{percentageGainOrLoss.toFixed(1)}%</h1>
+            <span>+{percentageGainOrLoss.toFixed(1)}%</span>
           </>
         )
       } else if (percentageGainOrLoss < 0) {
         return (
           <>
-            <h1>{percentageGainOrLoss.toFixed(1)}%</h1>
+            <span>{percentageGainOrLoss.toFixed(1)}%</span>
           </>
         )
       } else {
         return (
           <>
-            <h1>0%</h1>
+            <span>0%</span>
           </>
         )
       }
     }
-
     return {
       totalBalance,
       totalCost,
@@ -226,12 +274,23 @@ export function PortfolioProvider({
       income: 0,
       gainOrLoss,
       individualGainOrLoss,
-      historicalData,
+      monthlyData,
     }
-  }, [userAssetData, resultsByTicker, convertCurrency, fxRates, historicalData])
+  }, [
+    userAssetData,
+    resultsByTicker,
+    convertCurrency,
+    fxRates,
+    historicalData,
+    userAssetsByTicker,
+  ])
 
   const isLoading =
-    getMe.isLoading || areAssetsLoading || isPolygonLoading || isFxLoading || isHistoricalLoading
+    getMe.isLoading ||
+    areAssetsLoading ||
+    isPolygonLoading ||
+    isFxLoading ||
+    isHistoricalLoading
   const error =
     (getMe.error as Error)?.message ||
     (polygonError as Error)?.message ||

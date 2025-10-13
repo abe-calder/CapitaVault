@@ -33,6 +33,5 @@ export async function getAssetHistory(tickerArray: { ticker: string }[]) {
 
 
   const response = await request.get(`${rootURL}/polygon/history/${queryString}`)
-  console.log(response.body)
   return response.body
 }
