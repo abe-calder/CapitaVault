@@ -1,6 +1,6 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import getAssetDataByTicker, { getMarketHolidays } from '../apis/polygon'
+import getAssetDataByTicker from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 
@@ -10,10 +10,6 @@ interface PolygonDataContextState {
   polygonData: Results[]
   isLoading: boolean
   error: string | null
-  marketHolidayData: string[] | null
-  isHolidayLoading: boolean
-  isHolidayError: boolean
-  holidayError: Error | null
 }
 
 const PolygonDataContext = createContext<PolygonDataContextState | undefined>(
@@ -36,29 +32,21 @@ export function PolygonDataProvider({
     refetchOnWindowFocus: false,
   })
 
-  const {
-    data: marketHolidayData,
-    isLoading: isHolidayLoading,
-    isError: isHolidayError,
-    error: holidayError,
-  } = useQuery({
-    queryKey: ['upcomingMarketHolidays'],
-    queryFn: () => getMarketHolidays(),
-    enabled: true,
-    staleTime: 750 * 60 * 60, // 45 mins
-    refetchInterval: 750 * 60 * 60, // 45 mins
-    refetchOnWindowFocus: false,
-  })
 
-  const value = {
-    polygonData: data || [],
-    isLoading: isLoading,
-    error: isError ? (error as Error).message : null,
-    marketHolidayData: marketHolidayData || [],
-    isHolidayLoading: isHolidayLoading,
-    holidayError: holidayError,
-    isHolidayError: isHolidayError
-  }
+  const value: PolygonDataContextState = useMemo(
+    () => ({
+      polygonData: data || [],
+      isLoading: isLoading,
+      error: isError ? (error as Error).message : null,
+    }),
+    [
+      data,
+      isLoading,
+      isError,
+      error,
+
+    ],
+  )
 
   return (
     <PolygonDataContext.Provider value={value}>

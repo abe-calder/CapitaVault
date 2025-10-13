@@ -185,10 +185,10 @@ router.get('/history/:ticker', async (req, res) => {
 router.get('/holidays', async (req, res) => {
   const response = await request
     .get(
-      `
-      https://api.polygon.io/v1/marketstatus/upcoming`,
+      'https://api.polygon.io/v1/marketstatus/upcoming',
     )
     .set('Authorization', `Bearer ${process.env.POLY_API_KEY}`)
+  console.log(response.body)
   res.json(response.body)
 })
 

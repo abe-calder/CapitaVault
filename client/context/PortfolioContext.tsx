@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useUsers } from '../hooks/useUsers'
 import { useGetAssets } from '../hooks/useAssets'
 import { useFxRatesContext } from './FxRatesContext'
-import getAssetDataByTicker, { getAssetHistory } from '../apis/polygon'
+import getAssetDataByTicker, { getAssetHistory} from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 

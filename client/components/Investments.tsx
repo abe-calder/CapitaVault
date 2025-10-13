@@ -10,6 +10,7 @@ import {
   Tooltip,
   Line,
 } from 'recharts'
+import { useGetHolidayData } from '../hooks/usePolygon'
 
 export default function Investments() {
   const {
