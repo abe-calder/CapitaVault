@@ -10,7 +10,6 @@ import {
   Tooltip,
   Line,
 } from 'recharts'
-import { useGetHolidayData } from '../hooks/usePolygon'
 
 export default function Investments() {
   const {
@@ -111,6 +110,11 @@ export default function Investments() {
           <div className="my-investments-wrapper">
             <h1 className="my-investments-heading">My Investments</h1>
             {assetValues}
+          </div>
+          <div className="upcoming-market-holidays-wrapper">
+            <h1 className="upcoming-market-holidays-heading">
+              Upcoming Market Holidays
+            </h1>
           </div>
           <div className="investments-buttons">
             <label htmlFor="toggle-currency" className="toggle-currency-label">

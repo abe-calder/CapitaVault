@@ -337,7 +337,7 @@ html {
 
 .statistics-heading {
   position: absolute;
-  font-size: 1vw;
+  font-size: 1.4vw;
   font-weight: 500;
   left: 0.7vw;
   top: 0.7vh;
@@ -1191,6 +1191,40 @@ html {
   padding-left: 1vw;
   padding-right: 1vw;
   padding-bottom: 1vw;
+}
+
+.upcoming-market-holidays-wrapper {
+  position: absolute;
+  width: 30vw;
+  height: 25vh;
+  background-color: rgb(34, 34, 44);
+  bottom: 0vh;
+  right: 0vw;
+}
+
+.upcoming-market-holidays-heading {
+  position: absolute;
+  font-size: 1.4vw;
+  font-weight: 500;
+  color: white;
+}
+
+.market-holidays-span-wrapper {
+  position: absolute;
+  font-size: 0.9vw;
+  color: white;
+}
+
+.market-holiday-name {
+  position: absolute;
+  font-size: 0.9vw;
+  color: white;
+}
+
+.market-holiday-date {
+  position: absolute;
+  font-size: 0.9vw;
+  color: white;
 }
 
 /* INVESTMENTS PAGE END */
