@@ -20,18 +20,18 @@ export default async function getAssetDataByTicker(
   return response.body as Result[]
 }
 
-
-export async function getAssetHistory(tickerArray: { ticker: string }[]) {
+export async function getAssetHistory(tickerArray: string[]) {
   const assetTickers = tickerArray
     .map((asset) => {
-      const upperTicker = asset.ticker.toUpperCase()
+      const upperTicker = asset.toUpperCase()
       // same as function above
       return upperTicker.startsWith('X:') ? upperTicker : `X:${upperTicker}USD`
     })
     .join(',')
   const queryString = assetTickers
 
-
-  const response = await request.get(`${rootURL}/polygon/history/${queryString}`)
+  const response = await request.get(
+    `${rootURL}/polygon/history/${queryString}`,
+  )
   return response.body
 }

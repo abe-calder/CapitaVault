@@ -60,16 +60,19 @@ export function PortfolioProvider({
     refetchOnWindowFocus: false,
   })
 
-  const tickersForPassing = Promise.all(userAssetData)
+  const tickersForHistory = useMemo(
+    () => userAssetData.map((asset) => asset.ticker),
+    [userAssetData],
+  )
 
   const {
     data: historicalData = [],
     isLoading: isHistoricalLoading,
     error: historicalError,
   } = useQuery({
-    queryKey: ['historicalData', userAssetData],
-    queryFn: async () => getAssetHistory(await tickersForPassing),
-    enabled: userAssetData.length > 0,
+    queryKey: ['historicalData', tickersForHistory],
+    queryFn: () => getAssetHistory(tickersForHistory),
+    enabled: tickersForHistory.length > 0,
     staleTime: 500 * 60 * 60, // 1 hour
     refetchInterval: 500 * 60 * 60,
     refetchOnWindowFocus: false,
@@ -178,37 +181,52 @@ export function PortfolioProvider({
         })
       })
 
-      historicalData.forEach((assetHistory) => {
-        const asset = userAssetsByTicker[assetHistory.ticker]
-        if (!asset) return
+      if (historicalData.length > 0) {
+        historicalData.forEach((assetHistory) => {
+          // Normalize the ticker from historical data to match the key in userAssetsByTicker
+          // e.g., 'X:BTCUSD' becomes 'BTC'
+          const baseTicker = assetHistory.ticker.replace(/^X:|USD$/g, '')
+          const asset = userAssetsByTicker[baseTicker]
+          if (!asset) return
 
-        assetHistory.results.forEach((monthlyResult) => {
-          const monthTimestamp = monthlyResult.t
-          const price = monthlyResult.c
-          const valueForAsset = price * asset.shares
+          assetHistory.results.forEach((monthlyResult) => {
+            // Normalize the timestamp to the start of the month (UTC)
+            // This prevents duplicate months if timestamps differ slightly (e.g., by a few hours)
+            const date = new Date(monthlyResult.t)
+            date.setUTCDate(1)
+            date.setUTCHours(0, 0, 0, 0)
+            const normalizedMonthTimestamp = date.getTime()
 
-          const currentTotal = monthlyTotals.get(monthTimestamp) || 0
-          monthlyTotals.set(monthTimestamp, currentTotal + valueForAsset)
+            const price = monthlyResult.c
+            const valueForAsset = price * asset.shares
+            const currentTotal =
+              monthlyTotals.get(normalizedMonthTimestamp) || 0
+            monthlyTotals.set(
+              normalizedMonthTimestamp,
+              currentTotal + valueForAsset,
+            )
+          })
         })
-      })
 
-      const sortedMonthlyData = Array.from(monthlyTotals.entries()).sort(
-        (a, b) => a[0] - b[0],
-      )
+        const sortedMonthlyData = Array.from(monthlyTotals.entries()).sort(
+          (a, b) => a[0] - b[0],
+        )
 
-      const toCurrency = convertCurrency.toUpperCase()
-      const marketToSelectedRate = fxRates[toCurrency] / fxRates['USD']
+        const toCurrency = convertCurrency.toUpperCase()
+        const marketToSelectedRate = fxRates[toCurrency] / fxRates['USD']
 
-      sortedMonthlyData.forEach(([timestamp, value]) => {
-        const valueInSelectedCurrency = value * marketToSelectedRate
+        sortedMonthlyData.forEach(([timestamp, value]) => {
+          const valueInSelectedCurrency = value * marketToSelectedRate
 
-        monthlyData.push({
-          month: new Date(timestamp).toLocaleString('default', {
-            month: 'short',
-          }),
-          value: valueInSelectedCurrency,
+          monthlyData.push({
+            month: new Date(timestamp).toLocaleString('default', {
+              month: 'short',
+              year: '2-digit',
+            }),
+            value: valueInSelectedCurrency,
+          })
         })
-      })
+      }
     }
 
     function gainOrLoss() {
@@ -266,6 +284,7 @@ export function PortfolioProvider({
         )
       }
     }
+
     return {
       totalBalance,
       totalCost,

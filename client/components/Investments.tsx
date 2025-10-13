@@ -1,7 +1,7 @@
 import Nav from './Nav'
 import TopRightProfile from './TopRightProfile'
 import { usePortfolio } from '../context/PortfolioContext'
-import { formatCurrency } from './formatCurrency'
+import { formatCurrency } from '../utils/formatCurrency'
 import {
   LineChart,
   ResponsiveContainer,
