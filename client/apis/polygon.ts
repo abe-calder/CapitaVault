@@ -19,3 +19,12 @@ export default async function getAssetDataByTicker(
   const response = await request.get(`${rootURL}/polygon/${queryString}`)
   return response.body as Result[]
 }
+
+
+export async function getAssetHistory(ticker: string) {
+  const response = await request.get(
+    `${rootURL}/polygon/history/${ticker}`
+  )
+  console.log(response.body)
+  return response.body 
+}
