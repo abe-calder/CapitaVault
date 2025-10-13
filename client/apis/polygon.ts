@@ -19,3 +19,26 @@ export default async function getAssetDataByTicker(
   const response = await request.get(`${rootURL}/polygon/${queryString}`)
   return response.body as Result[]
 }
+
+export async function getAssetHistory(tickerArray: string[]) {
+  const assetTickers = tickerArray
+    .map((asset) => {
+      const upperTicker = asset.toUpperCase()
+      // same as function above
+      return upperTicker.startsWith('X:') ? upperTicker : `X:${upperTicker}USD`
+    })
+    .join(',')
+  const queryString = assetTickers
+
+  const response = await request.get(
+    `${rootURL}/polygon/history/${queryString}`,
+  )
+  return response.body
+}
+
+
+export async function getMarketHolidays() {
+  const response = await request.get(`${rootURL}/polygon/holidays`)
+  console.log(response.body)
+  return response.body
+}

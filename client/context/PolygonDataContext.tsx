@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import getAssetDataByTicker from '../apis/polygon'
 import { AssetData } from '../../models/assets'
@@ -32,11 +32,21 @@ export function PolygonDataProvider({
     refetchOnWindowFocus: false,
   })
 
-  const value = {
-    polygonData: data || [],
-    isLoading: isLoading,
-    error: isError ? (error as Error).message : null,
-  }
+
+  const value: PolygonDataContextState = useMemo(
+    () => ({
+      polygonData: data || [],
+      isLoading: isLoading,
+      error: isError ? (error as Error).message : null,
+    }),
+    [
+      data,
+      isLoading,
+      isError,
+      error,
+
+    ],
+  )
 
   return (
     <PolygonDataContext.Provider value={value}>

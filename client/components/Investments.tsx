@@ -1,7 +1,16 @@
 import Nav from './Nav'
 import TopRightProfile from './TopRightProfile'
 import { usePortfolio } from '../context/PortfolioContext'
-import { formatCurrency } from './formatCurrency'
+import { formatCurrency } from '../utils/formatCurrency'
+import {
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Line,
+} from 'recharts'
+import { useGetHolidayData } from '../hooks/usePolygon'
 
 export default function Investments() {
   const {
@@ -11,6 +20,7 @@ export default function Investments() {
     convertCurrency,
     gainOrLoss,
     individualGainOrLoss,
+    monthlyData,
   } = usePortfolio()
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
@@ -21,9 +31,9 @@ export default function Investments() {
 
   const totalShares = pieChartData.reduce((a, c) => a + c.shares, 0)
 
-  const assetValues = pieChartData.map((asset, i) => {
+  const assetValues = pieChartData.map((asset) => {
     return (
-      <div key={asset.ticker[i]} className="my-investments">
+      <div key={asset.ticker} className="my-investments">
         <h1 className="investments-asset-name">{asset.name}</h1>
         <h1 className="investments-asset-value">
           {formatCurrency(asset.value, convertCurrency)}
@@ -35,7 +45,9 @@ export default function Investments() {
     )
   })
 
-  const revenue = pieChartData.reduce((a, c) => a + c.yearlyRevenue, 0)
+  const formatTooltip = (value: number) => {
+    return formatCurrency(value, convertCurrency)
+  }
 
   return (
     <>
@@ -53,7 +65,7 @@ export default function Investments() {
               ></img>
               <h1 className="total-investments-heading">Total Invested</h1>
               <h2 className="total-invested-value">
-                {convertCurrency} {totalCost.toFixed(2)}
+                {formatCurrency(totalCost, convertCurrency)}
               </h2>
             </div>
             <div className="number-of-investments-wrapper">
@@ -79,9 +91,22 @@ export default function Investments() {
               <h1 className="rate-of-return-value">{gainOrLoss()}</h1>
             </div>
           </div>
-          <div className='yearly-total-revenue-wrapper'>
-            <h1 className='yearly-total-revenue-heading'>Yearly Total Revenue</h1>
-            <h1 className='yearly-total-revenue-value'>{formatCurrency(revenue, convertCurrency)}</h1>
+          <div className="yearly-total-revenue-wrapper">
+            <h1 className="yearly-total-revenue-heading">
+              Portfolio Value Over Time
+            </h1>
+            <div className="monthly-line-chart-data">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={monthlyData}>
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip
+                    formatter={(value: number) => formatTooltip(value)}
+                  />
+                  <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
           <div className="my-investments-wrapper">
             <h1 className="my-investments-heading">My Investments</h1>

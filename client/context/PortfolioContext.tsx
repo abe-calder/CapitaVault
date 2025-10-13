@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useUsers } from '../hooks/useUsers'
 import { useGetAssets } from '../hooks/useAssets'
 import { useFxRatesContext } from './FxRatesContext'
-import getAssetDataByTicker from '../apis/polygon'
+import getAssetDataByTicker, { getAssetHistory} from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 
@@ -19,6 +19,10 @@ interface PortfolioState {
     ticker: string
     shares: number
     yearlyRevenue: number
+  }[]
+  monthlyData: {
+    month: string
+    value: number
   }[]
   convertCurrency: string
   setConvertCurrency: (currency: string) => void
@@ -56,6 +60,24 @@ export function PortfolioProvider({
     refetchOnWindowFocus: false,
   })
 
+  const tickersForHistory = useMemo(
+    () => userAssetData.map((asset) => asset.ticker),
+    [userAssetData],
+  )
+
+  const {
+    data: historicalData = [],
+    isLoading: isHistoricalLoading,
+    error: historicalError,
+  } = useQuery({
+    queryKey: ['historicalData', tickersForHistory],
+    queryFn: () => getAssetHistory(tickersForHistory),
+    enabled: tickersForHistory.length > 0,
+    staleTime: 500 * 60 * 60, // 1 hour
+    refetchInterval: 500 * 60 * 60,
+    refetchOnWindowFocus: false,
+  })
+
   const {
     rates: fxRates,
     isLoading: isFxLoading,
@@ -77,6 +99,14 @@ export function PortfolioProvider({
     return tickerMap
   }, [polygonData])
 
+  const userAssetsByTicker = useMemo(() => {
+    const assetMap: Record<string, AssetData> = {}
+    userAssetData.forEach((asset) => {
+      assetMap[asset.ticker] = asset
+    })
+    return assetMap
+  }, [userAssetData])
+
   const portfolioMetrics = useMemo(() => {
     let totalBalance = 0
     let totalCost = 0
@@ -88,6 +118,11 @@ export function PortfolioProvider({
       ticker: string
       cost: number
       yearlyRevenue: number
+    }[] = []
+    const monthlyTotals = new Map<number, number>()
+    const monthlyData: {
+      month: string
+      value: number
     }[] = []
 
     if (
@@ -103,7 +138,7 @@ export function PortfolioProvider({
         const quantity = asset.shares
 
         const costString = asset.cost
-        const costValue = parseFloat(costString.replace(/[^0-9.]/g, ''))
+        const costValue = Number(costString.replace(/[^0-9.]/g, ''))
         const currencyMatch = costString.match(/[a-zA-Z]+/)
         const costCurrency = currencyMatch
           ? currencyMatch[0].toUpperCase()
@@ -126,10 +161,10 @@ export function PortfolioProvider({
         const costInSelectedCurrency = !isNaN(costValue)
           ? costValue * costToSelectedRate
           : 0
-        
+
         const yearlyRevenueInSelectedCurrency =
           currentValueInSelectedCurrency - costInSelectedCurrency
-        
+
         const currentValueInUsd = currentPrice * quantity * rateToUsd
 
         totalBalance += currentValueInSelectedCurrency
@@ -145,6 +180,49 @@ export function PortfolioProvider({
           yearlyRevenue: yearlyRevenueInSelectedCurrency,
         })
       })
+
+      if (historicalData.length > 0) {
+        historicalData.forEach((assetHistory) => {
+          const baseTicker = assetHistory.ticker.replace(/^X:|USD$/g, '')
+          const asset = userAssetsByTicker[baseTicker]
+          if (!asset) return
+
+          assetHistory.results.forEach((monthlyResult) => {
+            const date = new Date(monthlyResult.t)
+            date.setUTCDate(1)
+            date.setUTCHours(0, 0, 0, 0)
+            const normalizedMonthTimestamp = date.getTime()
+
+            const price = monthlyResult.c
+            const valueForAsset = price * asset.shares
+            const currentTotal =
+              monthlyTotals.get(normalizedMonthTimestamp) || 0
+            monthlyTotals.set(
+              normalizedMonthTimestamp,
+              currentTotal + valueForAsset,
+            )
+          })
+        })
+
+        const sortedMonthlyData = Array.from(monthlyTotals.entries()).sort(
+          (a, b) => a[0] - b[0],
+        )
+
+        const toCurrency = convertCurrency.toUpperCase()
+        const marketToSelectedRate = fxRates[toCurrency] / fxRates['USD']
+
+        sortedMonthlyData.forEach(([timestamp, value]) => {
+          const valueInSelectedCurrency = value * marketToSelectedRate
+
+          monthlyData.push({
+            month: new Date(timestamp).toLocaleString('default', {
+              month: 'short',
+              year: '2-digit',
+            }),
+            value: valueInSelectedCurrency,
+          })
+        })
+      }
     }
 
     function gainOrLoss() {
@@ -175,7 +253,7 @@ export function PortfolioProvider({
           </>
         )
       } else {
-        return <p>0%</p>
+        return <span>0%</span>
       }
     }
 
@@ -185,19 +263,19 @@ export function PortfolioProvider({
       if (percentageGainOrLoss > 0) {
         return (
           <>
-            <h1>+{percentageGainOrLoss.toFixed(1)}%</h1>
+            <span>+{percentageGainOrLoss.toFixed(1)}%</span>
           </>
         )
       } else if (percentageGainOrLoss < 0) {
         return (
           <>
-            <h1>{percentageGainOrLoss.toFixed(1)}%</h1>
+            <span>{percentageGainOrLoss.toFixed(1)}%</span>
           </>
         )
       } else {
         return (
           <>
-            <h1>0%</h1>
+            <span>0%</span>
           </>
         )
       }
@@ -211,15 +289,28 @@ export function PortfolioProvider({
       income: 0,
       gainOrLoss,
       individualGainOrLoss,
+      monthlyData,
     }
-  }, [userAssetData, resultsByTicker, convertCurrency, fxRates])
+  }, [
+    userAssetData,
+    resultsByTicker,
+    convertCurrency,
+    fxRates,
+    historicalData,
+    userAssetsByTicker,
+  ])
 
   const isLoading =
-    getMe.isLoading || areAssetsLoading || isPolygonLoading || isFxLoading
+    getMe.isLoading ||
+    areAssetsLoading ||
+    isPolygonLoading ||
+    isFxLoading ||
+    isHistoricalLoading
   const error =
     (getMe.error as Error)?.message ||
     (polygonError as Error)?.message ||
-    fxError
+    fxError ||
+    (historicalError as Error)?.message
 
   const value: PortfolioState = {
     ...portfolioMetrics,

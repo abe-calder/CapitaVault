@@ -679,7 +679,7 @@ html {
   position: absolute;
   top: 27.5vh;
   left: 0;
-  width:10vw;
+  width: 10vw;
 }
 
 .adjust-holdings-link:hover {
@@ -981,8 +981,6 @@ html {
 
 /* SETTINGS PAGE END */
 
-
-
 /* INVESTMENTS PAGE START */
 
 .investments-wrapper {
@@ -1011,7 +1009,6 @@ html {
   width: 20vw;
   height: 16vh;
   background-color: lightgray;
-  
 }
 
 .number-of-investments-wrapper {
@@ -1030,7 +1027,6 @@ html {
   height: 16vh;
   background-color: lightgray;
   left: 50vw;
-
 }
 
 .rate-of-return-icon {
@@ -1122,7 +1118,7 @@ html {
 
 .my-investments-wrapper {
   position: absolute;
-  bottom: 0vh;
+  top: 68vh;
   width: 41vw;
   height: 35vh;
   overflow-y: auto;
@@ -1167,22 +1163,34 @@ html {
 
 .yearly-total-revenue-wrapper {
   position: absolute;
-  width: 35vw;
-  height: 25vh;
-  background-color: rgb(104, 104, 104);
+  width: 70vw;
+  height: 35vh;
   top: 32vh;
+  background-color: lightgray;
 }
 
 .yearly-total-revenue-heading {
   position: absolute;
-  font-size: 1.4vw;
-  color: white;
+  font-size: 1.7vw;
+  font-weight: 500;
+  width: 21vw;
+  
 }
 
 .yearly-total-revenue-value {
   position: absolute;
   top: 10vh;
   color: white;
+}
+
+.monthly-line-chart-data {
+  position: absolute;
+  top: 6vh;
+  width: 100%;
+  height: 87.5%;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-bottom: 1vw;
 }
 
 /* INVESTMENTS PAGE END */
