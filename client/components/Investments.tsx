@@ -64,7 +64,7 @@ export default function Investments() {
               ></img>
               <h1 className="total-investments-heading">Total Invested</h1>
               <h2 className="total-invested-value">
-                {convertCurrency} {totalCost.toFixed(2)}
+                {formatCurrency(totalCost, convertCurrency)}
               </h2>
             </div>
             <div className="number-of-investments-wrapper">

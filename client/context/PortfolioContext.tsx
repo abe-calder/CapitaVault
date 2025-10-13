@@ -138,7 +138,7 @@ export function PortfolioProvider({
         const quantity = asset.shares
 
         const costString = asset.cost
-        const costValue = parseFloat(costString.replace(/[^0-9.]/g, ''))
+        const costValue = Number(costString.replace(/[^0-9.]/g, ''))
         const currencyMatch = costString.match(/[a-zA-Z]+/)
         const costCurrency = currencyMatch
           ? currencyMatch[0].toUpperCase()
@@ -183,15 +183,11 @@ export function PortfolioProvider({
 
       if (historicalData.length > 0) {
         historicalData.forEach((assetHistory) => {
-          // Normalize the ticker from historical data to match the key in userAssetsByTicker
-          // e.g., 'X:BTCUSD' becomes 'BTC'
           const baseTicker = assetHistory.ticker.replace(/^X:|USD$/g, '')
           const asset = userAssetsByTicker[baseTicker]
           if (!asset) return
 
           assetHistory.results.forEach((monthlyResult) => {
-            // Normalize the timestamp to the start of the month (UTC)
-            // This prevents duplicate months if timestamps differ slightly (e.g., by a few hours)
             const date = new Date(monthlyResult.t)
             date.setUTCDate(1)
             date.setUTCHours(0, 0, 0, 0)

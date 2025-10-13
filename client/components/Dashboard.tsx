@@ -60,7 +60,7 @@ export default function Dashboard() {
   const income = totalBalance - totalCost
 
   const formatTooltip = (value: number) => {
-    return `${convertCurrency} ${value.toFixed(2)}`
+    return formatCurrency(value, convertCurrency)
   }
 
   const assetDataValues = pieChartData.map((asset) => {
@@ -88,13 +88,13 @@ export default function Dashboard() {
     return <div>Error: {errorMessage}</div>
   }
 
-  const oneQuarterBalance = (totalBalance / 8).toFixed(2)
-  const oneHalfBalance = (totalBalance / 4).toFixed(2)
-  const threeQuartersBalance = (totalBalance / 2).toFixed(2)
-  const fullBalance = totalBalance.toFixed(2)
+  const oneQuarterBalance = totalBalance / 8
+  const oneHalfBalance = totalBalance / 4
+  const threeQuartersBalance = totalBalance / 2
+  const fullBalance = totalBalance
 
   const oneQuarterGoal =
-    userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 4
+    userGoalData.userGoalCost && userGoalData.userGoalCost / 4
   const oneHalfGoal =
     userGoalData.userGoalCost && Number(userGoalData.userGoalCost) / 2
   const threeQuartersGoal =
@@ -107,6 +107,7 @@ export default function Dashboard() {
       name: '0',
       CurrentBalance: 0,
       pv: 0,
+      uv: 0,
       goal: fullGoal,
     },
     {
@@ -151,15 +152,15 @@ export default function Dashboard() {
                 {gainOrLoss()}
               </p>
               <p className="total-balance-value">
-                {convertCurrency} {totalBalance.toFixed(2)}
+                {formatCurrency(totalBalance, convertCurrency)}
               </p>
               <div className="total-cost-value">
                 <p className="total-cost-expense-p">&#8964; Expense</p>
-                {convertCurrency} {totalCost.toFixed(2)}
+                {formatCurrency(totalCost, convertCurrency)}
                 <h1 className="total-balance-divider"> | </h1>
                 <p className="total-income-p">^ Income </p>
                 <p className="total-income-value">
-                  {convertCurrency} {income.toFixed(2)}
+                  {formatCurrency(income, convertCurrency)}
                 </p>
               </div>
             </div>
@@ -203,16 +204,23 @@ export default function Dashboard() {
                 {userGoalData.userGoal}
               </h1>
               <h1 className="goals-sub-heading-user-goal-cost">
-                <p>{totalBalance.toFixed(2)}</p>
+                <p>{formatCurrency(totalBalance, '')}</p>
                 out of
-                <p>{userGoalData && userGoalData.userGoalCost}</p>
+                <p>
+                  {userGoalData &&
+                    formatCurrency(userGoalData.userGoalCost, '')}
+                </p>
               </h1>
               <div className="line-chart">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={lineData}>
                     <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
+                    <YAxis
+                      tickFormatter={(value) => formatCurrency(value, '')}
+                    />
+                    <Tooltip
+                      formatter={(value: number) => formatTooltip(value)}
+                    />
                     <Line
                       type="monotone"
                       dataKey="CurrentBalance"
