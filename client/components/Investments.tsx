@@ -98,7 +98,7 @@ export default function Investments() {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={monthlyData}>
                   <XAxis dataKey="month" />
-                  <YAxis tickFormatter={(value) => formatCurrency(value, '')} />
+                  <YAxis />
                   <Tooltip
                     formatter={(value: number) => formatTooltip(value)}
                   />

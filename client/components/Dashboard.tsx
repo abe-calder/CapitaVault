@@ -216,10 +216,10 @@ export default function Dashboard() {
                   <LineChart data={lineData}>
                     <XAxis dataKey="name" />
                     <YAxis
-                      tickFormatter={(value) => formatCurrency(value, '')}
+                      
                     />
                     <Tooltip
-                      formatter={(value: number) => formatTooltip(value)}
+                      
                     />
                     <Line
                       type="monotone"

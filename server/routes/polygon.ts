@@ -25,14 +25,11 @@ function getPreviousAndCurrentYearTimeframe(): {
     return `${year}-${month}-${day}`
   }
 
-  // 4. Return the formatted dates
   return {
     previousYear: formatDate(oneYearAgo),
     currentYear: formatDate(today),
   }
 }
-
-
 
 router.get('/', async (req, res) => {
   const tickersArr: string[] | string | undefined = String(req.query.tickers)
@@ -120,29 +117,29 @@ router.get('/history/:ticker', async (req, res) => {
       return res.status(400).json({ error: 'No valid tickers provided.' })
     }
 
-    const cryptoTickers = tickers.map((ticker) => 
+    const cryptoTickers = tickers.map((ticker) =>
       request
-      .get(
-        `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/month/${timeframe.previousYear}/${timeframe.currentYear}?adjusted=true&sort=asc&limit=230`,
-      )
-      .set('Authorization', `Bearer ${process.env.POLY_API_KEY}`)
-      .then((response) => ({
-        ticker: ticker,
-        results: response.body.results || [],
-      }))
-      .catch(() => ({
-        ticker: ticker,
-        results: [],
-      }))
+        .get(
+          `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/month/${timeframe.previousYear}/${timeframe.currentYear}?adjusted=true&sort=asc&limit=230`,
+        )
+        .set('Authorization', `Bearer ${process.env.POLY_API_KEY}`)
+        .then((response) => ({
+          ticker: ticker,
+          results: response.body.results || [],
+        }))
+        .catch(() => ({
+          ticker: ticker,
+          results: [],
+        })),
     )
     const firstResponses = await Promise.all(cryptoTickers)
-    
+
     const retryTickers = firstResponses
       .filter((r) => !r.results || r.results.length === 0)
       .map((r) => r.ticker.replace(/^X:/, '').replace(/USD$/, ''))
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-     let secondResponses: any[] = []
+    let secondResponses: any[] = []
     if (retryTickers.length > 0) {
       const stockTickers = retryTickers.map((ticker) =>
         request
@@ -157,9 +154,9 @@ router.get('/history/:ticker', async (req, res) => {
           .catch(() => ({
             ticker: `X:${ticker}USD`,
             results: [],
-          }))
+          })),
       )
-       secondResponses = await Promise.all(stockTickers)
+      secondResponses = await Promise.all(stockTickers)
     }
 
     // combine
@@ -183,8 +180,16 @@ router.get('/history/:ticker', async (req, res) => {
     ]
     res.json(allResults)
   }
+})
 
-  })
-
+router.get('/holidays', async (req, res) => {
+  const response = await request
+    .get(
+      `
+      https://api.polygon.io/v1/marketstatus/upcoming`,
+    )
+    .set('Authorization', `Bearer ${process.env.POLY_API_KEY}`)
+  res.json(response.body)
+})
 
 export default router
