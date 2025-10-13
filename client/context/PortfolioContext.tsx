@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useUsers } from '../hooks/useUsers'
 import { useGetAssets } from '../hooks/useAssets'
 import { useFxRatesContext } from './FxRatesContext'
-import getAssetDataByTicker from '../apis/polygon'
+import getAssetDataByTicker, { getAssetHistory } from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 
@@ -50,6 +50,21 @@ export function PortfolioProvider({
   } = useQuery({
     queryKey: ['polygonMarketData', userAssetData],
     queryFn: () => getAssetDataByTicker(userAssetData),
+    enabled: userAssetData.length > 0,
+    staleTime: 500 * 60 * 60, // 1 hour
+    refetchInterval: 500 * 60 * 60,
+    refetchOnWindowFocus: false,
+  })
+
+  const tickersForPassing = Promise.all(userAssetData)
+
+  const {
+    data: historicalData = [],
+    isLoading: isHistoricalLoading,
+    error: historicalError,
+  } = useQuery({
+    queryKey: ['historicalData', userAssetData],
+    queryFn: async () => getAssetHistory(await tickersForPassing),
     enabled: userAssetData.length > 0,
     staleTime: 500 * 60 * 60, // 1 hour
     refetchInterval: 500 * 60 * 60,
@@ -126,10 +141,10 @@ export function PortfolioProvider({
         const costInSelectedCurrency = !isNaN(costValue)
           ? costValue * costToSelectedRate
           : 0
-        
+
         const yearlyRevenueInSelectedCurrency =
           currentValueInSelectedCurrency - costInSelectedCurrency
-        
+
         const currentValueInUsd = currentPrice * quantity * rateToUsd
 
         totalBalance += currentValueInSelectedCurrency
@@ -175,7 +190,7 @@ export function PortfolioProvider({
           </>
         )
       } else {
-        return <p>0%</p>
+        return <span>0%</span>
       }
     }
 
@@ -211,15 +226,17 @@ export function PortfolioProvider({
       income: 0,
       gainOrLoss,
       individualGainOrLoss,
+      historicalData,
     }
-  }, [userAssetData, resultsByTicker, convertCurrency, fxRates])
+  }, [userAssetData, resultsByTicker, convertCurrency, fxRates, historicalData])
 
   const isLoading =
-    getMe.isLoading || areAssetsLoading || isPolygonLoading || isFxLoading
+    getMe.isLoading || areAssetsLoading || isPolygonLoading || isFxLoading || isHistoricalLoading
   const error =
     (getMe.error as Error)?.message ||
     (polygonError as Error)?.message ||
-    fxError
+    fxError ||
+    (historicalError as Error)?.message
 
   const value: PortfolioState = {
     ...portfolioMetrics,

@@ -29,7 +29,7 @@ export async function getAssetHistory(tickerArray: { ticker: string }[]) {
       return upperTicker.startsWith('X:') ? upperTicker : `X:${upperTicker}USD`
     })
     .join(',')
-  const queryString = `?tickers=${assetTickers}`
+  const queryString = assetTickers
 
 
   const response = await request.get(`${rootURL}/polygon/history/${queryString}`)
