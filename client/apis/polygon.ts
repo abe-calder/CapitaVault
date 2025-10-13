@@ -21,10 +21,18 @@ export default async function getAssetDataByTicker(
 }
 
 
-export async function getAssetHistory(ticker: string) {
-  const response = await request.get(
-    `${rootURL}/polygon/history/${ticker}`
-  )
+export async function getAssetHistory(tickerArray: { ticker: string }[]) {
+  const assetTickers = tickerArray
+    .map((asset) => {
+      const upperTicker = asset.ticker.toUpperCase()
+      // same as function above
+      return upperTicker.startsWith('X:') ? upperTicker : `X:${upperTicker}USD`
+    })
+    .join(',')
+  const queryString = `?tickers=${assetTickers}`
+
+
+  const response = await request.get(`${rootURL}/polygon/history/${queryString}`)
   console.log(response.body)
-  return response.body 
+  return response.body
 }

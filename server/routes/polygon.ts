@@ -4,6 +4,36 @@ import request from 'superagent'
 
 const router = express.Router()
 
+// 12 month date range for second request /history/:ticker
+function getPreviousAndCurrentYearTimeframe(): {
+  previousYear: string
+  currentYear: string
+} {
+  const today: Date = new Date()
+
+  const oneYearAgo: Date = new Date(today.getTime())
+
+  oneYearAgo.setFullYear(today.getFullYear() - 1)
+
+  const formatDate = (date: Date): string => {
+    const year: number = date.getFullYear()
+
+    const month: string = String(date.getMonth() + 1).padStart(2, '0')
+
+    const day: string = String(date.getDate() - 1).padStart(2, '0')
+
+    return `${year}-${month}-${day}`
+  }
+
+  // 4. Return the formatted dates
+  return {
+    previousYear: formatDate(oneYearAgo),
+    currentYear: formatDate(today),
+  }
+}
+
+
+
 router.get('/', async (req, res) => {
   const tickersArr: string[] | string | undefined = String(req.query.tickers)
   if (tickersArr) {
@@ -77,34 +107,6 @@ router.get('/', async (req, res) => {
     res.json(allResults)
   }
 })
-
-function getPreviousAndCurrentYearTimeframe(): {
-  previousYear: string
-  currentYear: string
-} {
-  const today: Date = new Date()
-
-  const oneYearAgo: Date = new Date(today.getTime())
-
-  oneYearAgo.setFullYear(today.getFullYear() - 1)
-
-  const formatDate = (date: Date): string => {
-
-    const year: number = date.getFullYear()
-
-    const month: string = String(date.getMonth() + 1).padStart(2, '0')
-
-    const day: string = String(date.getDate() -1).padStart(2, '0')
-
-    return `${year}-${month}-${day}`
-  }
-
-  // 4. Return the formatted dates
-  return {
-    previousYear: formatDate(oneYearAgo), 
-    currentYear: formatDate(today), 
-  }
-}
 
 const timeframe = getPreviousAndCurrentYearTimeframe()
 
