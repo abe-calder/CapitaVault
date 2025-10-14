@@ -51,9 +51,6 @@ export default function Investments() {
     return formatCurrency(value, convertCurrency)
   }
 
-  console.log(marketHolidays)
-
-
   const holidayValues = marketHolidays.map((holiday) => {
     return (
       <div

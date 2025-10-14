@@ -229,7 +229,7 @@ export function PortfolioProvider({
 
     function gainOrLoss() {
       const percentageGainOrLoss =
-        ((totalBalance - totalCost) / totalBalance) * 100
+        ((totalBalance - totalCost) / totalCost) * 100
       if (percentageGainOrLoss > 0) {
         return (
           <>
