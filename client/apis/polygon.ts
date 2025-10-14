@@ -39,6 +39,5 @@ export async function getAssetHistory(tickerArray: string[]) {
 
 export async function getMarketHolidays() {
   const response = await request.get(`${rootURL}/polygon/holidays`)
-  console.log(response.body)
   return response.body
 }

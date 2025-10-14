@@ -10,7 +10,7 @@ import {
   Tooltip,
   Line,
 } from 'recharts'
-import { useGetHolidayData } from '../hooks/usePolygon'
+import { useMarketHolidays } from '../context/MarketHolidaysContext'
 
 export default function Investments() {
   const {
@@ -22,6 +22,8 @@ export default function Investments() {
     individualGainOrLoss,
     monthlyData,
   } = usePortfolio()
+
+  const { marketHolidays } = useMarketHolidays()
 
   function handleToggleCurrency(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault()
@@ -48,6 +50,24 @@ export default function Investments() {
   const formatTooltip = (value: number) => {
     return formatCurrency(value, convertCurrency)
   }
+
+  const holidayValues = marketHolidays.map((holiday) => {
+    return (
+      <div
+        key={holiday.date + holiday.exchange}
+        className="upcoming-market-holidays"
+      >
+        <div className='upcoming-market-holidays-content-wrapper'>
+          <h1 className="upcoming-market-holidays-name">{holiday.name}</h1>
+          <h1 className="upcoming-market-holidays-exchange">
+            {holiday.exchange}
+          </h1>
+          <h1 className="upcoming-market-holidays-date">{holiday.date}</h1>
+          <h1 className="upcoming-market-holidays-status">{holiday.status}</h1>
+        </div>
+      </div>
+    )
+  })
 
   return (
     <>
@@ -111,6 +131,12 @@ export default function Investments() {
           <div className="my-investments-wrapper">
             <h1 className="my-investments-heading">My Investments</h1>
             {assetValues}
+          </div>
+          <div className="upcoming-market-holidays-wrapper">
+            <h1 className="upcoming-market-holidays-heading">
+              Upcoming Market Holidays - USA Days
+            </h1>
+            {holidayValues}
           </div>
           <div className="investments-buttons">
             <label htmlFor="toggle-currency" className="toggle-currency-label">

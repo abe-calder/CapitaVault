@@ -182,12 +182,14 @@ export function PortfolioProvider({
       })
 
       if (historicalData.length > 0) {
-        historicalData.forEach((assetHistory) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        historicalData.forEach((assetHistory: { ticker: string; results: any[] }) => {
           const baseTicker = assetHistory.ticker.replace(/^X:|USD$/g, '')
           const asset = userAssetsByTicker[baseTicker]
           if (!asset) return
 
-          assetHistory.results.forEach((monthlyResult) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          assetHistory.results.forEach((monthlyResult: { t: string | number | Date; c: any }) => {
             const date = new Date(monthlyResult.t)
             date.setUTCDate(1)
             date.setUTCHours(0, 0, 0, 0)
@@ -227,7 +229,7 @@ export function PortfolioProvider({
 
     function gainOrLoss() {
       const percentageGainOrLoss =
-        ((totalBalance - totalCost) / totalBalance) * 100
+        ((totalBalance - totalCost) / totalCost) * 100
       if (percentageGainOrLoss > 0) {
         return (
           <>
