@@ -1200,6 +1200,7 @@ html {
   background-color: rgb(34, 34, 44);
   bottom: 0vh;
   right: 0vw;
+  overflow-y: auto;
 }
 
 .upcoming-market-holidays-heading {
@@ -1209,21 +1210,38 @@ html {
   color: white;
 }
 
-.market-holidays-span-wrapper {
-  position: absolute;
-  font-size: 0.9vw;
-  color: white;
+.upcoming-market-holidays-content-wrapper {
+  position: relative;
+  top: 4vh;
+  border: 0.5px solid white;
+  border-radius: 0.3vw;
+  padding: 0.2vw;
+  margin: 0.2vw;
+}
+
+.upcoming-market-holidays {
+  display: inline-table;
+  pad: 0.5vw;
+  overflow-y: auto;
 }
 
 .upcoming-market-holidays-name {
-
-  font-size: 0.4vw;
+  font-size: 0.5vw;
   color: white;
 }
 
 .upcoming-market-holidays-date {
+  font-size: 0.5vw;
+  color: white;
+}
 
-  font-size: 0.4vw;
+.upcoming-market-holidays-exchange {
+  font-size: 0.5vw;
+  color: white;
+}
+
+.upcoming-market-holidays-status {
+  font-size: 0.5vw;
   color: white;
 }
 

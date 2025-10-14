@@ -7,6 +7,7 @@ interface MarketHolidaysState {
     name: string
     date: string
     status: string
+    exchange: string
   }[]
   isLoading: boolean
   error: Error | string | null
@@ -27,9 +28,15 @@ export function MarketHolidaysProvider({ children }: { children: ReactNode }) {
 
   const sortedMarketHolidays = useMemo(() => {
     if (data) {
-      return [...data].sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-      )
+      const sortedData = [...data].filter((hol) => {
+        const date = hol.date
+        const name = hol.name
+        const status = hol.status
+        const exchange = hol.exchange
+        return date && name && status && exchange
+      })
+      return sortedData
+      
     }
     return 
   }, [data])

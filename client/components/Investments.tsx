@@ -53,11 +53,21 @@ export default function Investments() {
 
   console.log(marketHolidays)
 
+
   const holidayValues = marketHolidays.map((holiday) => {
     return (
-      <div key={holiday.date} className="upcoming-market-holidays">
-        <h1 className="upcoming-market-holidays-name">{holiday.name}</h1>
-        <h1 className="upcoming-market-holidays-date">{holiday.date}</h1>
+      <div
+        key={holiday.date + holiday.exchange}
+        className="upcoming-market-holidays"
+      >
+        <div className='upcoming-market-holidays-content-wrapper'>
+          <h1 className="upcoming-market-holidays-name">{holiday.name}</h1>
+          <h1 className="upcoming-market-holidays-exchange">
+            {holiday.exchange}
+          </h1>
+          <h1 className="upcoming-market-holidays-date">{holiday.date}</h1>
+          <h1 className="upcoming-market-holidays-status">{holiday.status}</h1>
+        </div>
       </div>
     )
   })
@@ -127,9 +137,9 @@ export default function Investments() {
           </div>
           <div className="upcoming-market-holidays-wrapper">
             <h1 className="upcoming-market-holidays-heading">
-              Upcoming Market Holidays
+              Upcoming Market Holidays - USA Days
             </h1>
-            <div>{holidayValues}</div>
+            {holidayValues}
           </div>
           <div className="investments-buttons">
             <label htmlFor="toggle-currency" className="toggle-currency-label">
