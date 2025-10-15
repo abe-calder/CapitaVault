@@ -55,7 +55,7 @@ export function PortfolioProvider({
     queryKey: ['polygonMarketData', userAssetData],
     queryFn: () => getAssetDataByTicker(userAssetData),
     enabled: userAssetData.length > 0,
-    staleTime: 500 * 60 * 60, // 1 hour
+    staleTime: 500 * 60 * 60, // 30 mins
     refetchInterval: 500 * 60 * 60,
     refetchOnWindowFocus: false,
   })

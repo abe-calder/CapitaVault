@@ -4,7 +4,7 @@ import getAssetDataByTicker from '../apis/polygon'
 import { AssetData } from '../../models/assets'
 import { Results } from '../../models/polygon'
 
-const REFETCH_INTERVAL = 500 * 60 * 60 // 1 hour
+const REFETCH_INTERVAL = 500 * 60 * 60 // 30 mins
 
 interface PolygonDataContextState {
   polygonData: Results[]

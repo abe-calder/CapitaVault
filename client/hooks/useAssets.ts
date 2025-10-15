@@ -48,7 +48,6 @@ export function useGetAssets(
     queryKey: ['getAssetsByUserId', userId],
     queryFn: async () => {
       const token = await getAccessTokenSilently()
-      // The API function now expects only the token
       return getAssetsByUserId({ userId, token } as GetAssetByUserIdFunction)
     },
     // Combine the base requirement with any options passed in

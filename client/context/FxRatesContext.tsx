@@ -2,9 +2,9 @@ import { createContext, useContext, ReactNode, useMemo } from 'react'
 import { useQueries } from '@tanstack/react-query'
 import getConversionRate from '../apis/fxrates.ts'
 
-// The list of currencies to get rates for, relative to USD.
+
 const TARGET_CURRENCIES = ['NZD', 'AUD', 'EUR', 'GBP'] // Exclude USD 
-const REFETCH_INTERVAL = 4000 * 60 * 60 // 1 hour in milliseconds
+const REFETCH_INTERVAL = 4000 * 60 * 60 // 4 hours
 
 interface FxRatesState {
   rates: Record<string, number>
