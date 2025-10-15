@@ -148,7 +148,7 @@ router.get('/history/:ticker', async (req, res) => {
           )
           .set('Authorization', `Bearer ${process.env.POLY_API_KEY}`)
           .then((response) => ({
-            ticker: `X:${ticker}USD`, // Return the original ticker format
+            ticker: `X:${ticker}USD`, // return original ticker format
             results: response.body.results || [],
           }))
           .catch(() => ({
