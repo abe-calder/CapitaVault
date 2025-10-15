@@ -63,7 +63,7 @@ export default function ProfileSettings() {
   
       const updatedUser = {
         name: formState.name,
-        emai: formState.email,
+        email: formState.email,
         username: formState.username,
         goal: formState.goal,
         goalCost: formState.goalCost
