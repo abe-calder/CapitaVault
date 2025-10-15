@@ -117,6 +117,7 @@ export default function ProfileSettings() {
               placeholder="Email"
               type="text"
               className="profile-form-input-email"
+              required
             ></input>
           </label>
           <label className="profile-form-label-username">
