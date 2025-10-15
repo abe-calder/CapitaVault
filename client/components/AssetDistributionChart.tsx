@@ -44,7 +44,7 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
 
     return chartData.map((asset) => ({
       ...asset,
-      percentage: (asset.value / totalBalance) * 100,
+      percentage: (asset.value / totalBalance) * 100, 
     }))
   }, [data, totalBalance])
 
@@ -57,7 +57,7 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
       <BarChart
         data={processedData}
         layout="vertical"
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 2, right: 60, left: 15, bottom: 5 }}
       >
         <XAxis type="number" hide domain={[0, 100]} />
         <YAxis

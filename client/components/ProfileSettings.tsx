@@ -1,9 +1,9 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import Settings from "./Settings";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useUpdateUser } from "../hooks/useUsers";
-import { UpdatedUser } from "../../models/users";
+import { useAuth0 } from '@auth0/auth0-react'
+import Settings from './Settings'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
+import { useUpdateUser } from '../hooks/useUsers'
+import { UpdatedUser } from '../../models/users'
 
 interface FormState {
   name: ''
@@ -18,7 +18,7 @@ const emptyForm: FormState = {
   email: '',
   username: '',
   goal: '',
-  goalCost: ''
+  goalCost: '',
 }
 
 export default function ProfileSettings() {
@@ -29,54 +29,54 @@ export default function ProfileSettings() {
   const updateUserFn = useUpdateUser()
 
   useEffect(() => {
-      const ws = new WebSocket('http://localhost:3000')
-  
-      ws.onopen = () => {
-        console.log('Websocket Connected')
-      }
-  
-      ws.onmessage = (event) => {
-        const data = JSON.parse(event.data)
-        if (data.type === 'database_change') {
-          queryClient.invalidateQueries({ queryKey: ['users'] })
-          queryClient.invalidateQueries({ queryKey: ['user'] })
-        }
-      }
-  
-      ws.onclose = () => {
-        console.log('WebSocket Disconnected')
-      }
-  
-      ws.onerror = (error) => {
-        console.error('WebSocket error:', error)
-      }
-  
-      return () => ws.close()
-    }, [queryClient])
+    const ws = new WebSocket('http://localhost:3000')
 
+    ws.onopen = () => {
+      console.log('Websocket Connected')
+    }
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      if (data.type === 'database_change') {
+        queryClient.invalidateQueries({ queryKey: ['users'] })
+        queryClient.invalidateQueries({ queryKey: ['user'] })
+      }
+    }
+
+    ws.onclose = () => {
+      console.log('WebSocket Disconnected')
+    }
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error)
+    }
+
+    return () => ws.close()
+  }, [queryClient])
 
   async function handleSubmit(evt: FormEvent<HTMLFormElement>) {
-      evt.preventDefault()
-      const token = await getAccessTokenSilently()
-  
-      
-  
-      const updatedUser = {
-        name: formState.name,
-        email: formState.email,
-        username: formState.username,
-        goal: formState.goal,
-        goalCost: formState.goalCost
-      } as unknown as UpdatedUser
-      await updateUserFn.mutateAsync({ updatedUser, token })
-      setFormState(emptyForm)
+    evt.preventDefault()
+    const token = await getAccessTokenSilently()
+
+    const updatedUser: Partial<UpdatedUser> = {}
+
+    if (formState.name) updatedUser.name = formState.name
+    if (formState.email) updatedUser.email = formState.email
+    if (formState.username) updatedUser.username = formState.username
+    if (formState.goal) updatedUser.goal = formState.goal
+    if (formState.goalCost) updatedUser.goalCost = formState.goalCost
+
+    if (Object.keys(updatedUser).length > 0) {
+      await updateUserFn.mutateAsync({ updatedUser: updatedUser as UpdatedUser, token })
     }
 
+    setFormState(emptyForm)
+  }
+
   function handleChange(evt: ChangeEvent<HTMLInputElement>) {
-      const { name, value } = evt.currentTarget
-  
-      setFormState((prev) => ({ ...prev, [name]: value }))
-    }
+    const { name, value } = evt.currentTarget
+    setFormState((prev) => ({ ...prev, [name]: value }))
+  }
 
   return (
     <>
@@ -117,7 +117,7 @@ export default function ProfileSettings() {
               placeholder="Email"
               type="text"
               className="profile-form-input-email"
-              required
+              
             ></input>
           </label>
           <label className="profile-form-label-username">
@@ -130,7 +130,7 @@ export default function ProfileSettings() {
               placeholder="Username"
               type="text"
               className="profile-form-input-username"
-              required
+              
             ></input>
           </label>
           <label className="profile-form-label-goal">
@@ -143,7 +143,6 @@ export default function ProfileSettings() {
               placeholder="Goal"
               type="text"
               className="profile-form-input-goal"
-              required
             ></input>
           </label>
           <label className="profile-form-label-goal-cost">
@@ -156,7 +155,6 @@ export default function ProfileSettings() {
               placeholder="100000NZD"
               type="text"
               className="profile-form-input-goal-cost"
-              required
             ></input>
           </label>
           <button

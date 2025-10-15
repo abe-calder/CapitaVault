@@ -369,7 +369,6 @@ html {
 .asset-distribution-chart {
   position: absolute;
   top: 5vh;
-  left: 0;
   width: 100%;
   height: calc(100% - 5vh);
 }
