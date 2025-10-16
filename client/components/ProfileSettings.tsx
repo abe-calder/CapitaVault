@@ -29,7 +29,7 @@ export default function ProfileSettings() {
   const updateUserFn = useUpdateUser()
 
   useEffect(() => {
-    const ws = new WebSocket('https://capitavault.onrender.com')
+    const ws = new WebSocket('wss://capitavault.onrender.com/ws')
 
     ws.onopen = () => {
       console.log('Websocket Connected')
