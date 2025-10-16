@@ -37,7 +37,7 @@ export async function updateUser(auth0Id: string, updatedUser: {
   goalCost: string
 }): Promise<UserData | undefined> {
   try {
-    return await db('users').where('users.auth0id', auth0Id).update({ name: updatedUser.name, email: updatedUser.email, username: updatedUser.username, goal: updatedUser.goal, goalCost: updatedUser.goalCost})
+    return await db('users').where('users.auth0Id', auth0Id).update({ name: updatedUser.name, email: updatedUser.email, username: updatedUser.username, goal: updatedUser.goal, goalCost: updatedUser.goalCost})
   } catch (err) {
     console.log(err)
   }
