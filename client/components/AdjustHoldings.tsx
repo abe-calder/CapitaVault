@@ -36,7 +36,7 @@ export default function AdjustHoldings() {
   const delteAssetById = useDeleteAssetById()
 
   useEffect(() => {
-    const ws = new WebSocket('http://localhost:3000')
+    const ws = new WebSocket('https://capitavault.onrender.com')
 
     ws.onopen = () => {
       console.log('Websocket Connected')
