@@ -22,7 +22,7 @@ export async function getUserById(
   auth0Id: string,
 ): Promise<UserData[] | undefined> {
   try {
-    const result = await db('users').where('users.auth0id', auth0Id).first()
+    const result = await db('users').where('users.auth0Id', auth0Id).first()
     return result
   } catch (err) {
     console.log(err)
