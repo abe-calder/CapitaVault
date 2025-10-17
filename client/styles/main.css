@@ -7,6 +7,14 @@ html {
   overflow-y: hidden;
 }
 
+/* MEDIA Q START */
+
+@media (max-width: 321px) {
+  
+}
+
+/* MEDIA Q END */
+
 /* SIGN IN PAGE START */
 
 .app {
