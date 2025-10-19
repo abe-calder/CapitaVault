@@ -47,7 +47,7 @@ export default function Nav() {
             </Link>
             <Link
               to="/settings/profile-settings"
-              className="settings-link"
+              className="page-link settings-link"
             >
               <img
                 alt="settings-icon"
