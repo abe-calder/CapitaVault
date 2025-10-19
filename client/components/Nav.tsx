@@ -20,7 +20,7 @@ export default function Nav() {
           <IfAuthenticated>
             <Link to="/dashboard" className="page-link dashboard-link">
               <img
-                className="mini-house-icon"
+                className="link-icons mini-house-icon"
                 alt="dashboard-house-icon"
                 src="/images/house-dashboard-icon.webp"
               ></img>
@@ -28,7 +28,7 @@ export default function Nav() {
             </Link>
             <Link to="/investments" className="page-link investments-link">
               <img
-                className="mini-chart-icon"
+                className="link-icons mini-chart-icon"
                 alt="investment-chart-icon"
                 src="/images/investment-chart-icon.webp"
               ></img>
@@ -40,12 +40,15 @@ export default function Nav() {
             >
               <img
                 alt="adjust-holdings-icon"
-                className="mini-adjust-holdings-icon"
+                className="link-icons mini-adjust-holdings-icon"
                 src="/images/adjust-holdings-link-image.webp"
               ></img>
               Adjust Holdings
             </Link>
-            <Link to="/settings/profile-settings" className="settings-link">
+            <Link
+              to="/settings/profile-settings"
+              className="settings-link"
+            >
               <img
                 alt="settings-icon"
                 className="mini-settings-icon"
@@ -54,7 +57,10 @@ export default function Nav() {
               Settings
             </Link>
 
-            <button className="log-out-button" onClick={() => handleSignOut()}>
+            <button
+              className="log-out-button"
+              onClick={() => handleSignOut()}
+            >
               <img
                 alt="log-out-icon"
                 src="/images/log-out-icon-.webp"

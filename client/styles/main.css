@@ -1256,9 +1256,40 @@ html {
   .nav {
     
   }
+
+  .page-link  {
+    font-size: 2vw;
+  }
+
+  .link-icons {
+    width: 5vw;
+  }
+
+  .log-out-button {
+    font-size: 2vw;
+  }
+
+  .mini-log-out-icon {
+    width: 5vw;
+  }
+
+  .settings-link {
+    font-size: 2vw;
+    
+  }
+
+  .mini-settings-icon {
+    width: 5vw;
+    
+  }
+
+  /* */
+
   .app2 {
     
   }
+
+  /* */
 
   .total-balance { 
     width: 30vw;
@@ -1303,14 +1334,28 @@ html {
     font-size: 1.5vw;
   }
 
+  /* */
+
   .statistics {
     width: 35vw;
     height: 25vh;
   }
 
   .statistics-heading {
-    font-size: 2.5vw;
+    font-size: 3vw;
   }
+
+  .pie-chart-statistics {
+    position: absolute;
+    top: -4vh;
+    right: 7vw;
+  }
+
+  .pie-chart {
+    width: 80%
+  }
+
+  /* */
 
   .spending {
     width: 32.5vw;
@@ -1324,10 +1369,24 @@ html {
     left: -20vw;
     top: 2vh;
   }
+
+  /* */
   
   .goals {
     width: 32.5vw;
     height: 17.5vh;
+  }
+
+ .goals-heading {
+    font-size: 2.6vw;
+  }
+
+  .goals-sub-heading-user-goal {
+    font-size: 1.2vw;
+  }
+
+  .goals-sub-heading-user-goal-cost {
+    font-size: 1.75vw
   }
 
   .line-chart {
@@ -1341,15 +1400,50 @@ html {
     font-size: 1vw;
   }
 
-  .pie-chart-statistics {
-    position: absolute;
-    top: -4vh;
-    right: 7vw;
+  /* */
+
+  .holdings {
+    height: 55vh;
+    width: 35vw;
+    left: -3vw;
   }
 
-  .pie-chart {
-    width: 80%
+  .holdings-heading {
+    font-size: 3vw;
   }
+
+  .holdings-buttons {
+    width: 40vw;
+    height: 5vh;
+  }
+
+  .toggle-currency-buttons {
+    width: 3vw;
+    height: 1.75vh;
+  }
+
+  .toggle-currency-label {
+    font-size: 2vw;
+    width: 40vw;
+  }
+
+
+  .asset-holdings-name {
+    font-size: 1.9vw;
+    width: 18vw;
+  }
+
+  .asset-holdings-value {
+    font-size: 1.9vw;
+    left: -5vw;
+  }
+
+  .asset-shares {
+    font-size: 1.2vw;
+    left: -5vw;
+  }
+
+  /* */
   
 }
 
