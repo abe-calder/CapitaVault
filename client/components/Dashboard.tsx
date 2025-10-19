@@ -170,7 +170,7 @@ export default function Dashboard() {
               <h2 className="statistics-heading">Statistics</h2>
               {pieChartData.length > 0 && (
                 <div className="pie-chart">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer className="pie-chart-statistics" width="100%" height="100%">
                     <PieChart>
                       <Pie
                         data={pieChartData}
@@ -212,15 +212,15 @@ export default function Dashboard() {
                 </p>
               </h1>
               <div className="line-chart">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer
+                  className="line-line"
+                  width="100%"
+                  height="100%"
+                >
                   <LineChart data={lineData}>
                     <XAxis dataKey="name" />
-                    <YAxis
-                      
-                    />
-                    <Tooltip
-                      
-                    />
+                    <YAxis />
+                    <Tooltip />
                     <Line
                       type="monotone"
                       dataKey="CurrentBalance"
