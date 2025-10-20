@@ -54,11 +54,12 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
   }
 
   const percentageMediaStyles = {
-    '@media screen and (max-width: 431px) and (max-height: 933px)': {
+    '@media (max-width: 431px)': {
       fontSize: '2vw',
+      fill: 'black',
     },
     fill: 'black',
-    fontSize: '0.7vw',
+    fontSize: '0.8vw',
   }
 
   return (
@@ -74,7 +75,7 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
           dataKey="ticker"
           axisLine={false}
           tickLine={false}
-          tick={{ fill: 'black', fontSize: '0.7vw' }}
+          tick={{ fill: 'black', fontSize: '0.8vw' }}
           interval={0}
           width={80}
           id="adcfs"
@@ -89,13 +90,13 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
           background={{ fill: '#eee', opacity: 0.2 }}
           radius={[5, 5, 5, 5]}
         >
-          <LabelList
-            dataKey="percentage"
-            position="right"
-            // @ts-expect-error formater type err
-            formatter={(value: number) => `${value.toFixed(1)}%`}
-            style={percentageMediaStyles}
-          />
+            <LabelList
+              dataKey="percentage"
+              position="right"
+              // @ts-expect-error formater type err
+              formatter={(value: number) => `${value.toFixed(1)}%`}
+              style={percentageMediaStyles}
+            />
         </Bar>
       </BarChart>
     </ResponsiveContainer>

@@ -1765,12 +1765,12 @@ html {
   }
 
   .total-income-value {
-    font-size: 2.2vw;
+    font-size: 2.1vw;
   }
 
   .total-expense-value {
     width: 15.8vw;
-    font-size: 2.2vw;
+    font-size: 2.1vw;
     margin-left: 4vw;
   }
 
@@ -1806,7 +1806,7 @@ html {
   .asset-distribution-chart {
     width: 175%;
     height: 80%;
-    left: -14vw;
+    left: -16vw;
     top: 3vh;
   }
 
@@ -1822,31 +1822,33 @@ html {
   /* */
 
   .goals {
-    width: 32.5vw;
+    width: 33.5vw;
     height: 17.5vh;
   }
 
   .goals-heading {
-    font-size: 2.6vw;
+    font-size: 3.5vw;
   }
 
   .goals-sub-heading-user-goal {
-    font-size: 1.2vw;
+    font-size: 1.7vw;
+    top: 1.4vh;
+    left: 15vw;
   }
 
   .goals-sub-heading-user-goal-cost {
-    font-size: 1.75vw;
+    font-size: 2.25vw;
   }
 
   .line-chart {
-    width: 110%;
-    height: 100%;
-    left: -5vw;
-    top: 1vh;
+    width: 115%;
+    height: 80%;
+    left: -6vw;
+    top: 3vh;
   }
 
   .line-line {
-    font-size: 1vw;
+    font-size: 2vw;
   }
 
   /* */
