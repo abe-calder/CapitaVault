@@ -10,7 +10,6 @@ export default function Settings() {
         <TopRightProfile />
         <div className="settings-page-wrapper">
           <div className="settings-tabs-wrapper">
-            <h1 className="settings-heading">Settings</h1>
           </div>
         </div>
       </div>
