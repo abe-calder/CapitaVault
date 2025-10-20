@@ -22,6 +22,7 @@ interface Props {
 }
 
 export default function AssetDistributionChart({ data, totalBalance }: Props) {
+
   const processedData = useMemo(() => {
     if (!data || data.length === 0 || totalBalance === 0) {
       return []
@@ -52,6 +53,14 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
     return null
   }
 
+  const percentageMediaStyles = {
+    '@media screen and (max-width: 431px) and (max-height: 933px)': {
+      fontSize: '2vw',
+    },
+    fill: 'black',
+    fontSize: '0.7vw',
+  }
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -68,6 +77,7 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
           tick={{ fill: 'black', fontSize: '0.7vw' }}
           interval={0}
           width={80}
+          id="adcfs"
         />
         <Tooltip
           cursor={{ fill: 'rgba(255, 255, 255, 0.1)' }}
@@ -84,7 +94,7 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
             position="right"
             // @ts-expect-error formater type err
             formatter={(value: number) => `${value.toFixed(1)}%`}
-            style={{ fill: 'black', fontSize: '0.7vw' }}
+            style={percentageMediaStyles}
           />
         </Bar>
       </BarChart>

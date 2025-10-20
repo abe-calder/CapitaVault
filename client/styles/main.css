@@ -1676,6 +1676,7 @@ html {
 
   .page-link {
     font-size: 2.5vw;
+    left: -2vw;
   }
 
   .link-icons {
@@ -1717,7 +1718,7 @@ html {
   }
 
   .dashboard-heading {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
 
   /* */
@@ -1732,47 +1733,44 @@ html {
   }
 
   .total-balance-heading {
-    font-size: 2.75vw;
+    font-size: 3.25vw;
   }
 
   .total-balance-percentage-gain-or-loss {
-    font-size: 1.8vw;
+    font-size: 2.3vw;
   }
 
   .total-balance-value {
-    font-size: 2.2vw;
+    font-size: 2.6vw;
     left: 0.9vw;
   }
 
   .total-cost-value {
-    font-size: 2vw;
-    left: 12vw;
+    font-size: 2.5vw;
+    left: 11vw;
   }
 
   .total-cost-expense-p {
-    font-size: 2vw;
+    font-size: 2.5vw;
     margin-left: 4vw;
   }
 
   .total-balance-divider {
-    font-size: 2vw;
-    left: 3vw;
-    top: 1vh;
+    display: none;
   }
 
   .total-income-p {
-    font-size: 2vw;
+    font-size: 2.5vw;
     top: 0vh;
   }
 
   .total-income-value {
-    font-size: 2vw;
-    
+    font-size: 2.2vw;
   }
 
   .total-expense-value {
-    width: 14vw;
-    font-size: 2vw;
+    width: 15.8vw;
+    font-size: 2.2vw;
     margin-left: 4vw;
   }
 
@@ -1780,7 +1778,7 @@ html {
 
   .statistics {
     width: 35vw;
-    height: 25vh;
+    height: 27.5vh;
   }
 
   .statistics-heading {
@@ -1790,26 +1788,35 @@ html {
   .pie-chart-statistics {
     position: absolute;
     top: -4vh;
-    right: 7vw;
+    right: 11vw;
   }
 
   .pie-chart {
-    width: 80%;
+    width: 100%;
   }
 
   /* */
 
   .spending {
-    width: 32.5vw;
+    width: 33.5vw;
     height: 17.5vh;
     left: 17.5vw;
   }
 
   .asset-distribution-chart {
-    width: 200%;
+    width: 175%;
     height: 80%;
-    left: -20vw;
-    top: 2vh;
+    left: -14vw;
+    top: 3vh;
+  }
+
+  .spending-heading {
+    font-size: 3.75vw;
+    width: 45vw;
+  }
+
+  #adcfs {
+    font-size: 2vw;
   }
 
   /* */
