@@ -36,11 +36,11 @@ export default function Investments() {
   const assetValues = pieChartData.map((asset) => {
     return (
       <div key={asset.ticker} className="my-investments">
-        <h1 className="investments-asset-name">{asset.name}</h1>
-        <h1 className="investments-asset-value">
+        <h1 className="investments-asset-name ian">{asset.name}</h1>
+        <h1 className="investments-asset-value iav">
           {formatCurrency(asset.value, convertCurrency)}
         </h1>
-        <h1 className="investments-asset-gain-or-loss">
+        <h1 className="investments-asset-gain-or-loss iagol">
           {individualGainOrLoss(asset.value, asset.cost)}
         </h1>
       </div>
@@ -57,13 +57,15 @@ export default function Investments() {
         key={holiday.date + holiday.exchange}
         className="upcoming-market-holidays"
       >
-        <div className='upcoming-market-holidays-content-wrapper'>
-          <h1 className="upcoming-market-holidays-name">{holiday.name}</h1>
-          <h1 className="upcoming-market-holidays-exchange">
+        <div className="upcoming-market-holidays-content-wrapper">
+          <h1 className="upcoming-market-holidays-name umhd">{holiday.name}</h1>
+          <h1 className="upcoming-market-holidays-exchange umhd">
             {holiday.exchange}
           </h1>
-          <h1 className="upcoming-market-holidays-date">{holiday.date}</h1>
-          <h1 className="upcoming-market-holidays-status">{holiday.status}</h1>
+          <h1 className="upcoming-market-holidays-date umhd">{holiday.date}</h1>
+          <h1 className="upcoming-market-holidays-status umhd">
+            {holiday.status}
+          </h1>
         </div>
       </div>
     )
@@ -116,7 +118,7 @@ export default function Investments() {
               Portfolio Value Over Time
             </h1>
             <div className="monthly-line-chart-data">
-              <ResponsiveContainer className="" width="100%" height="100%">
+              <ResponsiveContainer className="pvotcc" width="100%" height="100%">
                 <LineChart data={monthlyData}>
                   <XAxis dataKey="month" />
                   <YAxis />
