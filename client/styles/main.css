@@ -1532,6 +1532,44 @@ html {
 
   /* */
 
+  .investments-heading {
+    font-size: 3vw;
+  }
+
+  .total-investments-wrapper {
+    height: 12.5vh;
+  }
+
+  .number-of-investments-wrapper {
+    height: 12.5vh;
+  }
+
+  .rate-of-return-wrapper {
+    height: 12.5vh;
+  }
+
+  .total-invested-value {
+    width: 18vw;
+  }
+
+  .tiv {
+    font-size: 2vw;
+    left: 2vw;
+  }
+
+  .tih {
+    font-size: 2vw;
+    width: 19vw;
+    left: 1vw;
+    font-weight: 600;
+  }
+
+  .tio {
+    top: 1vh;
+    left: 7vw;
+    width: 5vw;
+  }
+
 }
 
 @media screen and (max-width: 430px) and (max-height: 932px) {
