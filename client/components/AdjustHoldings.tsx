@@ -120,51 +120,51 @@ export default function AdjustHoldings() {
             </h1>
             <div className="adjust-holdings-form">
               <form onSubmit={handleSubmit}>
-                <label className="adjust-ticker-form-label">
+                <label className="adjust-ticker-form-label ajhl">
                   Input the ticker tag for the asset
                   <input
                     type="text"
                     name="ticker"
                     id="ticker"
                     value={formState.ticker}
-                    className="adjust-ticker-input"
+                    className="adjust-ticker-input ajhi"
                     placeholder="BTC"
                     onChange={handleChange}
                     required
                   />
                 </label>
-                <label className="adjust-asset-name-form-label">
+                <label className="adjust-asset-name-form-label  ajhl">
                   Input the name of the asset
                   <input
                     type="text"
                     name="name"
                     id="name"
                     value={formState.name}
-                    className="adjust-name-input"
+                    className="adjust-name-input ajhi"
                     placeholder="BitCoin"
                     onChange={handleChange}
                     required
                   />
                 </label>
-                <label className="adjust-shares-form-label">
+                <label className="adjust-shares-form-label  ajhl">
                   Input the amount of shares
                   <input
                     type="number"
                     name="shares"
                     value={formState.shares}
-                    className="adjust-shares-input"
+                    className="adjust-shares-input ajhi"
                     placeholder="0.23447"
                     onChange={handleChange}
                     required
                   />
                 </label>
-                <label className="adjust-cost-form-label">
+                <label className="adjust-cost-form-label  ajhl">
                   Input the cost of the shares when you bought them
                   <input
                     type="text"
                     name="cost"
                     value={formState.cost}
-                    className="adjust-cost-input"
+                    className="adjust-cost-input ajhi"
                     placeholder="10,000NZD"
                     onChange={handleChange}
                     required
@@ -172,7 +172,7 @@ export default function AdjustHoldings() {
                 </label>
                 <button
                   data-pending={addAssets.isPending}
-                  className="adjust-form-submit-button"
+                  className="adjust-form-submit-button ajhsb"
                 >
                   Submit
                 </button>
@@ -188,10 +188,10 @@ export default function AdjustHoldings() {
               {userAssetData.map((asset: AssetData) => {
                 return (
                   <div className="user-assets-wrapper" key={asset.id}>
-                    <h1 className="user-assets-name">{asset.name}</h1>
-                    <p className="user-assets-ticker">{asset.ticker}</p>
-                    <p className="user-assets-shares">Shares: {asset.shares}</p>
-                    <p className="user-asset-cost">Cost: {asset.cost}</p>
+                    <h1 className="user-assets-name chn">{asset.name}</h1>
+                    <p className="user-assets-ticker cht">{asset.ticker}</p>
+                    <p className="user-assets-shares chs">Shares: {asset.shares}</p>
+                    <p className="user-asset-cost chc">Cost: {asset.cost}</p>
                     <button
                       onClick={() => handleDelete(asset.id)}
                       className="user-asset-delete"

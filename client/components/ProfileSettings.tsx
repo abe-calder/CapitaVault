@@ -91,11 +91,12 @@ export default function ProfileSettings() {
             left: '15vw',
           }}
           className="profile-photo"
+          id="pspf"
           alt="profile-image"
           src={user && user.picture}
         ></img>
         <form onSubmit={handleSubmit}>
-          <label className="profile-form-label-name">
+          <label className="profile-form-label-name psfl">
             Change Your Name:
             <input
               onChange={handleChange}
@@ -104,10 +105,10 @@ export default function ProfileSettings() {
               value={formState.name}
               placeholder="Name"
               type="text"
-              className="profile-form-input-name"
+              className="profile-form-input-name psfi"
             ></input>
           </label>
-          <label className="profile-form-label-email">
+          <label className="profile-form-label-email psfl">
             Change Your Email:
             <input
               onChange={handleChange}
@@ -116,11 +117,10 @@ export default function ProfileSettings() {
               value={formState.email}
               placeholder="Email"
               type="text"
-              className="profile-form-input-email"
-              
+              className="profile-form-input-email psfi"
             ></input>
           </label>
-          <label className="profile-form-label-username">
+          <label className="profile-form-label-username psfl">
             Change Your Username:
             <input
               onChange={handleChange}
@@ -129,8 +129,7 @@ export default function ProfileSettings() {
               value={formState.username}
               placeholder="Username"
               type="text"
-              className="profile-form-input-username"
-              
+              className="profile-form-input-username psfi"
             ></input>
           </label>
           <label className="profile-form-label-goal">
@@ -142,10 +141,10 @@ export default function ProfileSettings() {
               value={formState.goal}
               placeholder="Goal"
               type="text"
-              className="profile-form-input-goal"
+              className="profile-form-input-goal psfi"
             ></input>
           </label>
-          <label className="profile-form-label-goal-cost">
+          <label className="profile-form-label-goal-cost psfl">
             Change Your Goal $ Value:
             <input
               onChange={handleChange}
@@ -154,7 +153,7 @@ export default function ProfileSettings() {
               value={formState.goalCost}
               placeholder="100000NZD"
               type="text"
-              className="profile-form-input-goal-cost"
+              className="profile-form-input-goal-cost psfi"
             ></input>
           </label>
           <button

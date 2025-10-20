@@ -36,11 +36,11 @@ export default function Investments() {
   const assetValues = pieChartData.map((asset) => {
     return (
       <div key={asset.ticker} className="my-investments">
-        <h1 className="investments-asset-name">{asset.name}</h1>
-        <h1 className="investments-asset-value">
+        <h1 className="investments-asset-name ian">{asset.name}</h1>
+        <h1 className="investments-asset-value iav">
           {formatCurrency(asset.value, convertCurrency)}
         </h1>
-        <h1 className="investments-asset-gain-or-loss">
+        <h1 className="investments-asset-gain-or-loss iagol">
           {individualGainOrLoss(asset.value, asset.cost)}
         </h1>
       </div>
@@ -57,13 +57,15 @@ export default function Investments() {
         key={holiday.date + holiday.exchange}
         className="upcoming-market-holidays"
       >
-        <div className='upcoming-market-holidays-content-wrapper'>
-          <h1 className="upcoming-market-holidays-name">{holiday.name}</h1>
-          <h1 className="upcoming-market-holidays-exchange">
+        <div className="upcoming-market-holidays-content-wrapper">
+          <h1 className="upcoming-market-holidays-name umhd">{holiday.name}</h1>
+          <h1 className="upcoming-market-holidays-exchange umhd">
             {holiday.exchange}
           </h1>
-          <h1 className="upcoming-market-holidays-date">{holiday.date}</h1>
-          <h1 className="upcoming-market-holidays-status">{holiday.status}</h1>
+          <h1 className="upcoming-market-holidays-date umhd">{holiday.date}</h1>
+          <h1 className="upcoming-market-holidays-status umhd">
+            {holiday.status}
+          </h1>
         </div>
       </div>
     )
@@ -79,36 +81,36 @@ export default function Investments() {
             <h1 className="investments-heading">Investments</h1>
             <div className="total-investments-wrapper">
               <img
-                className="dollar-sign-icon"
+                className="dollar-sign-icon tio"
                 alt="dollar-sign-icon"
                 src="/images/hand-and-dollar-sign-icon.webp"
               ></img>
-              <h1 className="total-investments-heading">Total Invested</h1>
-              <h2 className="total-invested-value">
+              <h1 className="total-investments-heading tih">Total Invested</h1>
+              <h2 className="total-invested-value tiv">
                 {formatCurrency(totalCost, convertCurrency)}
               </h2>
             </div>
             <div className="number-of-investments-wrapper">
               <img
-                className="stack-of-coins-icon"
+                className="stack-of-coins-icon  tio"
                 alt="stack-of-coins-icon"
                 src="/images/stack-of-coins-icon.webp"
               ></img>
-              <h1 className="number-of-investments-heading">
+              <h1 className="number-of-investments-heading tih">
                 No. of Investments
               </h1>
-              <h1 className="number-of-investments-value">
+              <h1 className="number-of-investments-value tiv">
                 {totalShares.toFixed(2)}
               </h1>
             </div>
             <div className="rate-of-return-wrapper">
               <img
-                className="rate-of-return-icon"
+                className="rate-of-return-icon  tio"
                 alt="rate-of-return-icon"
                 src="/images/rate-of-return-icon.webp"
               ></img>
-              <h1 className="rate-of-return-heading">Rate of Return</h1>
-              <h1 className="rate-of-return-value">{gainOrLoss()}</h1>
+              <h1 className="rate-of-return-heading tih">Rate of Return</h1>
+              <h1 className="rate-of-return-value tiv">{gainOrLoss()}</h1>
             </div>
           </div>
           <div className="yearly-total-revenue-wrapper">
@@ -116,7 +118,7 @@ export default function Investments() {
               Portfolio Value Over Time
             </h1>
             <div className="monthly-line-chart-data">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer className="pvotcc" width="100%" height="100%">
                 <LineChart data={monthlyData}>
                   <XAxis dataKey="month" />
                   <YAxis />
