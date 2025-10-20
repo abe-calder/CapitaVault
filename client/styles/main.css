@@ -1289,11 +1289,26 @@ html {
 
   /* */
 
-  .app2 {
+  html {
+    width: 96vw;
     
   }
 
+  .app2 {
+    height: 95vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .dashboard-heading {
+    font-size: 3vw;
+  }
+
   /* */
+
+  .heading-and-total-balance-wrapper {
+    top: 9vh;
+  }
 
   .total-balance { 
     width: 30vw;
@@ -1410,6 +1425,7 @@ html {
     height: 55vh;
     width: 35vw;
     left: -3vw;
+    top: 6vh;
   }
 
   .holdings-heading {
@@ -1459,14 +1475,66 @@ html {
   }
 
   /* */
-  
-  .user-asset-delete {
-    
+
+  .adjust-holdings-heading {
+    font-size: 3vw;
   }
 
+  .ajhl {
+    width: 25vw;
+    font-size: 2vw;
+  }
 
+  .ajhi {
+    width: 25vw;
+    height: 2.5vh;
+    font-size: 2.5vw;
+  }
+
+  .ajhsb {
+    font-size: 3vw;
+  }
+
+  .current-holdings-heading {
+    font-size: 3vw;
+  }
+
+  .current-holdings-disclaimer {
+    font-size: 2vw;
+    top: 2.5vh;
+    width: 30vw;
+  }
+
+  .user-assets-wrapper {
+    margin-top: 4vh;
+  }
+
+  .chn {
+    font-size: 2.4vw;
+  }
+
+  .cht {
+    font-size: 2.4vw;
+  }
+
+  .chs {
+    font-size: 2.4vw;
+  }
+
+  .chc {
+    font-size: 2.4vw;
+  }
+
+  .user-asset-delete {
+    font-size: 1.7vw;
+    top: 8.5vh;
+  } 
 
   /* */
+
+}
+
+@media screen and (max-width: 430px) and (max-height: 932px) {
 
 }
 
