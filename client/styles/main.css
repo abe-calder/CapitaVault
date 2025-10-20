@@ -1670,7 +1670,443 @@ html {
 
 }
 
-@media screen and (max-width: 430px) and (max-height: 932px) {
+@media screen and (max-width: 431px) and (max-height: 933px) {
+  .nav {
+  }
+
+  .page-link {
+    font-size: 2.5vw;
+    left: -2vw;
+  }
+
+  .link-icons {
+    width: 6vw;
+  }
+
+  .log-out-button {
+    font-size: 2.5vw;
+    width: 19vw;
+    left: -0vw;
+  }
+
+  .mini-log-out-icon {
+    width: 6vw;
+  }
+
+  .settings-link {
+    font-size: 2.5vw;
+    width: 20vw;
+    margin-left: 4vw;
+    left: -0vw;
+  }
+
+  .mini-settings-icon {
+    width: 6vw;
+    margin-left: -4.5vw;
+  }
+
+  /* */
+
+  html {
+    width: 96vw;
+  }
+
+  .app2 {
+    height: 95vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .dashboard-heading {
+    font-size: 4vw;
+  }
+
+  /* */
+
+  .heading-and-total-balance-wrapper {
+    top: 9vh;
+  }
+
+  .total-balance {
+    width: 30vw;
+    height: 12.5vh;
+  }
+
+  .total-balance-heading {
+    font-size: 3.25vw;
+  }
+
+  .total-balance-percentage-gain-or-loss {
+    font-size: 2.3vw;
+  }
+
+  .total-balance-value {
+    font-size: 2.6vw;
+    left: 0.9vw;
+  }
+
+  .total-cost-value {
+    font-size: 2.5vw;
+    left: 11vw;
+  }
+
+  .total-cost-expense-p {
+    font-size: 2.5vw;
+    margin-left: 4vw;
+  }
+
+  .total-balance-divider {
+    display: none;
+  }
+
+  .total-income-p {
+    font-size: 2.5vw;
+    top: 0vh;
+  }
+
+  .total-income-value {
+    font-size: 2.1vw;
+  }
+
+  .total-expense-value {
+    width: 15.8vw;
+    font-size: 2.1vw;
+    margin-left: 4vw;
+  }
+
+  /* */
+
+  .statistics {
+    width: 35vw;
+    height: 27.5vh;
+  }
+
+  .statistics-heading {
+    font-size: 3vw;
+  }
+
+  .pie-chart-statistics {
+    position: absolute;
+    top: -4vh;
+    right: 11vw;
+  }
+
+  .pie-chart {
+    width: 100%;
+  }
+
+  /* */
+
+  .spending {
+    width: 33.5vw;
+    height: 17.5vh;
+    left: 17.5vw;
+  }
+
+  .asset-distribution-chart {
+    width: 175%;
+    height: 80%;
+    left: -16vw;
+    top: 3vh;
+  }
+
+  .spending-heading {
+    font-size: 3.75vw;
+    width: 45vw;
+  }
+
+  #adcfs {
+    font-size: 2vw;
+  }
+
+  /* */
+
+  .goals {
+    width: 33.5vw;
+    height: 17.5vh;
+  }
+
+  .goals-heading {
+    font-size: 3.5vw;
+  }
+
+  .goals-sub-heading-user-goal {
+    font-size: 1.7vw;
+    top: 1.4vh;
+    left: 15vw;
+  }
+
+  .goals-sub-heading-user-goal-cost {
+    font-size: 2.25vw;
+  }
+
+  .line-chart {
+    width: 115%;
+    height: 80%;
+    left: -6vw;
+    top: 3vh;
+  }
+
+  .line-line {
+    font-size: 2vw;
+  }
+
+  /* */
+
+
+   
+  .holdings {
+    height: 55vh;
+    width: 35vw;
+    left: -0vw;
+    top: 6vh;
+  }
+
+  .holdings-heading {
+    font-size: 3vw;
+  }
+
+  .holdings-buttons {
+    width: 40vw;
+    height: 5vh;
+  }
+
+  .toggle-currency-buttons {
+    width: 3vw;
+    height: 1.75vh;
+  }
+
+  .toggle-currency-label {
+    font-size: 2vw;
+    width: 40vw;
+  }
+
+  .asset-holdings-name {
+    font-size: 1.9vw;
+    width: 18vw;
+  }
+
+  .asset-holdings-value {
+    font-size: 1.9vw;
+    left: -5vw;
+  }
+
+  .asset-shares {
+    font-size: 1.2vw;
+    left: -5vw;
+  }
+
+  /* */
+
+  .profile {
+    width: 15vw;
+    font-size: 10vw;
+  }
+
+  .profile-name {
+    font-size: 2.25vw;
+  }
+
+  /* */
+
+  .adjust-holdings-heading {
+    font-size: 3vw;
+  }
+
+  .ajhl {
+    width: 25vw;
+    font-size: 2vw;
+  }
+
+  .ajhi {
+    width: 25vw;
+    height: 2.5vh;
+    font-size: 2.5vw;
+  }
+
+  .ajhsb {
+    font-size: 3vw;
+  }
+
+  .current-holdings-heading {
+    font-size: 3vw;
+  }
+
+  .current-holdings-disclaimer {
+    font-size: 2vw;
+    top: 2.5vh;
+    width: 30vw;
+  }
+
+  .user-assets-wrapper {
+    margin-top: 4vh;
+  }
+
+  .chn {
+    font-size: 2.4vw;
+  }
+
+  .cht {
+    font-size: 2.4vw;
+  }
+
+  .chs {
+    font-size: 2.4vw;
+  }
+
+  .chc {
+    font-size: 2.4vw;
+  }
+
+  .user-asset-delete {
+    font-size: 1.7vw;
+    top: 8.5vh;
+  }
+
+  /* */
+
+  .investments-heading {
+    font-size: 3vw;
+  }
+
+  .total-investments-wrapper {
+    height: 12.5vh;
+  }
+
+  .number-of-investments-wrapper {
+    height: 12.5vh;
+  }
+
+  .rate-of-return-wrapper {
+    height: 12.5vh;
+  }
+
+  .total-invested-value {
+    width: 18vw;
+  }
+
+  .tiv {
+    font-size: 2vw;
+    left: 2vw;
+  }
+
+  .tih {
+    font-size: 2vw;
+    width: 19vw;
+    left: 1vw;
+    font-weight: 600;
+  }
+
+  .tio {
+    top: 1vh;
+    left: 7vw;
+    width: 5vw;
+  }
+
+  .yearly-total-revenue-wrapper {
+    height: 30vh;
+  }
+
+  .yearly-total-revenue-heading {
+    font-size: 3vw;
+    width: 40vw;
+  }
+
+  .pvotcc {
+    font-size: 2vw;
+  }
+
+  .monthly-line-chart-data {
+    width: 113%;
+    height: 95%;
+    top: 4vh;
+    left: -9vw;
+  }
+
+  .my-investments-wrapper {
+    height: 30vh;
+    top: 65vh;
+  }
+
+  .my-investments-heading {
+    font-size: 3vw;
+    width: 26vw;
+  }
+
+  .ian {
+    font-size: 2vw;
+    left: 0vw;
+    width: 12vw;
+  }
+
+  .iav {
+    font-size: 2vw;
+    left: 4vw;
+    width: 15vw;
+  }
+
+  .iagol {
+    font-size: 2vw;
+    left: 7.5vw;
+    width: 8vw;
+  }
+
+  .upcoming-market-holidays-wrapper {
+    height: 30vh;
+  }
+
+  .upcoming-market-holidays-heading {
+    font-size: 3vw;;
+  }
+
+  .upcoming-market-holidays-content-wrapper {
+    left: 1vw;
+  }
+
+  .umhd {
+    font-size: 2vw;
+    margin: 0.5vw;
+  }
+
+  /* */
+
+  #pspf {
+    width: 150%;
+    left: 20vw;
+  }
+
+  .profile-settings-wrapper {
+    width: 70vw;
+    height: 75vh;
+    top: 9vh;
+  }
+
+  .settings-heading {
+    font-size: 3vw;
+  }
+
+  .profile-settings-heading {
+    font-size: 3vw;
+  }
+
+  .psfl {
+    width: 25vw;
+    font-size: 2vw;
+  }
+
+  .psfi {
+    width: 25vw;
+    height: 2.5vh;
+    font-size: 2.5vw;
+  }
+
+  .profile-form-submit-button {
+    font-size: 3vw;
+  }
 }
+
+
+
+/* OPTIONAL OTHER DIMENTIONS TO INCLUDE 1. (W: 376px H: 813px), 2.(W: 415px H: 897px)*/ 
 
 /* MEDIA Q END */

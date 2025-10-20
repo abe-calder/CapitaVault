@@ -22,6 +22,7 @@ interface Props {
 }
 
 export default function AssetDistributionChart({ data, totalBalance }: Props) {
+
   const processedData = useMemo(() => {
     if (!data || data.length === 0 || totalBalance === 0) {
       return []
@@ -52,6 +53,15 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
     return null
   }
 
+  const percentageMediaStyles = {
+    '@media (max-width: 431px)': {
+      fontSize: '2vw',
+      fill: 'black',
+    },
+    fill: 'black',
+    fontSize: '0.8vw',
+  }
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -65,9 +75,10 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
           dataKey="ticker"
           axisLine={false}
           tickLine={false}
-          tick={{ fill: 'black', fontSize: '0.7vw' }}
+          tick={{ fill: 'black', fontSize: '0.8vw' }}
           interval={0}
           width={80}
+          id="adcfs"
         />
         <Tooltip
           cursor={{ fill: 'rgba(255, 255, 255, 0.1)' }}
@@ -79,13 +90,13 @@ export default function AssetDistributionChart({ data, totalBalance }: Props) {
           background={{ fill: '#eee', opacity: 0.2 }}
           radius={[5, 5, 5, 5]}
         >
-          <LabelList
-            dataKey="percentage"
-            position="right"
-            // @ts-expect-error formater type err
-            formatter={(value: number) => `${value.toFixed(1)}%`}
-            style={{ fill: 'black', fontSize: '0.7vw' }}
-          />
+            <LabelList
+              dataKey="percentage"
+              position="right"
+              // @ts-expect-error formater type err
+              formatter={(value: number) => `${value.toFixed(1)}%`}
+              style={percentageMediaStyles}
+            />
         </Bar>
       </BarChart>
     </ResponsiveContainer>

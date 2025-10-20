@@ -156,7 +156,7 @@ export default function Dashboard() {
               </p>
               <div className="total-cost-value">
                 <p className="total-cost-expense-p">&#8964; Expense</p>
-                {formatCurrency(totalCost, convertCurrency)}
+                <p className='total-expense-value'>{formatCurrency(totalCost, convertCurrency)}</p>
                 <h1 className="total-balance-divider"> | </h1>
                 <p className="total-income-p">^ Income </p>
                 <p className="total-income-value">
@@ -170,7 +170,11 @@ export default function Dashboard() {
               <h2 className="statistics-heading">Statistics</h2>
               {pieChartData.length > 0 && (
                 <div className="pie-chart">
-                  <ResponsiveContainer className="pie-chart-statistics" width="100%" height="100%">
+                  <ResponsiveContainer
+                    className="pie-chart-statistics"
+                    width="100%"
+                    height="100%"
+                  >
                     <PieChart>
                       <Pie
                         data={pieChartData}
