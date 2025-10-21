@@ -1289,6 +1289,56 @@ html {
 
   /* */
 
+  .register-form {
+
+  }
+
+  .register-heading {
+    font-size: 4vw;
+    top: -5vh;
+    width: 35vw;
+  }
+
+  .register-button {
+    width: 35vw;
+    font-size: 3vw;
+  }
+
+  .rfi {
+    width: 30vw;
+    height: 3vh;
+    font-size: 3vw;
+  }
+
+  .rfl {
+    width: 25vw;
+    font-size: 2.5vw;
+  }
+
+  .username-label {
+    top: 5vh;
+  }
+
+  .email-label {
+    top: 15vh;
+  }
+
+  .rfsb {
+    font-size: 3vw;
+    width: 35vw;
+    height: 3vh;
+  
+  }
+
+
+  /* */
+
+  .mini-sign-in-page-logo {
+    width: 7.5vw;
+  }
+
+  /* */
+
   html {
     width: 96vw;
   }
