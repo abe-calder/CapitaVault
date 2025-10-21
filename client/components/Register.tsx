@@ -91,7 +91,7 @@ function Register() {
           )}
           <form onSubmit={handleSubmit}>
             <div>
-              <label className="username-label" htmlFor="playerTag">
+              <label className="username-label rfl" htmlFor="playerTag">
                 Username:
               </label>
               <input
@@ -100,11 +100,11 @@ function Register() {
                 name="username"
                 value={form.username}
                 onChange={handleChange}
-                className="username-input"
+                className="username-input rfi"
                 placeholder="Username"
               />
 
-              <label className="email-label" htmlFor="email">
+              <label className="email-label rfl" htmlFor="email">
                 Email:
               </label>
               <input
@@ -113,10 +113,10 @@ function Register() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                className="email-input"
+                className="email-input rfi"
                 placeholder="Email"
               />
-              <label className="name-label" htmlFor="name">
+              <label className="name-label rfl" htmlFor="name">
                 Name:
               </label>
               <input
@@ -125,10 +125,10 @@ function Register() {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                className="name-input"
+                className="name-input rfi"
                 placeholder="Name"
               />
-              <label className="goal-label" htmlFor="goal">
+              <label className="goal-label rfl" htmlFor="goal">
                 Goal:
               </label>
               <input
@@ -137,10 +137,10 @@ function Register() {
                 name="goal"
                 value={form.goal}
                 onChange={handleChange}
-                className="goal-input"
+                className="goal-input rfi"
                 placeholder="Goal"
               />
-              <label className="goal-cost-label" htmlFor="goalCost">
+              <label className="goal-cost-label rfl" htmlFor="goalCost">
                 Goal Cost:
               </label>
               <input
@@ -148,13 +148,13 @@ function Register() {
                 id="goalCost"
                 name="goalCost"
                 onChange={handleChange}
-                className="goal-cost-input"
+                className="goal-cost-input rfi"
                 placeholder="100000NZD"
                 value={form.goalCost}
               />
             </div>
             <div>
-              <button className="register-button" disabled={!form.auth0Id}>
+              <button className="register-button rfsb" disabled={!form.auth0Id}>
                 Register
               </button>
             </div>
