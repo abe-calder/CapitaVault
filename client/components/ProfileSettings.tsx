@@ -132,7 +132,7 @@ export default function ProfileSettings() {
               className="profile-form-input-username psfi"
             ></input>
           </label>
-          <label className="profile-form-label-goal">
+          <label className="profile-form-label-goal psfl">
             Change Your Goal:
             <input
               onChange={handleChange}
