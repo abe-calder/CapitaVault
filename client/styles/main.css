@@ -2021,63 +2021,66 @@ html {
   }
 
   .yearly-total-revenue-wrapper {
-    height: 30vh;
+    height: 35vh;
+    top: 27.5vh;
+    width: 72.5vw;
   }
 
   .yearly-total-revenue-heading {
-    font-size: 3vw;
-    width: 40vw;
+    font-size: 3.75vw;
+    width: 45vw;
   }
 
   .pvotcc {
     font-size: 2vw;
+    font-weight: 600;
   }
 
   .monthly-line-chart-data {
     width: 113%;
     height: 95%;
     top: 4vh;
-    left: -9vw;
+    left: -8.5vw;
   }
 
   .my-investments-wrapper {
-    height: 30vh;
-    top: 65vh;
+    height: 32vh;
+    top: 63vh;
   }
 
   .my-investments-heading {
-    font-size: 3vw;
-    width: 26vw;
+    font-size: 3.75vw;
+    width: 30vw;
   }
 
   .ian {
-    font-size: 2vw;
+    font-size: 2.25vw;
     left: 0vw;
     width: 12vw;
   }
 
   .iav {
-    font-size: 2vw;
-    left: 4vw;
-    width: 15vw;
+    font-size: 2.25vw;
+    left: 2vw;
+    width: 16vw;
   }
 
   .iagol {
-    font-size: 2vw;
-    left: 7.5vw;
+    font-size: 2.25vw;
+    left: 5.5vw;
     width: 8vw;
   }
 
   .upcoming-market-holidays-wrapper {
-    height: 30vh;
+    height: 32vh;
   }
 
   .upcoming-market-holidays-heading {
-    font-size: 3vw;;
+    font-size: 3.1vw;
   }
 
   .upcoming-market-holidays-content-wrapper {
-    left: 1vw;
+    left: 0.75vw;
   }
 
   .umhd {
