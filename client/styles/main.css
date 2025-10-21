@@ -1882,7 +1882,7 @@ html {
 
   .asset-holdings-name {
     font-size: 2.5vw;
-    width: 18vw;
+    width: 19vw;
   }
 
   .asset-holdings-value {
@@ -1915,32 +1915,34 @@ html {
   /* */
 
   .adjust-holdings-heading {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .ajhl {
     width: 25vw;
-    font-size: 2vw;
+    font-size: 2.5vw;
   }
 
   .ajhi {
-    width: 25vw;
-    height: 2.5vh;
-    font-size: 2.5vw;
+    width: 30vw;
+    height: 3vh;
+    font-size: 3vw;
   }
 
   .ajhsb {
     font-size: 3vw;
+    width: 35vw;
   }
 
   .current-holdings-heading {
-    font-size: 3vw;
+    font-size: 3.75vw;
   }
 
   .current-holdings-disclaimer {
-    font-size: 2vw;
+    font-size: 2.15vw;
     top: 2.5vh;
     width: 30vw;
+    font-weight: 400;
   }
 
   .user-assets-wrapper {
