@@ -1674,6 +1674,11 @@ html {
   .nav {
   }
 
+  .nav-heading {
+    font-size: 4vw;
+    left: -3vw;
+  }
+
   .page-link {
     font-size: 2.5vw;
     left: -2vw;
@@ -1718,7 +1723,7 @@ html {
   }
 
   .app2 {
-    height: 95vh;
+    height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
   }
@@ -1913,9 +1918,10 @@ html {
   }
 
   .profile-photo {
-    width: 5vw;
-    left: -5vw;
-    top: -0.2vh
+    width: 6vw;
+    border-radius: 3vw;
+    left: -7vw;
+    top: -0.3vh
   }
 
   /* */
@@ -1933,6 +1939,7 @@ html {
     width: 30vw;
     height: 3vh;
     font-size: 3vw;
+    
   }
 
   .ajhsb {
@@ -1985,6 +1992,11 @@ html {
   .total-investments-wrapper {
     height: 12.5vh;
     width: 22.5vw;
+  }
+
+  .investments-buttons {
+    left: 0vw;
+    top: 10.5vh;
   }
 
   .number-of-investments-wrapper {
@@ -2091,7 +2103,6 @@ html {
   /* */
 
   #pspf {
-    width: 150%;
     left: 20vw;
   }
 
@@ -2101,27 +2112,24 @@ html {
     top: 9vh;
   }
 
-  .settings-heading {
-    font-size: 3vw;
-  }
-
   .profile-settings-heading {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .psfl {
-    width: 25vw;
-    font-size: 2vw;
+    width: 35vw;
+    font-size: 2.5vw;
   }
 
   .psfi {
-    width: 25vw;
-    height: 2.5vh;
-    font-size: 2.5vw;
+    width: 30vw;
+    height: 3vh;
+    font-size: 3vw;
   }
 
   .profile-form-submit-button {
     font-size: 3vw;
+    width: 35vw;
   }
 }
 
