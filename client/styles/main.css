@@ -1707,6 +1707,12 @@ html {
 
   /* */
 
+  .mini-sign-in-page-logo {
+    width: 6vw;
+  }
+
+  /* */
+
   html {
     width: 96vw;
   }
@@ -1966,26 +1972,29 @@ html {
   }
 
   .user-asset-delete {
-    font-size: 1.7vw;
-    top: 8.5vh;
+    font-size: 2.25vw;
+    top: 9vh;
   }
 
   /* */
 
   .investments-heading {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .total-investments-wrapper {
     height: 12.5vh;
+    width: 22.5vw;
   }
 
   .number-of-investments-wrapper {
     height: 12.5vh;
+    width: 22.5vw;
   }
 
   .rate-of-return-wrapper {
     height: 12.5vh;
+    width: 22.5vw;
   }
 
   .total-invested-value {
@@ -1993,21 +2002,22 @@ html {
   }
 
   .tiv {
-    font-size: 2vw;
-    left: 2vw;
+    width: 20.8vw;
+    font-size: 2.7vw;
+    left: 2.5vw;
   }
 
   .tih {
-    font-size: 2vw;
-    width: 19vw;
-    left: 1vw;
+    font-size: 2.4vw;
+    width: 24vw;
+    left: 0.2vw;
     font-weight: 600;
   }
 
   .tio {
     top: 1vh;
     left: 7vw;
-    width: 5vw;
+    width: 7vw;
   }
 
   .yearly-total-revenue-wrapper {
