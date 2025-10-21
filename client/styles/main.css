@@ -1903,7 +1903,13 @@ html {
   }
 
   .profile-name {
-    font-size: 2.25vw;
+    font-size: 2.75vw;
+  }
+
+  .profile-photo {
+    width: 5vw;
+    left: -5vw;
+    top: -0.2vh
   }
 
   /* */
