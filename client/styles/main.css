@@ -1674,6 +1674,11 @@ html {
   .nav {
   }
 
+  .nav-heading {
+    font-size: 4vw;
+    left: -3vw;
+  }
+
   .page-link {
     font-size: 2.5vw;
     left: -2vw;
@@ -1707,12 +1712,18 @@ html {
 
   /* */
 
+  .mini-sign-in-page-logo {
+    width: 6vw;
+  }
+
+  /* */
+
   html {
     width: 96vw;
   }
 
   .app2 {
-    height: 95vh;
+    height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
   }
@@ -1853,8 +1864,6 @@ html {
 
   /* */
 
-
-   
   .holdings {
     height: 55vh;
     width: 35vw;
@@ -1863,7 +1872,7 @@ html {
   }
 
   .holdings-heading {
-    font-size: 3vw;
+    font-size: 3.75vw;
   }
 
   .holdings-buttons {
@@ -1872,28 +1881,29 @@ html {
   }
 
   .toggle-currency-buttons {
-    width: 3vw;
+    width: 3.5vw;
     height: 1.75vh;
+    font-size: 1.5vw;
   }
 
   .toggle-currency-label {
-    font-size: 2vw;
+    font-size: 2.25vw;
     width: 40vw;
   }
 
   .asset-holdings-name {
-    font-size: 1.9vw;
-    width: 18vw;
+    font-size: 2.5vw;
+    width: 19vw;
   }
 
   .asset-holdings-value {
-    font-size: 1.9vw;
-    left: -5vw;
+    font-size: 2.5vw;
+    left: -7.5vw;
   }
 
   .asset-shares {
-    font-size: 1.2vw;
-    left: -5vw;
+    font-size: 1.8vw;
+    left: -7.5vw;
   }
 
   /* */
@@ -1904,38 +1914,48 @@ html {
   }
 
   .profile-name {
-    font-size: 2.25vw;
+    font-size: 2.75vw;
+  }
+
+  .profile-photo {
+    width: 6vw;
+    border-radius: 3vw;
+    left: -7vw;
+    top: -0.3vh
   }
 
   /* */
 
   .adjust-holdings-heading {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .ajhl {
     width: 25vw;
-    font-size: 2vw;
+    font-size: 2.5vw;
   }
 
   .ajhi {
-    width: 25vw;
-    height: 2.5vh;
-    font-size: 2.5vw;
+    width: 30vw;
+    height: 3vh;
+    font-size: 3vw;
+    
   }
 
   .ajhsb {
     font-size: 3vw;
+    width: 35vw;
   }
 
   .current-holdings-heading {
-    font-size: 3vw;
+    font-size: 3.75vw;
   }
 
   .current-holdings-disclaimer {
-    font-size: 2vw;
+    font-size: 2.15vw;
     top: 2.5vh;
     width: 30vw;
+    font-weight: 400;
   }
 
   .user-assets-wrapper {
@@ -1959,26 +1979,34 @@ html {
   }
 
   .user-asset-delete {
-    font-size: 1.7vw;
-    top: 8.5vh;
+    font-size: 2.25vw;
+    top: 9vh;
   }
 
   /* */
 
   .investments-heading {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .total-investments-wrapper {
     height: 12.5vh;
+    width: 22.5vw;
+  }
+
+  .investments-buttons {
+    left: 0vw;
+    top: 10.5vh;
   }
 
   .number-of-investments-wrapper {
     height: 12.5vh;
+    width: 22.5vw;
   }
 
   .rate-of-return-wrapper {
     height: 12.5vh;
+    width: 22.5vw;
   }
 
   .total-invested-value {
@@ -1986,81 +2014,85 @@ html {
   }
 
   .tiv {
-    font-size: 2vw;
-    left: 2vw;
+    width: 20.8vw;
+    font-size: 2.7vw;
+    left: 2.5vw;
   }
 
   .tih {
-    font-size: 2vw;
-    width: 19vw;
-    left: 1vw;
+    font-size: 2.4vw;
+    width: 24vw;
+    left: 0.2vw;
     font-weight: 600;
   }
 
   .tio {
     top: 1vh;
     left: 7vw;
-    width: 5vw;
+    width: 7vw;
   }
 
   .yearly-total-revenue-wrapper {
-    height: 30vh;
+    height: 35vh;
+    top: 27.5vh;
+    width: 72.5vw;
   }
 
   .yearly-total-revenue-heading {
-    font-size: 3vw;
-    width: 40vw;
+    font-size: 3.75vw;
+    width: 45vw;
   }
 
   .pvotcc {
     font-size: 2vw;
+    font-weight: 600;
   }
 
   .monthly-line-chart-data {
     width: 113%;
     height: 95%;
     top: 4vh;
-    left: -9vw;
+    left: -8.5vw;
   }
 
   .my-investments-wrapper {
-    height: 30vh;
-    top: 65vh;
+    height: 32vh;
+    top: 63vh;
   }
 
   .my-investments-heading {
-    font-size: 3vw;
-    width: 26vw;
+    font-size: 3.75vw;
+    width: 30vw;
   }
 
   .ian {
-    font-size: 2vw;
+    font-size: 2.25vw;
     left: 0vw;
     width: 12vw;
   }
 
   .iav {
-    font-size: 2vw;
-    left: 4vw;
-    width: 15vw;
+    font-size: 2.25vw;
+    left: 2vw;
+    width: 16vw;
   }
 
   .iagol {
-    font-size: 2vw;
-    left: 7.5vw;
+    font-size: 2.25vw;
+    left: 5.5vw;
     width: 8vw;
   }
 
   .upcoming-market-holidays-wrapper {
-    height: 30vh;
+    height: 32vh;
   }
 
   .upcoming-market-holidays-heading {
-    font-size: 3vw;;
+    font-size: 3.1vw;
   }
 
   .upcoming-market-holidays-content-wrapper {
-    left: 1vw;
+    left: 0.75vw;
   }
 
   .umhd {
@@ -2071,7 +2103,6 @@ html {
   /* */
 
   #pspf {
-    width: 150%;
     left: 20vw;
   }
 
@@ -2081,27 +2112,24 @@ html {
     top: 9vh;
   }
 
-  .settings-heading {
-    font-size: 3vw;
-  }
-
   .profile-settings-heading {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .psfl {
-    width: 25vw;
-    font-size: 2vw;
+    width: 35vw;
+    font-size: 2.5vw;
   }
 
   .psfi {
-    width: 25vw;
-    height: 2.5vh;
-    font-size: 2.5vw;
+    width: 30vw;
+    height: 3vh;
+    font-size: 3vw;
   }
 
   .profile-form-submit-button {
     font-size: 3vw;
+    width: 35vw;
   }
 }
 
