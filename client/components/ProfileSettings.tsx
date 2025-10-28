@@ -31,9 +31,7 @@ export default function ProfileSettings() {
   useEffect(() => {
     const ws = new WebSocket('wss://capitavault.onrender.com/ws')
 
-    ws.onopen = () => {
-      console.log('Websocket Connected')
-    }
+    ws.onopen = () => {}
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data)
@@ -43,9 +41,7 @@ export default function ProfileSettings() {
       }
     }
 
-    ws.onclose = () => {
-      console.log('WebSocket Disconnected')
-    }
+    ws.onclose = () => {}
 
     ws.onerror = (error) => {
       console.error('WebSocket error:', error)
